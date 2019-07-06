@@ -4,9 +4,9 @@
 
 package ocean.utils;
 
-import flash.errors.Error;
-import flash.utils.ByteArray;
-import flash.errors.EOFError;
+import openfl.errors.Error;
+import openfl.utils.ByteArray;
+import openfl.errors.EOFError;
 
 class GreedyUINT
 {

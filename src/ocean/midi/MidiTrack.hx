@@ -24,8 +24,8 @@
 
 package ocean.midi;
 
-import flash.errors.Error;
-import flash.utils.ByteArray;
+import openfl.errors.Error;
+import openfl.utils.ByteArray;
 import ocean.midi.model.ChannelItem;
 import ocean.midi.model.MessageItem;
 import ocean.midi.model.MessageList;

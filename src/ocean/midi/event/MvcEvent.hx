@@ -24,7 +24,7 @@
 
 package ocean.midi.event;
 
-import flash.events.Event;
+import openfl.events.Event;
 
 //public static const
 //public static const

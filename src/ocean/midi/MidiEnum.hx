@@ -24,7 +24,7 @@
 
 package ocean.midi;
 
-import flash.utils.Dictionary;
+import openfl.utils.Dictionary;
 
 /**
 	 * MidiEnum class
@@ -87,7 +87,7 @@ class MidiEnum
     
     public static inline var NOTE : Int = 0x00;  // zero can be presents the note kind  
     
-    private static var _message : Dictionary = new Dictionary(true);
+    private static var _message : Dictionary<Int, String> = new Dictionary(true);
     
     //Initialize the static block
     

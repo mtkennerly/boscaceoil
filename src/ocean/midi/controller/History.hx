@@ -25,7 +25,7 @@
 
 package ocean.midi.controller;
 
-import flash.errors.Error;
+import openfl.errors.Error;
 import de.polygonal.ds.DLinkedList;
 import de.polygonal.ds.DListIterator;
 

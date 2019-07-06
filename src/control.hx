@@ -1,8 +1,8 @@
-import flash.display.*;
-import flash.geom.*;
-import flash.events.*;
-import flash.utils.*;
-import flash.net.*;
+import openfl.display.*;
+import openfl.geom.*;
+import openfl.events.*;
+import openfl.utils.*;
+import openfl.net.*;
 import ocean.midi.MidiFile;
 import org.si.sion.SiONDriver;
 import org.si.sion.SiONData;
@@ -11,12 +11,12 @@ import org.si.sion.SiONVoice;
 import org.si.sion.sequencer.SiMMLTrack;
 import org.si.sion.effector.*;
 import org.si.sion.events.*;
-import flash.filesystem.*;
-import flash.net.FileFilter;
-import flash.system.Capabilities;
+import openfl.filesystem.*;
+import openfl.net.FileFilter;
+import openfl.system.Capabilities;
 
 #if targetWeb
-import flash.external.ExternalInterface;
+import openfl.external.ExternalInterface;
 import mx.utils.Base64Encoder;
 #end
 class Control extends Sprite

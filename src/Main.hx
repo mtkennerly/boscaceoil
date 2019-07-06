@@ -32,28 +32,29 @@
 
  */
 
-import flash.display.*;
-import flash.geom.*;
-import flash.events.*;
-import flash.net.*;
-import flash.media.*;
-import flash.ui.ContextMenu;
-import flash.ui.ContextMenuItem;
-import flash.ui.Keyboard;
+import openfl.display.*;
+import openfl.geom.*;
+import openfl.events.*;
+import openfl.net.*;
+import openfl.media.*;
+import openfl.ui.Keyboard;
 import bigroom.input.KeyPoll;
-import flash.ui.Mouse;
-import flash.utils.Timer;
-import flash.events.InvokeEvent;
+import openfl.ui.Mouse;
+import openfl.utils.Timer;
 
-#if targetDesktop
-import flash.desktop.NativeApplication;
-#end
 #if targetWeb
-import flash.external.ExternalInterface;
+import openfl.external.ExternalInterface;
 #end
 
 class Main extends Sprite
 {
+    public static var appEventDispatcher : EventDispatcher = new EventDispatcher();
+
+    public static function main() : Void
+    {
+        new Main();
+    }
+
     public function generickeypoll() : Void
     {
         control.press_up = false;control.press_down = false;control.press_left = false;control.press_right = false;control.press_space = false;control.press_enter = false;if (key.isDown(Keyboard.LEFT) || key.isDown(Keyboard.A))
@@ -1042,7 +1043,7 @@ class Main extends Sprite
         #if targetDesktop
         if (key.isDown(Keyboard.ESCAPE))
         {
-            NativeApplication.nativeApplication.exit(0);
+            Sys.exit(0);
         }
         #end
     }
@@ -1176,8 +1177,8 @@ class Main extends Sprite
         control.ctrl = "Ctrl";  //Set this to Cmd on Mac so that the tutorial is correct  
         
         #if targetDesktop
-        NativeApplication.nativeApplication.setAsDefaultApplication("ceol");
-        NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE, onInvokeEvent);
+        appEventDispatcher.addEventListener("INVOKE", onInvokeEvent);
+        appEventDispatcher.dispatchEvent(new Event("INVOKE"));
         #end
         
         key = new KeyPoll(stage);
@@ -1308,8 +1309,8 @@ class Main extends Sprite
     private function _startMainLoop() : Void
     {
         #if targetDesktop
-        NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE, __activate__);
-        NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE, __deactivate__);
+        appEventDispatcher.addEventListener(Event.ACTIVATE, __activate__);
+        appEventDispatcher.addEventListener(Event.DEACTIVATE, __deactivate__);
         #end
         #if targetWeb
         addEventListener(Event.DEACTIVATE, __activate__);
@@ -1432,7 +1433,7 @@ class Main extends Sprite
     }
     
     #if targetDesktop
-    public function onInvokeEvent(event : InvokeEvent) : Void
+    public function onInvokeEvent(event : Event) : Void
     {
         if (event.arguments.length > 0)
         {

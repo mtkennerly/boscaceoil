@@ -23,7 +23,7 @@
  */
 package ocean.midi;
 
-import flash.errors.Error;
+import openfl.errors.Error;
 
 /**
 	 * Invalid Midi Error

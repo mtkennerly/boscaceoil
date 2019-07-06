@@ -26,7 +26,7 @@
 
 package ocean.midi;
 
-import flash.errors.Error;
+import openfl.errors.Error;
 
 /**
 	* General MIDI's most recognized feature is the defined list of sounds or "patches".

@@ -9,9 +9,9 @@
  * Full example:
  * package
  *  {
- *  	import flash.display.Sprite;
- *  	import flash.events.Event;
- *  	import flash.ui.Keyboard;
+ *  	import openfl.display.Sprite;
+ *  	import openfl.events.Event;
+ *  	import openfl.ui.Keyboard;
  *  	import fgc.input.KeyPoll;
  *  	
  *  	public class Test 
@@ -63,11 +63,11 @@
 
 package bigroom.input;
 
-import flash.events.KeyboardEvent;
-import flash.events.Event;
-import flash.display.DisplayObject;
-import flash.utils.ByteArray;
-import flash.events.MouseEvent;
+import openfl.events.KeyboardEvent;
+import openfl.events.Event;
+import openfl.display.DisplayObject;
+import openfl.utils.ByteArray;
+import openfl.events.MouseEvent;
 
 class KeyPoll
 {

@@ -24,7 +24,7 @@
 
 package ocean.midi.model;
 
-import flash.utils.ByteArray;
+import openfl.utils.ByteArray;
 
 /**
 	 */

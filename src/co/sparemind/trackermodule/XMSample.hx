@@ -1,7 +1,7 @@
 package co.sparemind.trackermodule;
 
-import flash.utils.ByteArray;
-import flash.utils.Endian;
+import openfl.utils.ByteArray;
+import openfl.utils.Endian;
 
 
 class XMSample

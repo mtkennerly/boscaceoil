@@ -1,8 +1,8 @@
 package co.sparemind.trackermodule;
 
-import flash.utils.IDataOutput;
-import flash.utils.ByteArray;
-import flash.utils.Endian;
+import openfl.utils.IDataOutput;
+import openfl.utils.ByteArray;
+import openfl.utils.Endian;
 
 
 /**

@@ -1,11 +1,11 @@
 // temporary: ignore the entire contents of this file when building for web
 #if targetDesktop
-import flash.display.*;
-import flash.geom.*;
-import flash.events.*;
-import flash.utils.*;
-import flash.net.*;
-import flash.filesystem.*;
+import openfl.display.*;
+import openfl.geom.*;
+import openfl.events.*;
+import openfl.utils.*;
+import openfl.net.*;
+import openfl.filesystem.*;
 import org.si.sion.midi.*;
 import org.si.sion.events.*;
 

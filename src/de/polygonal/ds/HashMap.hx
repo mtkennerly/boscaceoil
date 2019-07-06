@@ -1,6 +1,6 @@
 package de.polygonal.ds;
 
-import flash.utils.Dictionary;
+import openfl.utils.Dictionary;
 import de.polygonal.ds.Collection;
 import de.polygonal.ds.Iterator;
 import de.polygonal.ds.HashMap;

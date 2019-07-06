@@ -1,4 +1,4 @@
-import flash.geom.*;
+import openfl.geom.*;
 
 class Guibutton
 {

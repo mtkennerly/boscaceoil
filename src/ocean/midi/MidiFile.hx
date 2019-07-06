@@ -28,7 +28,7 @@ import ocean.midi.model.MetaItem;
 import ocean.midi.model.ChannelItem;
 import ocean.midi.model.MessageItem;
 import ocean.midi.model.MessageList;
-import flash.utils.ByteArray;
+import openfl.utils.ByteArray;
 import ocean.midi.model.NoteItem;
 
 /**

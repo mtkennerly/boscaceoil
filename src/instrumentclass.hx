@@ -1,7 +1,7 @@
-import flash.display.*;
-import flash.geom.*;
-import flash.events.*;
-import flash.net.*;
+import openfl.display.*;
+import openfl.geom.*;
+import openfl.events.*;
+import openfl.net.*;
 import org.si.sion.SiONVoice;
 
 class Instrumentclass

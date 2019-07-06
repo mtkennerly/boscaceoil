@@ -1,7 +1,7 @@
-import flash.utils.IDataOutput;
-import flash.utils.ByteArray;
-import flash.utils.Endian;
-import flash.geom.Rectangle;
+import openfl.utils.IDataOutput;
+import openfl.utils.ByteArray;
+import openfl.utils.Endian;
+import openfl.geom.Rectangle;
 import org.si.sion.SiONDriver;
 import org.si.sion.SiONVoice;
 import co.sparemind.trackermodule.XMSong;

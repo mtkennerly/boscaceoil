@@ -1,11 +1,11 @@
-import flash.display.*;
-import flash.geom.*;
-import flash.events.*;
-import flash.net.*;
-import flash.text.*;
-import flash.utils.Dictionary;
+import openfl.display.*;
+import openfl.geom.*;
+import openfl.events.*;
+import openfl.net.*;
+import openfl.text.*;
+import openfl.utils.Dictionary;
 #if targetDesktop
-import flash.display.NativeWindow;
+import openfl.display.NativeWindow;
 #end
 
 class Gfx extends Sprite

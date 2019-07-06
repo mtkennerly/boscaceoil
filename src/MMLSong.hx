@@ -1,5 +1,5 @@
-import flash.utils.IDataOutput;
-import flash.geom.Rectangle;
+import openfl.utils.IDataOutput;
+import openfl.geom.Rectangle;
 
 class MMLSong
 {

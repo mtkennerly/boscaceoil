@@ -1,8 +1,8 @@
-import flash.display.*;
-import flash.geom.*;
-import flash.events.*;
-import flash.utils.*;
-import flash.net.*;
+import openfl.display.*;
+import openfl.geom.*;
+import openfl.events.*;
+import openfl.utils.*;
+import openfl.net.*;
 import ocean.midi.*;
 import ocean.midi.event.*;
 import ocean.midi.model.*;

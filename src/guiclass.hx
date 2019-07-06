@@ -1,9 +1,9 @@
-import flash.desktop.InteractiveIcon;
-import flash.display.*;
-import flash.geom.*;
-import flash.events.*;
-import flash.utils.*;
-import flash.net.*;
+import openfl.desktop.InteractiveIcon;
+import openfl.display.*;
+import openfl.geom.*;
+import openfl.events.*;
+import openfl.utils.*;
+import openfl.net.*;
 import bigroom.input.KeyPoll;
 
 class Guiclass
