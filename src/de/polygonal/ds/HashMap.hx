@@ -81,10 +81,8 @@ class HashMap implements Collection
         if (obj != null)
         {
             --_size;
-            This is an intentional compilation error. See the README for handling the delete keyword
-            delete _keyMap[key];
-            This is an intentional compilation error. See the README for handling the delete keyword
-            delete _objMap[obj];
+            _keyMap.remove(key);
+            _objMap.remove(obj);
             return obj;
         }
         return null;

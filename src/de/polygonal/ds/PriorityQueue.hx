@@ -71,8 +71,7 @@ class PriorityQueue implements Collection
     {
         if (_count >= 1)
         {
-            This is an intentional compilation error. See the README for handling the delete keyword
-            delete _posLookup[null];
+            _posLookup.remove(null);
             
             _heap[1] = _heap[_count];
             walkDown(1);
@@ -128,8 +127,7 @@ class PriorityQueue implements Collection
         }
         
         var pos : Int = Reflect.field(_posLookup, Std.string(obj));
-        This is an intentional compilation error. See the README for handling the delete keyword
-        delete _posLookup[obj];
+        _posLookup.remove(obj);
         
         _heap[pos] = _heap[_count];
         ;
