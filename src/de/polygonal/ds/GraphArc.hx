@@ -6,33 +6,33 @@
  * implies agreement with all terms and conditions of the accompanying
  * software licence.
  */
-package de.polygonal.ds
-{
-	/**
+package de.polygonal.ds;
+
+
+/**
 	 * A weighted arc pointing to a graph node.
 	 */
-	public class GraphArc
-	{
-		/**
+class GraphArc
+{
+    /**
 		 * The node that the arc points to being referenced.
 		 */
-		public var node:GraphNode;
-		
-		/**
+    public var node : GraphNode;
+    
+    /**
 		 * The weight (or cost) of the arc.
 		 */
-		public var weight:Number
-		
-		/**
+    public var weight : Float;
+    
+    /**
 		 * Initializes a new graph arc with a given weight.
 		 * 
 		 * @param node 		The graph node.
 		 * @param weight 	The weight.
 		 */
-		public function GraphArc(node:GraphNode, weight:Number = 1)
-		{
-			this.node = node;
-			this.weight = weight;
-		}
-	}
+    public function new(node : GraphNode, weight : Float = 1)
+    {
+        this.node = node;
+        this.weight = weight;
+    }
 }

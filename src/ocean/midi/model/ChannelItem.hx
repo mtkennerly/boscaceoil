@@ -22,65 +22,86 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-package ocean.midi.model {
+package ocean.midi.model;
 
-	/**
+
+/**
 	 */
-	public class ChannelItem extends MessageItem{
-		public var _channel:uint;
-		public var _command:uint;
-		public var _data1:uint;
-		public var _data2:*;
+class ChannelItem extends MessageItem
+{
+    public var channel(get, set) : Int;
+    public var command(get, set) : Int;
+    public var data1(get, set) : Int;
+    public var data2(get, set) : Dynamic;
 
-		public function ChannelItem():void{
-			super();
-		}
-		
-		public function get channel():uint{
-			return _channel;
-		}
-		
-		public function set channel(c:uint):void{
-			_channel = c&0x0F;
-		}
-		
-		public function get command():uint{
-			return _command;
-		}
-		
-		public function set command(c:uint):void{
-			_command = c&0xF0;
-			kind = _command;
-		}
-		
-
-		
-		public function get data1():uint{
-			return _data1;
-		}
-		
-		public function set data1(d:uint):void{
-			_data1 = d;
-		}
-		
-		public function get data2():*{
-			return _data2;
-		}
-		
-		public function set data2(d:*):void{
-			_data2 = d;
-		}
-		
-		override public function clone():MessageItem{
-			var item:ChannelItem = new ChannelItem();
-			item.kind = this.kind;
-			item.timeline = this.timeline;
-			item.channel = this.channel;
-			item.command = this.command;
-			item.data1 = this.data1;
-			item.data2 = this.data2;
-			return item;
-		}
-	}
-	
+    public var _channel : Int;
+    public var _command : Int;
+    public var _data1 : Int;
+    public var _data2 : Dynamic;
+    
+    public function new()
+    {
+        super();
+    }
+    
+    private function get_channel() : Int
+    {
+        return _channel;
+    }
+    
+    private function set_channel(c : Int) : Int
+    {
+        _channel = c & 0x0F;
+        return c;
+    }
+    
+    private function get_command() : Int
+    {
+        return _command;
+    }
+    
+    private function set_command(c : Int) : Int
+    {
+        _command = c & 0xF0;
+        kind = _command;
+        return c;
+    }
+    
+    
+    
+    private function get_data1() : Int
+    {
+        return _data1;
+    }
+    
+    private function set_data1(d : Int) : Int
+    {
+        _data1 = d;
+        return d;
+    }
+    
+    private function get_data2() : Dynamic
+    {
+        return _data2;
+    }
+    
+    private function set_data2(d : Dynamic) : Dynamic
+    {
+        _data2 = d;
+        return d;
+    }
+    
+    override public function clone() : MessageItem
+    {
+        var item : ChannelItem = new ChannelItem();
+        item.kind = this.kind;
+        item.timeline = this.timeline;
+        item.channel = this.channel;
+        item.command = this.command;
+        item.data1 = this.data1;
+        item.data2 = this.data2;
+        return item;
+    }
 }
+
+

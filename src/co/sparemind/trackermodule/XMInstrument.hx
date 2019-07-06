@@ -1,51 +1,66 @@
-package co.sparemind.trackermodule {
-	public class XMInstrument {
-		import flash.utils.ByteArray;
-		import flash.utils.Endian;
+package co.sparemind.trackermodule;
 
-		protected var _name:ByteArray;
-		public var volume:uint = 40;
-		public var samples:Vector.<XMSample> = new Vector.<XMSample>();
-		public var keymapAssignments:Vector.<uint> = Vector.<uint>([
-				0,0,0,0,0,0,0,0,0,0,0,0,
-				0,0,0,0,0,0,0,0,0,0,0,0,
-				0,0,0,0,0,0,0,0,0,0,0,0,
-				0,0,0,0,0,0,0,0,0,0,0,0,
-				0,0,0,0,0,0,0,0,0,0,0,0,
-				0,0,0,0,0,0,0,0,0,0,0,0,
-				0,0,0,0,0,0,0,0,0,0,0,0,
-				0,0,0,0,0,0,0,0,0,0,0,0
-				]);
+import flash.utils.ByteArray;
+import flash.utils.Endian;
 
-		public function XMInstrument() {
-			_name = new ByteArray();
-			_name.endian = Endian.LITTLE_ENDIAN;
-			this.name  = '                      ';
-		}
 
-		public function addSample(sample:XMSample):void {
-			samples.push(sample);
-		}
+class XMInstrument
+{
+    public var name(get, set) : String;
 
-		/**
+    
+    
+    
+    private var _name : ByteArray;
+    public var volume : Int = 40;
+    public var samples : Array<XMSample> = new Array<XMSample>();
+    public var keymapAssignments : Array<Int> = [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        ];
+    
+    public function new()
+    {
+        _name = new ByteArray();
+        _name.endian = Endian.LITTLE_ENDIAN;
+        this.name = "                      ";
+    }
+    
+    public function addSample(sample : XMSample) : Void
+    {
+        samples.push(sample);
+    }
+    
+    /**
 		 * XM only seems to support 16 samples per instrument
 		 * so this silently discards any past that.
 		 */
-		public function addSamples(extraSamples:Vector.<XMSample>):void {
-			samples = samples.concat(extraSamples).slice(0,16);
-		}
-
-		public function get name():String {
-			return _name.toString();
-		}
-		public function set name(unpadded:String):void {
-			_name.clear();
-			_name.writeMultiByte(unpadded.slice(0,22), 'us-ascii');
-			for (var i:uint = _name.length; i < 22; i++) {
-				_name.writeByte(0x20); // space-padded
-			}
-		}
-	}
-
+    public function addSamples(extraSamples : Array<XMSample>) : Void
+    {
+        samples = samples.concat(extraSamples).slice(0, 16);
+    }
+    
+    private function get_name() : String
+    {
+        return Std.string(_name);
+    }
+    private function set_name(unpadded : String) : String
+    {
+        _name.clear();
+        _name.writeMultiByte(unpadded.substring(0, 22), "us-ascii");
+        for (i in _name.length...22)
+        {
+            _name.writeByte(0x20);
+        }
+        return unpadded;
+    }
 }
+
+
 

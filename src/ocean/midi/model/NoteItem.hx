@@ -22,75 +22,98 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-package ocean.midi.model {
+package ocean.midi.model;
 
-	/**
+
+/**
 	 */
-	public class NoteItem extends MessageItem{
-		private var _pitch:uint;
-		private var _velocity:uint;
-		private var _duration:uint;
-		private var _channel:uint;
-		private static const _pitchName:Array = ["C","Db","D","Eb","E","F","F#","G","G#","A","Bb","B"];
-		
-		public function NoteItem( c:uint=0 , p:uint=67 , v:uint=127 , d:uint=120, t:int=0 ):void{
-			super();
-			_channel = c&0x0F;
-			_pitch = p&0x7F;
-			_velocity = v&0x7F;
-			_duration = d;
-			
-			_timeline = t;
-		}
-		
-		public function get channel():uint{
-			return _channel;
-		}
-		
-		public function set channel(c:uint):void{
-			_channel = c;
-		}
-		
-		public function get pitch():uint{
-			return _pitch;
-		}
-		
-		public function get pitchName():String{
-			var level:uint = (_pitch/12>>0);
-			var str:String = _pitchName[_pitch%12] + (level?level:"");
-			return str;
-		}
-		
-		public function set pitch(p:uint):void{
-			_pitch = p;
-		}
-		
-		public function get duration():uint{
-			return _duration;
-		}
-		
-		public function set duration(d:uint):void{
-			_duration = d;
-		}
-		
-		public function get velocity():uint{
-			return _velocity;
-		}
-		
-		public function set velocity(v:uint):void{
-			_velocity = v;
-		}
-		
-		override public function clone():MessageItem{
-			var item:NoteItem = new NoteItem();
-			item.kind = this.kind;
-			item.timeline = this.timeline;
-			item.channel = this.channel;
-			item.duration = this.duration;
-			item.pitch = this.pitch;
-			item.velocity = this.velocity;
-			return item;
-		}
-	}
-	
+class NoteItem extends MessageItem
+{
+    public var channel(get, set) : Int;
+    public var pitch(get, set) : Int;
+    public var pitchName(get, never) : String;
+    public var duration(get, set) : Int;
+    public var velocity(get, set) : Int;
+
+    private var _pitch : Int;
+    private var _velocity : Int;
+    private var _duration : Int;
+    private var _channel : Int;
+    private static var _pitchName : Array<Dynamic> = ["C", "Db", "D", "Eb", "E", "F", "F#", "G", "G#", "A", "Bb", "B"];
+    
+    public function new(c : Int = 0, p : Int = 67, v : Int = 127, d : Int = 120, t : Int = 0)
+    {
+        super();
+        _channel = c & 0x0F;
+        _pitch = p & 0x7F;
+        _velocity = v & 0x7F;
+        _duration = d;
+        
+        _timeline = t;
+    }
+    
+    private function get_channel() : Int
+    {
+        return _channel;
+    }
+    
+    private function set_channel(c : Int) : Int
+    {
+        _channel = c;
+        return c;
+    }
+    
+    private function get_pitch() : Int
+    {
+        return _pitch;
+    }
+    
+    private function get_pitchName() : String
+    {
+        var level : Int = as3hx.Compat.parseInt(_pitch / 12 >> 0);
+        var str : String = _pitchName[_pitch % 12] + ((level != 0) ? level : "");
+        return str;
+    }
+    
+    private function set_pitch(p : Int) : Int
+    {
+        _pitch = p;
+        return p;
+    }
+    
+    private function get_duration() : Int
+    {
+        return _duration;
+    }
+    
+    private function set_duration(d : Int) : Int
+    {
+        _duration = d;
+        return d;
+    }
+    
+    private function get_velocity() : Int
+    {
+        return _velocity;
+    }
+    
+    private function set_velocity(v : Int) : Int
+    {
+        _velocity = v;
+        return v;
+    }
+    
+    override public function clone() : MessageItem
+    {
+        var item : NoteItem = new NoteItem();
+        item.kind = this.kind;
+        item.timeline = this.timeline;
+        item.channel = this.channel;
+        item.duration = this.duration;
+        item.pitch = this.pitch;
+        item.velocity = this.velocity;
+        return item;
+    }
 }
+
+

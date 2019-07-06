@@ -22,20 +22,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-package ocean.midi.model {
-	import flash.utils.ByteArray;
+package ocean.midi.model;
 
-	/**
+import flash.utils.ByteArray;
+
+/**
 	 */
-	public class RawItem {
-		public var noteOn:uint;
-		public var raw:ByteArray;
-		public var timeline:uint;
-		public var index:uint;
-		public function RawItem():void{
-			raw = new ByteArray();
-			noteOn = 0;
-		}
-	}
-	
+class RawItem
+{
+    public var noteOn : Int;
+    public var raw : ByteArray;
+    public var timeline : Int;
+    public var index : Int;
+    public function new()
+    {
+        raw = new ByteArray();
+        noteOn = 0;
+    }
 }
+
+

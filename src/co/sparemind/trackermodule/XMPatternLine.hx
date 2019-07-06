@@ -1,12 +1,17 @@
-package co.sparemind.trackermodule {
-	public class XMPatternLine {
-		public var cellOnTrack:Vector.<XMPatternCell>;
+package co.sparemind.trackermodule;
 
-		public function XMPatternLine(numtracks:int) {
-			cellOnTrack = new Vector.<XMPatternCell>(numtracks, true);
-			for (var i:uint = 0; i < numtracks; i++) {
-				cellOnTrack[i] = new XMPatternCell();
-			}
-		}
-	}
+
+class XMPatternLine
+{
+    public var cellOnTrack : Array<XMPatternCell>;
+    
+    public function new(numtracks : Int)
+    {
+        cellOnTrack = new Array<XMPatternCell>();
+        for (i in 0...numtracks)
+        {
+            cellOnTrack[i] = new XMPatternCell();
+        }
+    }
 }
+

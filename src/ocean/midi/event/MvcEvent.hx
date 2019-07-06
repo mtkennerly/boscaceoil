@@ -22,23 +22,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-package ocean.midi.event {
-	import flash.events.Event;
+package ocean.midi.event;
 
-	//public static const
-	//public static const
-	//public static const
-	//public static const
-	//public static const
-	
-	/**
+import flash.events.Event;
+
+//public static const
+//public static const
+//public static const
+//public static const
+//public static const
+/**
 	 */
-	public class MvcEvent extends Event{
-		public static const APPLY_TRACK:String = "apply an other track";
-		public static const UPDATE_VIEW:String = "update view";
-		public function MvcEvent(event:String):void{
-			super(event);
-		}
-	}
-	
+class MvcEvent extends Event
+{
+    public static inline var APPLY_TRACK : String = "apply an other track";
+    public static inline var UPDATE_VIEW : String = "update view";
+    public function new(event : String)
+    {
+        super(event);
+    }
 }
+
+

@@ -22,61 +22,81 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-package ocean.midi.model {
-	import flash.utils.ByteArray;
-	
-	import ocean.midi.MidiEnum;
-	
-	/**
+package ocean.midi.model;
+
+import flash.utils.ByteArray;
+import ocean.midi.MidiEnum;
+
+/**
 	 * 
 	 */
-	public class MetaItem extends MessageItem{
-		public var _text:ByteArray;
-		public var _type:uint;
-		
-		public function MetaItem():void{
-			super();
-			//defaulte meta item is a end of track
-			_text = new ByteArray();
-			_type = MidiEnum.END_OF_TRK;
-			this.kind = MidiEnum.META;
-		}
-		public function get text():ByteArray{
-			_text.position = 0;
-			return _text;
-		}
-		
-		public function set text(t:ByteArray):void{
-			_text.position = 0;
-			_text.length = 0;
-			_text.writeBytes(t);
-		}
-		
-		public function get type():uint{
-			return _type;
-		}
-		
-		public function set type(t:uint):void{
-			_type = t;
-		}
-		public function get metaName():String{
-			return MidiEnum.getMessageName(type);
-		}
-		public function get size():uint{
-			if( _text )
-				return _text.length;
-			else
-				return 0;
-		}
-		
-		override public function clone():MessageItem{
-			var item:MetaItem = new MetaItem();
-			item.kind = this.kind;
-			item.timeline = this.timeline;
-			item.text = this.text;
-			item.type = this.type;
-			return item;
-		}
-	}
-	
+class MetaItem extends MessageItem
+{
+    public var text(get, set) : ByteArray;
+    public var type(get, set) : Int;
+    public var metaName(get, never) : String;
+    public var size(get, never) : Int;
+
+    public var _text : ByteArray;
+    public var _type : Int;
+    
+    public function new()
+    {
+        super();
+        //defaulte meta item is a end of track
+        _text = new ByteArray();
+        _type = MidiEnum.END_OF_TRK;
+        this.kind = MidiEnum.META;
+    }
+    private function get_text() : ByteArray
+    {
+        _text.position = 0;
+        return _text;
+    }
+    
+    private function set_text(t : ByteArray) : ByteArray
+    {
+        _text.position = 0;
+        _text.length = 0;
+        _text.writeBytes(t);
+        return t;
+    }
+    
+    private function get_type() : Int
+    {
+        return _type;
+    }
+    
+    private function set_type(t : Int) : Int
+    {
+        _type = t;
+        return t;
+    }
+    private function get_metaName() : String
+    {
+        return MidiEnum.getMessageName(type);
+    }
+    private function get_size() : Int
+    {
+        if (_text != null)
+        {
+            return _text.length;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    
+    override public function clone() : MessageItem
+    {
+        var item : MetaItem = new MetaItem();
+        item.kind = this.kind;
+        item.timeline = this.timeline;
+        item.text = this.text;
+        item.type = this.type;
+        return item;
+    }
 }
+
+

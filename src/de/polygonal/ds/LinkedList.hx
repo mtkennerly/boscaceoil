@@ -6,14 +6,16 @@
  * implies agreement with all terms and conditions of the accompanying
  * software licence.
  */
-package de.polygonal.ds
-{
-	/**
+package de.polygonal.ds;
+
+
+/**
 	 * A marker interface for the singly linked and doubly
 	 * linked list class.
 	 */
-	public interface LinkedList
-	{
-	}
+interface LinkedList
+{
+
 }
+
 

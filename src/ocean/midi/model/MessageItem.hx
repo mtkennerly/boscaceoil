@@ -22,44 +22,57 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-package ocean.midi.model {
-	
-	/**
+package ocean.midi.model;
+
+
+/**
 	 */
-	public class MessageItem {
-		public var _timeline:uint;
-		public var _kind:uint;
-		/**
+class MessageItem
+{
+    public var kind(get, set) : Int;
+    public var timeline(get, set) : Int;
+
+    public var _timeline : Int;
+    public var _kind : Int;
+    /**
 		 * @default true Means this is an active item while false means to be erased.
 		 */
-		public var mark:Boolean;
-		
-		public function MessageItem():void{
-			mark = true;
-		}
-		
-		public function set kind(k:uint):void{
-			_kind = k;
-		}
-		
-		public function get kind():uint{
-			return _kind;
-		}
-		
-		public function get timeline():uint{
-			return _timeline;
-		}
-		
-		public function set timeline(t:uint):void{
-			_timeline = t;
-		}
-			
-		public function clone():MessageItem{
-			var msgItem:MessageItem = new MessageItem();
-			msgItem.kind = this.kind;
-			msgItem.timeline = this.timeline;
-			return msgItem;
-		}
-	}
-	
+    public var mark : Bool;
+    
+    public function new()
+    {
+        mark = true;
+    }
+    
+    private function set_kind(k : Int) : Int
+    {
+        _kind = k;
+        return k;
+    }
+    
+    private function get_kind() : Int
+    {
+        return _kind;
+    }
+    
+    private function get_timeline() : Int
+    {
+        return _timeline;
+    }
+    
+    private function set_timeline(t : Int) : Int
+    {
+        _timeline = t;
+        return t;
+    }
+    
+    public function clone() : MessageItem
+    {
+        var msgItem : MessageItem = new MessageItem();
+        msgItem.kind = this.kind;
+        msgItem.timeline = this.timeline;
+        return msgItem;
+    }
 }
+
+

@@ -23,54 +23,73 @@
  */
 
 
-package ocean.midi.controller {
-	import de.polygonal.ds.DLinkedList;
-	import de.polygonal.ds.DListIterator;
-	
-	/**
+package ocean.midi.controller;
+
+import flash.errors.Error;
+import de.polygonal.ds.DLinkedList;
+import de.polygonal.ds.DListIterator;
+
+/**
 	* Histroy is a singleton class. It holds a stack.
 	* All local item operations will be recorded into this global stack.
 	* Thus, undo and redo features are performed based on it.
 	* @author Efishocean
 	* @version 1.0.0
 	*/
-	public class History {
-		private static var singleton:History;
-		private var _size:uint;
-		private var _stack:DLinkedList;
-		private var _iterator:DListIterator;
-		public static function getHistory():History{
-			if( singleton==null ){
-				singleton = new History();
-				return singleton;
-			}
-			else
-				return singleton;
-		}
-		public function get size():uint{
-			return _size;
-		}
-		public function set size(s:uint):void{
-			_size = s;
-		}
-		public function get stack():DLinkedList{
-			return _stack;
-		}
-		public function get iterator():DListIterator{
-			return _iterator;
-		}
-		public function History():void{
-			if( singleton!=null ){
-				throw new Error("History is a singleton class, use getHistory() instead.");
-			}else{
-				_size = 128;
-				_stack = new DLinkedList();
-				// head of _stack should always be empty array.
-				_stack.append( new Array() );
-				_iterator = _stack.getListIterator();
-			}
-			
-		}
-	}
-	
+class History
+{
+    public var size(get, set) : Int;
+    public var stack(get, never) : DLinkedList;
+    public var iterator(get, never) : DListIterator;
+
+    private static var singleton : History;
+    private var _size : Int;
+    private var _stack : DLinkedList;
+    private var _iterator : DListIterator;
+    public static function getHistory() : History
+    {
+        if (singleton == null)
+        {
+            singleton = new History();
+            return singleton;
+        }
+        else
+        {
+            return singleton;
+        }
+    }
+    private function get_size() : Int
+    {
+        return _size;
+    }
+    private function set_size(s : Int) : Int
+    {
+        _size = s;
+        return s;
+    }
+    private function get_stack() : DLinkedList
+    {
+        return _stack;
+    }
+    private function get_iterator() : DListIterator
+    {
+        return _iterator;
+    }
+    public function new()
+    {
+        if (singleton != null)
+        {
+            throw new Error("History is a singleton class, use getHistory() instead.");
+        }
+        else
+        {
+            _size = 128;
+            _stack = new DLinkedList();
+            // head of _stack should always be empty array.
+            _stack.append(new Array<Dynamic>());
+            _iterator = _stack.getListIterator();
+        }
+    }
 }
+
+

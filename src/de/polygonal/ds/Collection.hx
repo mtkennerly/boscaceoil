@@ -6,55 +6,58 @@
  * implies agreement with all terms and conditions of the accompanying
  * software licence.
  */
-package de.polygonal.ds
-{
-	import de.polygonal.ds.Iterator;
-	
-	/**
+package de.polygonal.ds;
+
+import de.polygonal.ds.Iterator;
+
+/**
 	 * A 'java-style' collection interface.
 	 */
-	public interface Collection
-	{
-		/**
+interface Collection
+{
+    
+    /**
+		 * The total number of items.
+		 * 
+		 * @return The size.
+		 */
+    var size(get, never) : Int;
+
+    /**
 		 * Searches the collection for a matching item.
 		 * 
 		 * @return True if the item exists, otherwise false.
 		 */
-		function contains(obj:*):Boolean
-		
-		/**
+    function contains(obj : Dynamic) : Bool
+    ;
+    /**
 		 * Clears all items.
 		 */
-		function clear():void
-		
-		/**
+    function clear() : Void
+    ;
+    /**
 		 * Initializes an iterator object pointing
 		 * to the first item in the collection.
 		 *
 		 * @return An iterator object.
 		 */
-		function getIterator():Iterator
-		
-		/**
-		 * The total number of items.
-		 * 
-		 * @return The size.
-		 */
-		function get size():int;
-		
-		/**
+    function getIterator() : Iterator
+    ;
+    
+    /**
 		 * Checks if the collection is empty.
 		 * 
 		 * @return True if empty, otherwise false.
 		 */
-		function isEmpty():Boolean
-		
-		/**
+    function isEmpty() : Bool
+    ;
+    /**
 		 * Converts the collection into an array.
 		 * 
 		 * @return An array.
 		 */
-		function toArray():Array
-	}
+    function toArray() : Array<Dynamic>
+    ;
 }
+
 

@@ -1,10 +1,14 @@
-package co.sparemind.trackermodule {
-	public class XMPattern {
-		public var rows:Vector.<XMPatternLine>;
-		public function XMPattern(numrows:int) {
-			rows = new Vector.<XMPatternLine>(numrows, true);
-		}
-	}
+package co.sparemind.trackermodule;
 
+
+class XMPattern
+{
+    public var rows : Array<XMPatternLine>;
+    public function new(numrows : Int)
+    {
+        rows = new Array<XMPatternLine>();
+    }
 }
+
+
 

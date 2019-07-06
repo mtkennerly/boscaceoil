@@ -1,36 +1,49 @@
-package co.sparemind.trackermodule {
-	public class XMSample {
-		import flash.utils.ByteArray;
-		import flash.utils.Endian;
+package co.sparemind.trackermodule;
 
-		public var volume:uint;
-		public var finuetune:uint = 0;
-		// type bitfield: looping, 8-bit/16-bit
-		public var panning:uint = 0x80;
-		public var relativeNoteNumber:int = 0;
-		protected var _name:ByteArray;
-		public var data:ByteArray;
-		public var bitsPerSample:uint = 8;
-		public var finetune:uint = 0;
-		public var loopStart:uint = 0;
-		public var loopLength:uint = 0;
-		public var loopsForward:Boolean = false;
+import flash.utils.ByteArray;
+import flash.utils.Endian;
 
-		public function XMSample() {
-			_name = new ByteArray();
-			_name.endian = Endian.LITTLE_ENDIAN;
-			this.name  = '                      ';
-		}
-		public function get name():String {
-			return _name.toString();
-		}
-		public function set name(unpadded:String):void {
-			_name.clear();
-			_name.writeMultiByte(unpadded.slice(0,22), 'us-ascii');
-			for (var i:uint = _name.length; i < 22; i++) {
-				_name.writeByte(0x20); // space-padded
-			}
-		}
-	}
+
+class XMSample
+{
+    public var name(get, set) : String;
+
+    
+    
+    
+    public var volume : Int;
+    public var finuetune : Int = 0;
+    // type bitfield: looping, 8-bit/16-bit
+    public var panning : Int = 0x80;
+    public var relativeNoteNumber : Int = 0;
+    private var _name : ByteArray;
+    public var data : ByteArray;
+    public var bitsPerSample : Int = 8;
+    public var finetune : Int = 0;
+    public var loopStart : Int = 0;
+    public var loopLength : Int = 0;
+    public var loopsForward : Bool = false;
+    
+    public function new()
+    {
+        _name = new ByteArray();
+        _name.endian = Endian.LITTLE_ENDIAN;
+        this.name = "                      ";
+    }
+    private function get_name() : String
+    {
+        return Std.string(_name);
+    }
+    private function set_name(unpadded : String) : String
+    {
+        _name.clear();
+        _name.writeMultiByte(unpadded.substring(0, 22), "us-ascii");
+        for (i in _name.length...22)
+        {
+            _name.writeByte(0x20);
+        }
+        return unpadded;
+    }
 }
+
 

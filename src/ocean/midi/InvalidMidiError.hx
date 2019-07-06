@@ -21,20 +21,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
-package ocean.midi {
+package ocean.midi;
 
-	/**
+import flash.errors.Error;
+
+/**
 	 * Invalid Midi Error
 	 */
-	public dynamic class InvalidMidiError extends Error {
-		
-		/**
+class InvalidMidiError extends Error
+{
+    
+    /**
 		 * @param message error message text.
 		 * @param id @see Error
 		 */
-		public function InvalidMidiError(message:String="",id:int=0):void{
-			super(message,id);
-		}
-	}
-	
+    public function new(message : String = "", id : Int = 0)
+    {
+        super(message, id);
+    }
 }
+
+

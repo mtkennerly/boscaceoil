@@ -22,14 +22,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-package ocean.midi.controller {
+package ocean.midi.controller;
 
-	/**
+
+/**
 	 * This class is not impletemented.
 	 */
-	public class MultiTrackEditor{
-		private var selectedTracks:Array;
-		
-	}
-	
+class MultiTrackEditor
+{
+    private var selectedTracks : Array<Dynamic>;
+
+    public function new()
+    {
+    }
 }
+
+

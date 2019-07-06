@@ -22,52 +22,58 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-package ocean.midi.model {
-	import ocean.midi.MidiTrack;
-	
-	/**
-	 */
-	public dynamic class MessageList extends Array{
-				
-		public function MessageList():void{
-			super();
-		}
+package ocean.midi.model;
 
-		/**
+import ocean.midi.MidiTrack;
+
+/**
+	 */
+class MessageList extends Array<Dynamic>
+{
+    
+    public function new()
+    {
+        super();
+    }
+    
+    /**
 		* Export event list as midi track. Will optimize data, as well as filter unkown message.
 		* @return
 		*/
-		public function output():MidiTrack{
-			var mt:MidiTrack = new MidiTrack();
-			mt.msgList = this.clone();
-			return mt;
-		}
-		
-		/**
+    public function output() : MidiTrack
+    {
+        var mt : MidiTrack = new MidiTrack();
+        mt.msgList = this.clone();
+        return mt;
+    }
+    
+    /**
 		* Parse the midi Track, cache as event list in array
 		* @param	mt
 		* @return
 		*/
-		public function input(mt:MidiTrack):void{
-			for each( var item:* in mt.msgList ){
-				this.push( item.clone() );
-			}
-		}
-		
-		/**
+    public function input(mt : MidiTrack) : Void
+    {
+        for (item/* AS3HX WARNING could not determine type for var: item exp: EField(EIdent(mt),msgList) type: null */ in mt.msgList)
+        {
+            this.push(item.clone());
+        }
+    }
+    
+    /**
 		* new instance with the same identical contents
 		* @return a clone
 		*/
-		public function clone():MessageList{
-			var msgList:MessageList = new MessageList();
-			for each( var item:* in this ){
-				msgList.push(item.clone());
-			}
-			return msgList;
-		}
-		
-		
-	}
-	
+    public function clone() : MessageList
+    {
+        var msgList : MessageList = new MessageList();
+        for (item/* AS3HX WARNING could not determine type for var: item exp: EIdent(this) type: null */ in this)
+        {
+            msgList.push(item.clone());
+        }
+        return msgList;
+    }
 }
+
+
 

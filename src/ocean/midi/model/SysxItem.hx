@@ -21,41 +21,53 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
-package ocean.midi.model
-{
-	import flash.utils.ByteArray;
-	import ocean.midi.MidiEnum;
-	
-	/**
+package ocean.midi.model;
+
+import flash.utils.ByteArray;
+import ocean.midi.MidiEnum;
+
+/**
 	 */
-	public class SysxItem extends MessageItem
-	{
-		private var _data:ByteArray;
-		public function SysxItem():void{
-			super();
-			this.kind = MidiEnum.SYSTEM_EXCLUSIVE;
-			_data = new ByteArray();
-		}
-		public function get size():uint{
-			if( _data )
-				return _data.length;
-			else
-				return 0;
-		}
-		public function get data():ByteArray{
-			_data.position = 0;
-			return _data;
-		}
-		public function set data(d:ByteArray):void{
-			_data.position = 0 ;
-			_data.length = 0;
-			_data.writeBytes(d);			
-		}
-		override public function clone():MessageItem{
-			var item:SysxItem = new SysxItem();
-			item.timeline = this.timeline;
-			item.data = this.data;
-			return item;
-		}
-	}
+class SysxItem extends MessageItem
+{
+    public var size(get, never) : Int;
+    public var data(get, set) : ByteArray;
+
+    private var _data : ByteArray;
+    public function new()
+    {
+        super();
+        this.kind = MidiEnum.SYSTEM_EXCLUSIVE;
+        _data = new ByteArray();
+    }
+    private function get_size() : Int
+    {
+        if (_data != null)
+        {
+            return _data.length;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    private function get_data() : ByteArray
+    {
+        _data.position = 0;
+        return _data;
+    }
+    private function set_data(d : ByteArray) : ByteArray
+    {
+        _data.position = 0;
+        _data.length = 0;
+        _data.writeBytes(d);
+        return d;
+    }
+    override public function clone() : MessageItem
+    {
+        var item : SysxItem = new SysxItem();
+        item.timeline = this.timeline;
+        item.data = this.data;
+        return item;
+    }
 }
