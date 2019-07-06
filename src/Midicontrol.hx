@@ -61,41 +61,41 @@ class Midicontrol
     
     public static function openfile() : Void
     {
-        control.stopmusic();
+        Control.stopmusic();
         
-        if (!control.filepath)
+        if (!Control.filepath)
         {
-            control.filepath = control.defaultDirectory;
+            Control.filepath = Control.defaultDirectory;
         }
-        file = control.filepath.resolvePath("");
+        file = Control.filepath.resolvePath("");
         file.addEventListener(Event.SELECT, onloadmidi);
         file.browseForOpen("Load .mid File", [midiFilter]);
         
-        control.fixmouseclicks = true;
+        Control.fixmouseclicks = true;
     }
     
     public static function savemidi() : Void
     {
-        control.stopmusic();
+        Control.stopmusic();
         
-        if (!control.filepath)
+        if (!Control.filepath)
         {
-            control.filepath = control.defaultDirectory;
+            Control.filepath = Control.defaultDirectory;
         }
-        file = control.filepath.resolvePath("*.mid");
+        file = Control.filepath.resolvePath("*.mid");
         file.addEventListener(Event.SELECT, onsavemidi);
         file.browseForSave("Save .mid File");
         
-        control.fixmouseclicks = true;
+        Control.fixmouseclicks = true;
     }
     
     private static function onsavemidi(e : Event) : Void
     {
         file = try cast(e.currentTarget, File) catch(e:Dynamic) null;
         
-        if (!control.fileHasExtension(file, "mid"))
+        if (!Control.fileHasExtension(file, "mid"))
         {
-            control.addExtensionToFile(file, "mid");
+            Control.addExtensionToFile(file, "mid");
         }
         
         convertceoltomidi();
@@ -108,9 +108,9 @@ class Midicontrol
         stream.writeBytes(tempbytes, 0, tempbytes.length);
         stream.close();
         
-        control.fixmouseclicks = true;
-        control.showmessage("SONG EXPORTED AS MIDI");
-        control.savefilesettings();
+        Control.fixmouseclicks = true;
+        Control.showmessage("SONG EXPORTED AS MIDI");
+        Control.savefilesettings();
     }
     
     private static function onloadmidi(e : Event) : Void
@@ -173,22 +173,22 @@ class Midicontrol
         }
         
         //channelinstrument[9] = 142;
-        channelinstrument[9] = control.voicelist.getvoice("Simple Drumkit");
+        channelinstrument[9] = Control.voicelist.getvoice("Simple Drumkit");
         
         convertmiditoceol();
         
-        control.arrange.currentbar = 0;control.arrange.viewstart = 0;
-        control.changemusicbox(0);
+        Control.arrange.currentbar = 0;Control.arrange.viewstart = 0;
+        Control.changemusicbox(0);
         
         /*
-			control._driver.setBeatCallbackInterval(1);
-			control._driver.setTimerInterruption(1, null);
-          control._driver.play(smfData, false);
+			Control._driver.setBeatCallbackInterval(1);
+			Control._driver.setTimerInterruption(1, null);
+          Control._driver.play(smfData, false);
 			*/
         
-        control.showmessage("MIDI IMPORTED");
-        control.fixmouseclicks = true;
-        control.savefilesettings();
+        Control.showmessage("MIDI IMPORTED");
+        Control.fixmouseclicks = true;
+        Control.savefilesettings();
     }
     
     public static function clone(source : Dynamic) : Dynamic
@@ -326,11 +326,11 @@ class Midicontrol
         if (chan == 9)
         {
             //Drums, put it on the last row
-            if (control.arrange.bar[currentpattern].channel[7] == -1)
+            if (Control.arrange.bar[currentpattern].channel[7] == -1)
             {
                 return 7;
             }
-            else if (reversechannelinstrument(channelinstrument[control.musicbox[control.arrange.bar[currentpattern].channel[7]].instr]) == reversechannelinstrument(channelinstrument[chan]))
+            else if (reversechannelinstrument(channelinstrument[Control.musicbox[Control.arrange.bar[currentpattern].channel[7]].instr]) == reversechannelinstrument(channelinstrument[chan]))
             {
                 return 7;
             }
@@ -339,13 +339,13 @@ class Midicontrol
         
         for (i in 0...8)
         {
-            if (control.arrange.bar[currentpattern].channel[i] == -1)
+            if (Control.arrange.bar[currentpattern].channel[i] == -1)
             {
                 return i;
             }
             else if (channelinstrument[chan] != -1)
             {
-                if (reversechannelinstrument(channelinstrument[control.musicbox[control.arrange.bar[currentpattern].channel[i]].instr]) == reversechannelinstrument(channelinstrument[chan]))
+                if (reversechannelinstrument(channelinstrument[Control.musicbox[Control.arrange.bar[currentpattern].channel[i]].instr]) == reversechannelinstrument(channelinstrument[chan]))
                 {
                     return i;
                 }
@@ -362,26 +362,26 @@ class Midicontrol
         
         if (top > -1)
         {
-            if (control.arrange.bar[currentpattern].channel[top] == -1)
+            if (Control.arrange.bar[currentpattern].channel[top] == -1)
             {
-                control.currentinstrument = chan;
+                Control.currentinstrument = chan;
                 if (channelinstrument[chan] > -1)
                 {
-                    control.voicelist.index = channelinstrument[chan];
-                    control.changeinstrumentvoice(control.voicelist.name[control.voicelist.index]);
+                    Control.voicelist.index = channelinstrument[chan];
+                    Control.changeinstrumentvoice(Control.voicelist.name[Control.voicelist.index]);
                 }
                 else
                 {
-                    control.voicelist.index = 0;
-                    control.changeinstrumentvoice(control.voicelist.name[control.voicelist.index]);
+                    Control.voicelist.index = 0;
+                    Control.changeinstrumentvoice(Control.voicelist.name[Control.voicelist.index]);
                 }
-                control.addmusicbox();
-                control.arrange.addpattern(currentpattern, top, control.numboxes - 1);
-                return as3hx.Compat.parseInt(control.numboxes - 1);
+                Control.addmusicbox();
+                Control.arrange.addpattern(currentpattern, top, Control.numboxes - 1);
+                return as3hx.Compat.parseInt(Control.numboxes - 1);
             }
             else
             {
-                return control.arrange.bar[currentpattern].channel[top];
+                return Control.arrange.bar[currentpattern].channel[top];
             }
         }
         
@@ -389,13 +389,13 @@ class Midicontrol
     }
     
     public static function addnotetoceol(currentpattern : Int, time : Int, pitch : Int, notelength : Int, chan : Int) : Void
-    //control.musicbox[currentpattern + (instr * numpatterns)].addnote(time, pitch, notelength);
+    //Control.musicbox[currentpattern + (instr * numpatterns)].addnote(time, pitch, notelength);
     {
         
         currentpattern = getmusicbox(currentpattern, chan);
         if (currentpattern > -1)
         {
-            control.musicbox[currentpattern].addnote(time, pitch, notelength);
+            Control.musicbox[currentpattern].addnote(time, pitch, notelength);
         }
     }
     
@@ -405,9 +405,9 @@ class Midicontrol
         {
             for (j in 0...8)
             {
-                if (control.arrange.bar[i].channel[j] == _old)
+                if (Control.arrange.bar[i].channel[j] == _old)
                 {
-                    control.arrange.bar[i].channel[j] = _new;
+                    Control.arrange.bar[i].channel[j] = _new;
                 }
             }
         }
@@ -415,14 +415,14 @@ class Midicontrol
     
     public static function musicboxmatch(a : Int, b : Int) : Bool
     {
-        if (control.musicbox[a].numnotes == control.musicbox[b].numnotes)
+        if (Control.musicbox[a].numnotes == Control.musicbox[b].numnotes)
         {
-            if (control.musicbox[a].instr == control.musicbox[b].instr)
+            if (Control.musicbox[a].instr == Control.musicbox[b].instr)
             {
                 var i : Int = 0;
-                while (i < control.musicbox[a].numnotes)
+                while (i < Control.musicbox[a].numnotes)
                 {
-                    if (control.musicbox[a].notes[i].x != control.musicbox[b].notes[i].x)
+                    if (Control.musicbox[a].notes[i].x != Control.musicbox[b].notes[i].x)
                     {
                         return false;
                     }
@@ -436,15 +436,15 @@ class Midicontrol
     
     public static function convertmiditoceol() : Void
     {
-        control.newsong();
-        control.numboxes = 0;
-        control.bpm = (smfData.bpm - (smfData.bpm % 5));
-        if (control.bpm <= 10)
+        Control.newsong();
+        Control.numboxes = 0;
+        Control.bpm = (smfData.bpm - (smfData.bpm % 5));
+        if (Control.bpm <= 10)
         {
-            control.bpm = 120;
+            Control.bpm = 120;
         }
-        control._driver.bpm = control.bpm;
-        control._driver.play(null, false);
+        Control._driver.bpm = Control.bpm;
+        Control._driver.play(null, false);
         //for (var tst:int = 0; tst < 16; tst++) {
         //     trace("channel " + String(tst) + " uses instrument " + String(channelinstrument[tst]) + " at volume " + String(channelvolume[tst]));
         //}
@@ -459,31 +459,31 @@ class Midicontrol
         }
         if (numnotes > 16)
         {
-            control.doublesize = true;
+            Control.doublesize = true;
         }
         
         var boxsize : Int = resolution;
         numpatterns = getsonglength();
-        control.numboxes = 0;
-        control.arrange.bar[0].channel[0] = -1;
+        Control.numboxes = 0;
+        Control.arrange.bar[0].channel[0] = -1;
         
-        control.numinstrument = 16;
+        Control.numinstrument = 16;
         for (j in 0...16)
         {
-            control.currentinstrument = j;
-            control.voicelist.index = 132;  //Set to chiptune noise if not used  
-            control.changeinstrumentvoice(control.voicelist.name[control.voicelist.index]);
+            Control.currentinstrument = j;
+            Control.voicelist.index = 132;  //Set to chiptune noise if not used  
+            Control.changeinstrumentvoice(Control.voicelist.name[Control.voicelist.index]);
             
             if (channelinstrument[j] > -1)
             {
-                control.voicelist.index = channelinstrument[j];
-                control.changeinstrumentvoice(control.voicelist.name[control.voicelist.index]);
+                Control.voicelist.index = channelinstrument[j];
+                Control.changeinstrumentvoice(Control.voicelist.name[Control.voicelist.index]);
                 
-                control.instrument[control.currentinstrument].setvolume((channelvolume[j] * 256) / 128);
-                control.instrument[control.currentinstrument].updatefilter();
-                if (control.instrument[control.currentinstrument].type > 0)
+                Control.instrument[Control.currentinstrument].setvolume((channelvolume[j] * 256) / 128);
+                Control.instrument[Control.currentinstrument].updatefilter();
+                if (Control.instrument[Control.currentinstrument].type > 0)
                 {
-                    control.drumkit[control.instrument[control.currentinstrument].type - 1].updatevolume((channelvolume[j] * 256) / 128);
+                    Control.drumkit[Control.instrument[Control.currentinstrument].type - 1].updatevolume((channelvolume[j] * 256) / 128);
                 }
             }
         }
@@ -590,21 +590,21 @@ class Midicontrol
         
         //Optimising stage: Check for duplicate patterns and remove unused ones.
         i = 0;
-        while (i < control.numboxes)
+        while (i < Control.numboxes)
         {
-            var currenthash : Int = control.musicbox[i].hash;
+            var currenthash : Int = Control.musicbox[i].hash;
             if (currenthash != -1)
             {
                 j = as3hx.Compat.parseInt(i + 1);
-                while (j < control.numboxes)
+                while (j < Control.numboxes)
                 {
-                    if (control.musicbox[j].hash == currenthash)
+                    if (Control.musicbox[j].hash == currenthash)
                     {
                         //Probably a match! Let's compare and remove if so
                         if (musicboxmatch(i, j))
                         {
                             replaceontimeline(j, i);
-                            control.musicbox[j].hash = -1;
+                            Control.musicbox[j].hash = -1;
                         }
                     }
                     j++;
@@ -614,24 +614,24 @@ class Midicontrol
         }
         
         //Delete unused boxes
-        i = control.numboxes;
+        i = Control.numboxes;
         while (i >= 0)
         {
-            if (i < control.numboxes)
+            if (i < Control.numboxes)
             {
-                if (control.musicbox[i].hash == -1)
+                if (Control.musicbox[i].hash == -1)
                 {
-                    control.deletemusicbox(i);
+                    Control.deletemusicbox(i);
                 }
             }
             i--;
         }
         
-        control.arrange.loopstart = 0;
-        control.arrange.loopend = control.arrange.lastbar;
-        if (control.arrange.loopend <= control.arrange.loopstart)
+        Control.arrange.loopstart = 0;
+        Control.arrange.loopend = Control.arrange.lastbar;
+        if (Control.arrange.loopend <= Control.arrange.loopstart)
         {
-            control.arrange.loopend = control.arrange.loopstart + 1;
+            Control.arrange.loopend = Control.arrange.loopstart + 1;
         }
     }
     
@@ -663,25 +663,25 @@ class Midicontrol
         
         midiexporter.nexttrack();
         midiexporter.writetimesig();
-        midiexporter.writetempo(control.bpm);
+        midiexporter.writetempo(Control.bpm);
         
         midiexporter.nexttrack();
         
         //Write all the instruments to each channel.
         //In MIDI, channel 9 is special.
         var j : Int = 0;
-        while (j < control.numinstrument)
+        while (j < Control.numinstrument)
         {
-            midiexporter.writeinstrument(instrumentconverttomidi(control.instrument[j].index), j);
+            midiexporter.writeinstrument(instrumentconverttomidi(Control.instrument[j].index), j);
             j++;
         }
         
         //Cover the entire song
-        control.arrange.loopstart = 0;
-        control.arrange.loopend = control.arrange.lastbar;
-        if (control.arrange.loopend <= control.arrange.loopstart)
+        Control.arrange.loopstart = 0;
+        Control.arrange.loopend = Control.arrange.lastbar;
+        if (Control.arrange.loopend <= Control.arrange.loopstart)
         {
-            control.arrange.loopend = control.arrange.loopstart + 1;
+            Control.arrange.loopend = Control.arrange.loopstart + 1;
         }
         
         /*
@@ -693,23 +693,23 @@ class Midicontrol
         
         //Write notes
         j = 0;
-        while (j < control.arrange.lastbar)
+        while (j < Control.arrange.lastbar)
         {
             for (i in 0...8)
             {
-                if (control.arrange.bar[j].channel[i] != -1)
+                if (Control.arrange.bar[j].channel[i] != -1)
                 {
-                    var t : Int = control.arrange.bar[j].channel[i];
+                    var t : Int = Control.arrange.bar[j].channel[i];
                     //Do normal instruments first
-                    if (control.instrument[control.musicbox[control.arrange.bar[j].channel[i]].instr].type == 0)
+                    if (Control.instrument[Control.musicbox[Control.arrange.bar[j].channel[i]].instr].type == 0)
                     {
                         var k : Int = 0;
-                        while (k < control.musicbox[t].numnotes)
+                        while (k < Control.musicbox[t].numnotes)
                         {
-                            midiexporter.writenote(control.musicbox[t].instr, 
-                                    control.musicbox[t].notes[k].x, 
-                                    ((j * control.boxcount) + control.musicbox[t].notes[k].width) * 30, 
-                                    control.musicbox[t].notes[k].y * 30, 255
+                            midiexporter.writenote(Control.musicbox[t].instr, 
+                                    Control.musicbox[t].notes[k].x, 
+                                    ((j * Control.boxcount) + Control.musicbox[t].notes[k].width) * 30, 
+                                    Control.musicbox[t].notes[k].y * 30, 255
                     );
                             k++;
                         }
@@ -723,24 +723,24 @@ class Midicontrol
         midiexporter.writeinstrument(0, 9);
         //Drumkits
         j = 0;
-        while (j < control.arrange.lastbar)
+        while (j < Control.arrange.lastbar)
         {
             for (i in 0...8)
             {
-                if (control.arrange.bar[j].channel[i] != -1)
+                if (Control.arrange.bar[j].channel[i] != -1)
                 {
-                    t = control.arrange.bar[j].channel[i];
-                    var drumkit : Int = control.musicbox[control.arrange.bar[j].channel[i]].instr;
+                    t = Control.arrange.bar[j].channel[i];
+                    var drumkit : Int = Control.musicbox[Control.arrange.bar[j].channel[i]].instr;
                     //Now do drum kits
-                    if (help.Left(control.voicelist.voice[control.instrument[drumkit].index], 7) == "drumkit")
+                    if (help.Left(Control.voicelist.voice[Control.instrument[drumkit].index], 7) == "drumkit")
                     {
                         k = 0;
-                        while (k < control.musicbox[t].numnotes)
+                        while (k < Control.musicbox[t].numnotes)
                         {
                             midiexporter.writenote(9, 
-                                    convertdrumtonote(control.musicbox[t].notes[k].x, control.instrument[drumkit].index), 
-                                    ((j * control.boxcount) + control.musicbox[t].notes[k].width) * 30, 
-                                    control.musicbox[t].notes[k].y * 30, 255
+                                    convertdrumtonote(Control.musicbox[t].notes[k].x, Control.instrument[drumkit].index), 
+                                    ((j * Control.boxcount) + Control.musicbox[t].notes[k].width) * 30, 
+                                    Control.musicbox[t].notes[k].y * 30, 255
                     );
                             k++;
                         }
@@ -752,15 +752,15 @@ class Midicontrol
     }
     
     public static function convertdrumtonote(note : Int, drumkit : Int) : Int
-    //Takes a drum beat from control.createdrumkit()'s list and converts it
+    //Takes a drum beat from Control.createdrumkit()'s list and converts it
     {
         
         //to a drum beat from the General Midi list (http://www.midi.org/techspecs/gm1sound.php)
         var i : Int;
         var voicename : String = "";
-        if (control.voicelist.name[drumkit] == "Simple Drumkit")
+        if (Control.voicelist.name[drumkit] == "Simple Drumkit")
         {
-            voicename = control.drumkit[0].voicename[note];
+            voicename = Control.drumkit[0].voicename[note];
             
             if (voicename == "Bass Drum 1")
             {
@@ -795,9 +795,9 @@ class Midicontrol
                 return MIDIDRUM_49_Crash_Cymbal_1;
             }
         }
-        else if (control.voicelist.name[drumkit] == "SiON Drumkit")
+        else if (Control.voicelist.name[drumkit] == "SiON Drumkit")
         {
-            voicename = control.drumkit[1].voicename[note];
+            voicename = Control.drumkit[1].voicename[note];
             
             if (voicename == "Bass Drum 2")
             {
@@ -952,17 +952,17 @@ class Midicontrol
                 return MIDIDRUM_81_Open_Triangle;
             }
         }
-        else if (control.voicelist.name[drumkit] == "Midi Drumkit")
+        else if (Control.voicelist.name[drumkit] == "Midi Drumkit")
         {
             //This one's easy: we already have the mapping saved.
-            trace(note, control.drumkit[2].midivoice[note]);
-            if (control.drumkit[2].midivoice[note] >= 35 && control.drumkit[2].midivoice[note] <= 81)
+            trace(note, Control.drumkit[2].midivoice[note]);
+            if (Control.drumkit[2].midivoice[note] >= 35 && Control.drumkit[2].midivoice[note] <= 81)
             {
-                return control.drumkit[2].midivoice[note];
+                return Control.drumkit[2].midivoice[note];
             }
             //There are a handful of notes in the SiON midi drumkit that aren't standard:
             //Map them to something similar in the standard set:
-            voicename = control.drumkit[2].voicename[note];
+            voicename = Control.drumkit[2].voicename[note];
             if (voicename == "Seq Click H")
             {
                 return MIDIDRUM_42_Closed_Hi_Hat;
@@ -1029,7 +1029,7 @@ class Midicontrol
     //Converts Bosca Ceoil instrument to a similar Midi one.
     {
         
-        return control.voicelist.midimap[t];
+        return Control.voicelist.midimap[t];
     }
     
     #if targetDesktop

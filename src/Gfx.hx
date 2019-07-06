@@ -55,8 +55,8 @@ class Gfx extends Sprite
         }
         
         scalemode = t;
-        control.forceresize = true;
-        control.clicklist = true;
+        Control.forceresize = true;
+        Control.clicklist = true;
     }
     
     public static function tutorialimagewidth(t : Int) : Int
@@ -179,15 +179,15 @@ class Gfx extends Sprite
     
     public static function updateboxsize() : Void
     {
-        if (control.doublesize)
+        if (Control.doublesize)
         {
-            control.boxsize = (screenwidth - 60) / 32;
-            control.barsize = control.boxsize * control.barcount;
+            Control.boxsize = (screenwidth - 60) / 32;
+            Control.barsize = Control.boxsize * Control.barcount;
         }
         else
         {
-            control.boxsize = (screenwidth - 60) / 16;
-            control.barsize = control.boxsize * control.barcount;
+            Control.boxsize = (screenwidth - 60) / 16;
+            Control.barsize = Control.boxsize * Control.barcount;
         }
     }
     
@@ -203,89 +203,89 @@ class Gfx extends Sprite
         updateboxsize();
         
         //Draw background colour for each row
-        var isdrumkit : Bool = control.instrument[control.musicbox[control.currentbox].instr].type >= 1;
+        var isdrumkit : Bool = Control.instrument[Control.musicbox[Control.currentbox].instr].type >= 1;
         for (i in 0...notesonscreen)
         {
-            var instsize : Int = control.pianorollsize;
-            if (control.instrument[control.musicbox[control.currentbox].instr].type >= 1)
+            var instsize : Int = Control.pianorollsize;
+            if (Control.instrument[Control.musicbox[Control.currentbox].instr].type >= 1)
             {
-                instsize = control.drumkit[control.instrument[control.musicbox[control.currentbox].instr].type - 1].size;
+                instsize = Control.drumkit[Control.instrument[Control.musicbox[Control.currentbox].instr].type - 1].size;
             }
-            if (control.musicbox[control.currentbox].start + i - 1 < instsize)
+            if (Control.musicbox[Control.currentbox].start + i - 1 < instsize)
             {
-                var n : Int = as3hx.Compat.parseInt(control.musicbox[control.currentbox].start + i - 1);
-                var notename : String = ((n > -1)) ? control.notename[control.pianoroll[n]] : "";
+                var n : Int = as3hx.Compat.parseInt(Control.musicbox[Control.currentbox].start + i - 1);
+                var notename : String = ((n > -1)) ? Control.notename[Control.pianoroll[n]] : "";
                 var sharp : Bool = (isdrumkit) ? (n % 2 == 0) : (lastchar(notename) == "#");
                 if (!sharp)
                 {
-                    fillrect(0, screenheight - linesize - (i * linesize), screenwidth, linesize, 100 + (control.musicbox[control.currentbox].palette * 10));
-                    fillrect(0, screenheight - linesize - (i * linesize), screenwidth, 2, 103 + (control.musicbox[control.currentbox].palette * 10));
+                    fillrect(0, screenheight - linesize - (i * linesize), screenwidth, linesize, 100 + (Control.musicbox[Control.currentbox].palette * 10));
+                    fillrect(0, screenheight - linesize - (i * linesize), screenwidth, 2, 103 + (Control.musicbox[Control.currentbox].palette * 10));
                 }
                 else
                 {
-                    fillrect(0, screenheight - linesize - (i * linesize), screenwidth, linesize, 101 + (control.musicbox[control.currentbox].palette * 10));
-                    fillrect(0, screenheight - linesize - (i * linesize), screenwidth, 2, 103 + (control.musicbox[control.currentbox].palette * 10));
+                    fillrect(0, screenheight - linesize - (i * linesize), screenwidth, linesize, 101 + (Control.musicbox[Control.currentbox].palette * 10));
+                    fillrect(0, screenheight - linesize - (i * linesize), screenwidth, 2, 103 + (Control.musicbox[Control.currentbox].palette * 10));
                 }
             }
         }
         
         //Draw bars
         i = 0;
-        while (i < control.boxcount)
+        while (i < Control.boxcount)
         {
-            fillrect(40 + (i * control.boxsize), pianorollposition + linesize, 2, linesize * patterneditorheight, 102 + (control.musicbox[control.currentbox].palette * 10));
+            fillrect(40 + (i * Control.boxsize), pianorollposition + linesize, 2, linesize * patterneditorheight, 102 + (Control.musicbox[Control.currentbox].palette * 10));
             i++;
         }
         i = 0;
-        while (i <= (control.boxcount / control.barcount) + 1)
+        while (i <= (Control.boxcount / Control.barcount) + 1)
         {
-            fillrect(40 + (i * control.barsize) + 2, pianorollposition + linesize, 2, linesize * patterneditorheight, 103 + (control.musicbox[control.currentbox].palette * 10));
+            fillrect(40 + (i * Control.barsize) + 2, pianorollposition + linesize, 2, linesize * patterneditorheight, 103 + (Control.musicbox[Control.currentbox].palette * 10));
             i++;
         }
         
         //Reduced patternsize? Just draw over it!
-        if (control.doublesize)
+        if (Control.doublesize)
         {
-            if (control.boxcount < 32)
+            if (Control.boxcount < 32)
             {
-                fillrect(42 + (control.boxcount * control.boxsize), pianorollposition + linesize, screenwidth, linesize * patterneditorheight, 103 + (control.musicbox[control.currentbox].palette * 10));
+                fillrect(42 + (Control.boxcount * Control.boxsize), pianorollposition + linesize, screenwidth, linesize * patterneditorheight, 103 + (Control.musicbox[Control.currentbox].palette * 10));
             }
         }
-        else if (control.boxcount < 16)
+        else if (Control.boxcount < 16)
         {
-            fillrect(42 + (control.boxcount * control.boxsize), pianorollposition + linesize, screenwidth, linesize * patterneditorheight, 103 + (control.musicbox[control.currentbox].palette * 10));
+            fillrect(42 + (Control.boxcount * Control.boxsize), pianorollposition + linesize, screenwidth, linesize * patterneditorheight, 103 + (Control.musicbox[Control.currentbox].palette * 10));
         }
         
         //Note names
         fillrect(0, pianorollposition + linesize, 40, linesize * patterneditorheight, 4);
-        if (control.notey > -1)
+        if (Control.notey > -1)
         {
-            fillrect(0, screenheight - linesize - (control.notey * linesize), 40, linesize, 6);
+            fillrect(0, screenheight - linesize - (Control.notey * linesize), 40, linesize, 6);
         }
         
         //Print note names
-        j = control.instrument[control.musicbox[control.currentbox].instr].type;
+        j = Control.instrument[Control.musicbox[Control.currentbox].instr].type;
         if (j >= 1)
         {
             //Drumkit!
             j--;
             for (i in 0...notesonscreen)
             {
-                if (control.musicbox[control.currentbox].start + i - 1 < control.drumkit[j].size)
+                if (Control.musicbox[Control.currentbox].start + i - 1 < Control.drumkit[j].size)
                 {
-                    if (control.musicbox[control.currentbox].start + i - 1 > -1)
+                    if (Control.musicbox[Control.currentbox].start + i - 1 > -1)
                     {
-                        print(3, screenheight - linesize - (i * linesize), control.drumkit[j].voicename[control.musicbox[control.currentbox].start + i - 1], 0, false, true);
+                        print(3, screenheight - linesize - (i * linesize), Control.drumkit[j].voicename[Control.musicbox[Control.currentbox].start + i - 1], 0, false, true);
                     }
-                    else if (control.musicbox[control.currentbox].recordfilter == 1)
+                    else if (Control.musicbox[Control.currentbox].recordfilter == 1)
                     {
                         fillrect(0, screenheight - linesize - (i * linesize), screenwidth, linesize, 13);
-                        print(gfx.screenwidthmid - (gfx.len("! ADVANCED FILTER EDITING ON !") / 2), screenheight - linesize - (i * linesize) + 1, "! ADVANCED FILTER EDITING ON !", 15, false);
+                        print(Gfx.screenwidthmid - (Gfx.len("! ADVANCED FILTER EDITING ON !") / 2), screenheight - linesize - (i * linesize) + 1, "! ADVANCED FILTER EDITING ON !", 15, false);
                     }
                     else
                     {
                         fillrect(0, screenheight - linesize - (i * linesize), screenwidth, linesize, 12);
-                        print(gfx.screenwidthmid - (gfx.len("ADVANCED FILTER EDITING OFF") / 2), screenheight - linesize - (i * linesize) + 1, "ADVANCED FILTER EDITING OFF", 0);
+                        print(Gfx.screenwidthmid - (Gfx.len("ADVANCED FILTER EDITING OFF") / 2), screenheight - linesize - (i * linesize) + 1, "ADVANCED FILTER EDITING OFF", 0);
                     }
                 }
             }
@@ -294,56 +294,56 @@ class Gfx extends Sprite
         {
             for (i in 0...notesonscreen)
             {
-                if (control.musicbox[control.currentbox].start + i - 1 > -1)
+                if (Control.musicbox[Control.currentbox].start + i - 1 > -1)
                 {
-                    print(3, screenheight - linesize - (i * linesize), control.notename[control.pianoroll[control.musicbox[control.currentbox].start + i - 1]], 0);
+                    print(3, screenheight - linesize - (i * linesize), Control.notename[Control.pianoroll[Control.musicbox[Control.currentbox].start + i - 1]], 0);
                 }
-                else if (control.musicbox[control.currentbox].recordfilter == 1)
+                else if (Control.musicbox[Control.currentbox].recordfilter == 1)
                 {
                     fillrect(0, screenheight - linesize - (i * linesize), screenwidth, linesize, 13);
-                    print(gfx.screenwidthmid - (gfx.len("! ADVANCED FILTER EDITING ON !") / 2), screenheight - linesize - (i * linesize) + 1, "! ADVANCED FILTER EDITING ON !", 15);
+                    print(Gfx.screenwidthmid - (Gfx.len("! ADVANCED FILTER EDITING ON !") / 2), screenheight - linesize - (i * linesize) + 1, "! ADVANCED FILTER EDITING ON !", 15);
                 }
                 else
                 {
                     fillrect(0, screenheight - linesize - (i * linesize), screenwidth, linesize, 12);
-                    print(gfx.screenwidthmid - (gfx.len("ADVANCED FILTER EDITING OFF") / 2), screenheight - linesize - (i * linesize) + 1, "ADVANCED FILTER EDITING OFF", 0, true);
+                    print(Gfx.screenwidthmid - (Gfx.len("ADVANCED FILTER EDITING OFF") / 2), screenheight - linesize - (i * linesize) + 1, "ADVANCED FILTER EDITING OFF", 0, true);
                 }
             }
         }
         
         //Scroll bar
-        if (control.doublesize)
+        if (Control.doublesize)
         {
-            if (control.musicbox[control.currentbox].recordfilter == 1)
+            if (Control.musicbox[Control.currentbox].recordfilter == 1)
             {
-                fillrect(42 + (32 * control.boxsize), pianorollposition + linesize, 40, linesize * patterneditorheight, 9);
+                fillrect(42 + (32 * Control.boxsize), pianorollposition + linesize, 40, linesize * patterneditorheight, 9);
             }
             else
             {
-                fillrect(42 + (32 * control.boxsize), pianorollposition + linesize, 40, linesize * patterneditorheight, 4);
+                fillrect(42 + (32 * Control.boxsize), pianorollposition + linesize, 40, linesize * patterneditorheight, 4);
             }
         }
-        else if (control.musicbox[control.currentbox].recordfilter == 1)
+        else if (Control.musicbox[Control.currentbox].recordfilter == 1)
         {
-            fillrect(42 + (16 * control.boxsize), pianorollposition + linesize, 40, linesize * patterneditorheight, 9);
+            fillrect(42 + (16 * Control.boxsize), pianorollposition + linesize, 40, linesize * patterneditorheight, 9);
         }
         else
         {
-            fillrect(42 + (16 * control.boxsize), pianorollposition + linesize, 40, linesize * patterneditorheight, 4);
+            fillrect(42 + (16 * Control.boxsize), pianorollposition + linesize, 40, linesize * patterneditorheight, 4);
         }
         
         //Octave bars
-        j = control.instrument[control.musicbox[control.currentbox].instr].type;
+        j = Control.instrument[Control.musicbox[Control.currentbox].instr].type;
         if (j == 0)
         {
-            j = control.musicbox[control.currentbox].start;
+            j = Control.musicbox[Control.currentbox].start;
             for (i in 0...notesonscreen)
             {
-                if ((j + i) % control.scalesize == 0)
+                if ((j + i) % Control.scalesize == 0)
                 {
-                    fillrect(30, screenheight - linesize - (i * linesize), screenwidth, 3, 106 + (control.musicbox[control.currentbox].palette * 10));
-                    fillrect(30, screenheight - linesize - (i * linesize) + 3, screenwidth, 1, 107 + (control.musicbox[control.currentbox].palette * 10));
-                    tempstring = Std.string(j + i / control.scalesize);
+                    fillrect(30, screenheight - linesize - (i * linesize), screenwidth, 3, 106 + (Control.musicbox[Control.currentbox].palette * 10));
+                    fillrect(30, screenheight - linesize - (i * linesize) + 3, screenwidth, 1, 107 + (Control.musicbox[Control.currentbox].palette * 10));
+                    tempstring = Std.string(j + i / Control.scalesize);
                     print(screenwidth - 20, screenheight - linesize - (i * linesize) + 4, tempstring, 0, false, true);
                 }
             }
@@ -351,47 +351,47 @@ class Gfx extends Sprite
         
         //DRAW THE NOTES HERE
         j = 0;
-        while (j < control.musicbox[control.currentbox].numnotes)
+        while (j < Control.musicbox[Control.currentbox].numnotes)
         {
-            i = control.musicbox[control.currentbox].notes[j].width;
-            if (i < control.boxcount)
+            i = Control.musicbox[Control.currentbox].notes[j].width;
+            if (i < Control.boxcount)
             {
-                control.drawnoteposition = control.invertpianoroll[control.musicbox[control.currentbox].notes[j].x] + 1;
-                control.drawnotelength = control.musicbox[control.currentbox].notes[j].y * control.boxsize;
-                if (control.drawnoteposition > -1)
+                Control.drawnoteposition = Control.invertpianoroll[Control.musicbox[Control.currentbox].notes[j].x] + 1;
+                Control.drawnotelength = Control.musicbox[Control.currentbox].notes[j].y * Control.boxsize;
+                if (Control.drawnoteposition > -1)
                 {
-                    control.drawnoteposition -= control.musicbox[control.currentbox].start;
-                    if (control.drawnoteposition <= 0)
+                    Control.drawnoteposition -= Control.musicbox[Control.currentbox].start;
+                    if (Control.drawnoteposition <= 0)
                     {
-                        fillrect(42 + (i * control.boxsize), screenheight - linesize - 4, control.drawnotelength, 4, 104 + (control.musicbox[control.currentbox].palette * 10));
-                        fillrect(42 + (i * control.boxsize), screenheight - linesize - 2, control.drawnotelength, 2, 105 + (control.musicbox[control.currentbox].palette * 10));
-                        fillrect(42 + (i * control.boxsize), screenheight - linesize - 8, 2, 8, 105 + (control.musicbox[control.currentbox].palette * 10));
-                        fillrect(42 + (i * control.boxsize) + control.drawnotelength - 2, screenheight - linesize - 8, 2, 8, 105 + (control.musicbox[control.currentbox].palette * 10));
+                        fillrect(42 + (i * Control.boxsize), screenheight - linesize - 4, Control.drawnotelength, 4, 104 + (Control.musicbox[Control.currentbox].palette * 10));
+                        fillrect(42 + (i * Control.boxsize), screenheight - linesize - 2, Control.drawnotelength, 2, 105 + (Control.musicbox[Control.currentbox].palette * 10));
+                        fillrect(42 + (i * Control.boxsize), screenheight - linesize - 8, 2, 8, 105 + (Control.musicbox[Control.currentbox].palette * 10));
+                        fillrect(42 + (i * Control.boxsize) + Control.drawnotelength - 2, screenheight - linesize - 8, 2, 8, 105 + (Control.musicbox[Control.currentbox].palette * 10));
                     }
-                    else if (control.drawnoteposition >= notesonscreen)
+                    else if (Control.drawnoteposition >= notesonscreen)
                     {
-                        fillrect(42 + (i * control.boxsize), pianorollposition + linesize, control.drawnotelength, 4, 104 + (control.musicbox[control.currentbox].palette * 10));
-                        fillrect(42 + (i * control.boxsize), pianorollposition + linesize, control.drawnotelength, 2, 105 + (control.musicbox[control.currentbox].palette * 10));
-                        fillrect(42 + (i * control.boxsize), pianorollposition + linesize, 2, 8, 105 + (control.musicbox[control.currentbox].palette * 10));
-                        fillrect(42 + (i * control.boxsize) + control.drawnotelength - 2, pianorollposition + linesize, 2, 8, 105 + (control.musicbox[control.currentbox].palette * 10));
+                        fillrect(42 + (i * Control.boxsize), pianorollposition + linesize, Control.drawnotelength, 4, 104 + (Control.musicbox[Control.currentbox].palette * 10));
+                        fillrect(42 + (i * Control.boxsize), pianorollposition + linesize, Control.drawnotelength, 2, 105 + (Control.musicbox[Control.currentbox].palette * 10));
+                        fillrect(42 + (i * Control.boxsize), pianorollposition + linesize, 2, 8, 105 + (Control.musicbox[Control.currentbox].palette * 10));
+                        fillrect(42 + (i * Control.boxsize) + Control.drawnotelength - 2, pianorollposition + linesize, 2, 8, 105 + (Control.musicbox[Control.currentbox].palette * 10));
                     }
                     else
                     {
-                        fillrect(42 + (i * control.boxsize), screenheight - linesize - (control.drawnoteposition * linesize), control.drawnotelength, linesize, 105 + (control.musicbox[control.currentbox].palette * 10));
-                        fillrect(42 + (i * control.boxsize), screenheight - linesize - (control.drawnoteposition * linesize) + 16, control.drawnotelength, 4, 104 + (control.musicbox[control.currentbox].palette * 10));
-                        fillrect(42 + (i * control.boxsize) + control.drawnotelength - 4, screenheight - linesize - (control.drawnoteposition * linesize), 4, linesize, 104 + (control.musicbox[control.currentbox].palette * 10));
+                        fillrect(42 + (i * Control.boxsize), screenheight - linesize - (Control.drawnoteposition * linesize), Control.drawnotelength, linesize, 105 + (Control.musicbox[Control.currentbox].palette * 10));
+                        fillrect(42 + (i * Control.boxsize), screenheight - linesize - (Control.drawnoteposition * linesize) + 16, Control.drawnotelength, 4, 104 + (Control.musicbox[Control.currentbox].palette * 10));
+                        fillrect(42 + (i * Control.boxsize) + Control.drawnotelength - 4, screenheight - linesize - (Control.drawnoteposition * linesize), 4, linesize, 104 + (Control.musicbox[Control.currentbox].palette * 10));
                         
-                        tempstring = Std.string(as3hx.Compat.parseInt(control.musicbox[control.currentbox].notes[j].y));
-                        if (control.doublesize)
+                        tempstring = Std.string(as3hx.Compat.parseInt(Control.musicbox[Control.currentbox].notes[j].y));
+                        if (Control.doublesize)
                         {
-                            if (control.musicbox[control.currentbox].notes[j].y + control.musicbox[control.currentbox].notes[j].width > 32)
+                            if (Control.musicbox[Control.currentbox].notes[j].y + Control.musicbox[Control.currentbox].notes[j].width > 32)
                             {
-                                print(42 + (i * control.boxsize), screenheight - linesize - (control.drawnoteposition * linesize), tempstring, 12);
+                                print(42 + (i * Control.boxsize), screenheight - linesize - (Control.drawnoteposition * linesize), tempstring, 12);
                             }
                         }
-                        else if (control.musicbox[control.currentbox].notes[j].y + control.musicbox[control.currentbox].notes[j].width > 16)
+                        else if (Control.musicbox[Control.currentbox].notes[j].y + Control.musicbox[Control.currentbox].notes[j].width > 16)
                         {
-                            print(42 + (i * control.boxsize), screenheight - linesize - (control.drawnoteposition * linesize), tempstring, 12);
+                            print(42 + (i * Control.boxsize), screenheight - linesize - (Control.drawnoteposition * linesize), tempstring, 12);
                         }
                     }
                 }
@@ -404,40 +404,40 @@ class Gfx extends Sprite
     //Bar position
     {
         
-        control.seekposition(control.boxsize * control.looptime);
-        if (control.musicbox[control.currentbox].isplayed)
+        Control.seekposition(Control.boxsize * Control.looptime);
+        if (Control.musicbox[Control.currentbox].isplayed)
         {
             //Only draw if this musicbox is actually being played
-            fillrect(40 + control.barposition, pianorollposition + linesize, 4, linesize * patterneditorheight, 10);
-            fillrect(40 + control.barposition + 4, pianorollposition + linesize, 4, linesize * patterneditorheight, 11);
+            fillrect(40 + Control.barposition, pianorollposition + linesize, 4, linesize * patterneditorheight, 10);
+            fillrect(40 + Control.barposition + 4, pianorollposition + linesize, 4, linesize * patterneditorheight, 11);
         }
         
         //Draw the cursor
-        if (control.cursorx > -1 && control.cursory > -1)
+        if (Control.cursorx > -1 && Control.cursory > -1)
         {
-            if (control.musicbox[control.currentbox].start + control.cursory - 1 == -1)
+            if (Control.musicbox[Control.currentbox].start + Control.cursory - 1 == -1)
             {
-                if (control.doublesize)
+                if (Control.doublesize)
                 {
-                    drawbox(40 + (4 * control.boxsize), gfx.screenheight - linesize - (control.cursory * linesize), control.boxsize * 24, linesize, 0);
+                    drawbox(40 + (4 * Control.boxsize), Gfx.screenheight - linesize - (Control.cursory * linesize), Control.boxsize * 24, linesize, 0);
                 }
                 else
                 {
-                    drawbox(40 + (2 * control.boxsize), gfx.screenheight - linesize - (control.cursory * linesize), control.boxsize * 12, linesize, 0);
+                    drawbox(40 + (2 * Control.boxsize), Gfx.screenheight - linesize - (Control.cursory * linesize), Control.boxsize * 12, linesize, 0);
                 }
             }
-            else if (control.cursory == notesonscreen - 1)
+            else if (Control.cursory == notesonscreen - 1)
             {
                 //draw partial cursor
-                drawpartialbox(40 + (control.cursorx * control.boxsize), gfx.screenheight - linesize - (control.cursory * linesize), control.boxsize * control.notelength, linesize, 0, pianorollposition + linesize);
+                drawpartialbox(40 + (Control.cursorx * Control.boxsize), Gfx.screenheight - linesize - (Control.cursory * linesize), Control.boxsize * Control.notelength, linesize, 0, pianorollposition + linesize);
             }
             else
             {
-                drawbox(40 + (control.cursorx * control.boxsize), gfx.screenheight - linesize - (control.cursory * linesize), control.boxsize * control.notelength, linesize, 0);
-                if (control.notelength > control.boxcount)
+                drawbox(40 + (Control.cursorx * Control.boxsize), Gfx.screenheight - linesize - (Control.cursory * linesize), Control.boxsize * Control.notelength, linesize, 0);
+                if (Control.notelength > Control.boxcount)
                 {
-                    tempstring = Std.string(control.notelength);
-                    print(40 + (control.cursorx * control.boxsize), gfx.screenheight - linesize - (control.cursory * linesize), tempstring, 0);
+                    tempstring = Std.string(Control.notelength);
+                    print(40 + (Control.cursorx * Control.boxsize), Gfx.screenheight - linesize - (Control.cursory * linesize), tempstring, 0);
                 }
             }
         }
@@ -445,105 +445,105 @@ class Gfx extends Sprite
     
     public static function drawlist() : Void
     {
-        if (control.list.active)
+        if (Control.list.active)
         {
             //Draw list
-            fillrect(control.list.x - 2, control.list.y - 2, control.list.w + 4, control.list.h + 4, 12);
-            fillrect(control.list.x, control.list.y, control.list.w, control.list.h, 11);
-            if (control.list.type == control.LIST_SELECTINSTRUMENT)
+            fillrect(Control.list.x - 2, Control.list.y - 2, Control.list.w + 4, Control.list.h + 4, 12);
+            fillrect(Control.list.x, Control.list.y, Control.list.w, Control.list.h, 11);
+            if (Control.list.type == Control.LIST_SELECTINSTRUMENT)
             {
                 i = 0;
-                while (i < control.list.numitems)
+                while (i < Control.list.numitems)
                 {
-                    fillrect(control.list.x, control.list.y + (i * linesize), control.list.w, linesize, 101 + (control.instrument[i].palette * 10));
+                    fillrect(Control.list.x, Control.list.y + (i * linesize), Control.list.w, linesize, 101 + (Control.instrument[i].palette * 10));
                     i++;
                 }
-                if (control.list.selection > -1)
+                if (Control.list.selection > -1)
                 {
-                    fillrect(control.list.x, control.list.y + (control.list.selection * linesize), control.list.w, linesize, 100 + (control.instrument[control.list.selection].palette * 10));
+                    fillrect(Control.list.x, Control.list.y + (Control.list.selection * linesize), Control.list.w, linesize, 100 + (Control.instrument[Control.list.selection].palette * 10));
                 }
             }
             else
             {
                 i = 0;
-                while (i < control.list.numitems)
+                while (i < Control.list.numitems)
                 {
-                    if (help.Left(control.list.item[i], 1) == ">" || help.Left(control.list.item[i], 1) == "<")
+                    if (help.Left(Control.list.item[i], 1) == ">" || help.Left(Control.list.item[i], 1) == "<")
                     {
-                        fillrect(control.list.x, control.list.y + (i * linesize), control.list.w, linesize, 0);
+                        fillrect(Control.list.x, Control.list.y + (i * linesize), Control.list.w, linesize, 0);
                     }
                     i++;
                 }
                 
-                if (control.list.type == control.LIST_MIDIINSTRUMENT)
+                if (Control.list.type == Control.LIST_MIDIINSTRUMENT)
                 {
-                    if (control.midilistselection > -1)
+                    if (Control.midilistselection > -1)
                     {
-                        fillrect(control.list.x, control.list.y + (control.midilistselection * linesize), control.list.w, linesize, 3);
+                        fillrect(Control.list.x, Control.list.y + (Control.midilistselection * linesize), Control.list.w, linesize, 3);
                     }
                 }
                 
-                if (control.list.selection > -1)
+                if (Control.list.selection > -1)
                 {
-                    fillrect(control.list.x, control.list.y + (control.list.selection * linesize), control.list.w, linesize, 2);
+                    fillrect(Control.list.x, Control.list.y + (Control.list.selection * linesize), Control.list.w, linesize, 2);
                 }
             }
             
             i = 0;
-            while (i < control.list.numitems)
+            while (i < Control.list.numitems)
             {
-                if (help.Left(control.list.item[i], 1) == ">" || help.Left(control.list.item[i], 1) == "<")
+                if (help.Left(Control.list.item[i], 1) == ">" || help.Left(Control.list.item[i], 1) == "<")
                 {
-                    print(control.list.x + 2, control.list.y + (i * linesize), control.list.item[i], 14);
+                    print(Control.list.x + 2, Control.list.y + (i * linesize), Control.list.item[i], 14);
                 }
                 else
                 {
-                    print(control.list.x + 2, control.list.y + (i * linesize), control.list.item[i], 0);
+                    print(Control.list.x + 2, Control.list.y + (i * linesize), Control.list.item[i], 0);
                 }
                 i++;
             }
         }
         
-        if (control.secondlist.active)
+        if (Control.secondlist.active)
         {
             //Draw list
-            fillrect(control.secondlist.x - 2, control.secondlist.y - 2, control.secondlist.w + 4, control.secondlist.h + 4, 12);
-            fillrect(control.secondlist.x, control.secondlist.y, control.secondlist.w, control.secondlist.h, 11);
+            fillrect(Control.secondlist.x - 2, Control.secondlist.y - 2, Control.secondlist.w + 4, Control.secondlist.h + 4, 12);
+            fillrect(Control.secondlist.x, Control.secondlist.y, Control.secondlist.w, Control.secondlist.h, 11);
             i = 0;
-            while (i < control.secondlist.numitems)
+            while (i < Control.secondlist.numitems)
             {
-                if (help.Left(control.secondlist.item[i], 1) == ">" || help.Left(control.secondlist.item[i], 1) == "<")
+                if (help.Left(Control.secondlist.item[i], 1) == ">" || help.Left(Control.secondlist.item[i], 1) == "<")
                 {
-                    fillrect(control.secondlist.x, control.secondlist.y + (i * linesize), control.secondlist.w, linesize, 0);
+                    fillrect(Control.secondlist.x, Control.secondlist.y + (i * linesize), Control.secondlist.w, linesize, 0);
                 }
                 i++;
             }
-            if (control.secondlist.selection > -1)
+            if (Control.secondlist.selection > -1)
             {
-                fillrect(control.secondlist.x, control.secondlist.y + (control.secondlist.selection * linesize), control.secondlist.w, linesize, 2);
+                fillrect(Control.secondlist.x, Control.secondlist.y + (Control.secondlist.selection * linesize), Control.secondlist.w, linesize, 2);
             }
             
             i = 0;
-            while (i < control.secondlist.numitems)
+            while (i < Control.secondlist.numitems)
             {
-                if (help.Left(control.secondlist.item[i], 1) == ">" || help.Left(control.secondlist.item[i], 1) == "<")
+                if (help.Left(Control.secondlist.item[i], 1) == ">" || help.Left(Control.secondlist.item[i], 1) == "<")
                 {
-                    print(control.secondlist.x + 2, control.secondlist.y + (i * linesize), control.secondlist.item[i], 14);
+                    print(Control.secondlist.x + 2, Control.secondlist.y + (i * linesize), Control.secondlist.item[i], 14);
                 }
                 else
                 {
-                    print(control.secondlist.x + 2, control.secondlist.y + (i * linesize), control.secondlist.item[i], 0);
+                    print(Control.secondlist.x + 2, Control.secondlist.y + (i * linesize), Control.secondlist.item[i], 0);
                 }
                 i++;
             }
         }
         
         //Special trash button!
-        if (control.trashbutton > 0)
+        if (Control.trashbutton > 0)
         {
-            fillrect(screenwidth - 100 - 4, screenheight - (control.trashbutton * 2) - 4, 108, (control.trashbutton * 2) + 8, 12);
-            fillrect(screenwidth - 100, screenheight - (control.trashbutton * 2), 100, control.trashbutton * 2, 13);
-            print(screenwidth - 100 + 4, screenheight - (control.trashbutton * 2), "DELETE?", 0, false, true);
+            fillrect(screenwidth - 100 - 4, screenheight - (Control.trashbutton * 2) - 4, 108, (Control.trashbutton * 2) + 8, 12);
+            fillrect(screenwidth - 100, screenheight - (Control.trashbutton * 2), 100, Control.trashbutton * 2, 13);
+            print(screenwidth - 100 + 4, screenheight - (Control.trashbutton * 2), "DELETE?", 0, false, true);
         }
     }
     
@@ -553,7 +553,7 @@ class Gfx extends Sprite
         
         if (xp < screenwidth)
         {
-            temppal = control.musicbox[t].palette;
+            temppal = Control.musicbox[t].palette;
             if (!enabled)
             {
                 temppal = 21;
@@ -570,7 +570,7 @@ class Gfx extends Sprite
                 zoomoffset = forcezoom / 2;
             }
             
-            if (control.doublesize)
+            if (Control.doublesize)
             {
                 zoomoffset = zoomoffset / 2;
             }
@@ -578,35 +578,35 @@ class Gfx extends Sprite
             fillrect(xp, yp, temppatternwidth, 24, 100 + (temppal * 10));
             fillrect(xp + 44, yp + 2, temppatternwidth - 46, 20, 101 + (temppal * 10));
             mbj = 0;
-            while (mbj < control.musicbox[t].numnotes)
+            while (mbj < Control.musicbox[t].numnotes)
             {
-                mbi = control.musicbox[t].notes[mbj].width;
-                control.drawnoteposition = control.musicbox[t].notes[mbj].x;
-                control.drawnotelength = Math.ceil(control.musicbox[t].notes[mbj].y * zoomoffset);
-                if (mbi + control.musicbox[t].notes[mbj].y > control.boxcount)
+                mbi = Control.musicbox[t].notes[mbj].width;
+                Control.drawnoteposition = Control.musicbox[t].notes[mbj].x;
+                Control.drawnotelength = Math.ceil(Control.musicbox[t].notes[mbj].y * zoomoffset);
+                if (mbi + Control.musicbox[t].notes[mbj].y > Control.boxcount)
                 {
                     //temppatternwidth for each bar
-                    control.drawnotelength = (temppatternwidth / 2) - (21 + mbi * zoomoffset);
-                    control.drawnotelength += ((temppatternwidth / 2) * (control.musicbox[t].notes[mbj].y - (control.boxcount - mbi)) / control.boxcount);
+                    Control.drawnotelength = (temppatternwidth / 2) - (21 + mbi * zoomoffset);
+                    Control.drawnotelength += ((temppatternwidth / 2) * (Control.musicbox[t].notes[mbj].y - (Control.boxcount - mbi)) / Control.boxcount);
                 }
-                if (control.drawnoteposition > -1)
+                if (Control.drawnoteposition > -1)
                 {
-                    control.drawnoteposition -= control.musicbox[t].bottomnote;
-                    if (control.musicbox[t].notespan > 10)
+                    Control.drawnoteposition -= Control.musicbox[t].bottomnote;
+                    if (Control.musicbox[t].notespan > 10)
                     {
-                        control.drawnoteposition = ((control.drawnoteposition * 8) / control.musicbox[t].notespan) + 2;
+                        Control.drawnoteposition = ((Control.drawnoteposition * 8) / Control.musicbox[t].notespan) + 2;
                     }
                     else
                     {
-                        control.drawnoteposition++;
-                        if (control.musicbox[t].notespan < 6)
+                        Control.drawnoteposition++;
+                        if (Control.musicbox[t].notespan < 6)
                         {
-                            control.drawnoteposition += 6 - control.musicbox[t].notespan;
+                            Control.drawnoteposition += 6 - Control.musicbox[t].notespan;
                         }
                     }
-                    if (control.drawnoteposition >= 1 && control.drawnoteposition < 11)
+                    if (Control.drawnoteposition >= 1 && Control.drawnoteposition < 11)
                     {
-                        fillrect(xp + 42 + (mbi * 2) * zoomoffset, yp + 22 - (control.drawnoteposition * 2), control.drawnotelength * 2, 2, 105 + (temppal * 10));
+                        fillrect(xp + 42 + (mbi * 2) * zoomoffset, yp + 22 - (Control.drawnoteposition * 2), Control.drawnotelength * 2, 2, 105 + (temppal * 10));
                     }
                 }
                 mbj++;
@@ -618,7 +618,7 @@ class Gfx extends Sprite
             fillrect(xp + 42, yp, 2, 24, 100 + (temppal * 10));
             fillrect(xp + temppatternwidth - 2, yp, 2, 24, 100 + (temppal * 10));
             
-            if (control.currentbox == t)
+            if (Control.currentbox == t)
             {
                 drawbox(xp, yp, temppatternwidth, patternheight, 9);
                 drawbox(xp + 2, yp + 2, temppatternwidth - 4, patternheight - 4, 12);
@@ -639,7 +639,7 @@ class Gfx extends Sprite
     {
         for (i in 0...8)
         {
-            if (control.arrange.channelon[i] != null)
+            if (Control.arrange.channelon[i] != null)
             {
                 if (i % 2 == 0)
                 {
@@ -669,11 +669,11 @@ class Gfx extends Sprite
         {
             for (j in 0...8)
             {
-                if (k + control.arrange.viewstart > -1)
+                if (k + Control.arrange.viewstart > -1)
                 {
-                    if (control.arrange.bar[k + control.arrange.viewstart].channel[j] > -1)
+                    if (Control.arrange.bar[k + Control.arrange.viewstart].channel[j] > -1)
                     {
-                        drawmusicbox(k * patternwidth, linesize + (j * patternheight), control.arrange.bar[k + control.arrange.viewstart].channel[j], control.arrange.channelon[j]);
+                        drawmusicbox(k * patternwidth, linesize + (j * patternheight), Control.arrange.bar[k + Control.arrange.viewstart].channel[j], Control.arrange.channelon[j]);
                     }
                 }
             }
@@ -685,14 +685,14 @@ class Gfx extends Sprite
     //Position bar
     {
         
-        i = as3hx.Compat.parseInt(((control.looptime * patternwidth) / control.boxcount) + ((control.arrange.currentbar - control.arrange.viewstart) * patternwidth));
+        i = as3hx.Compat.parseInt(((Control.looptime * patternwidth) / Control.boxcount) + ((Control.arrange.currentbar - Control.arrange.viewstart) * patternwidth));
         if (i < patternmanagerx)
         {
             fillrect(i, linesize, 4, pianorollposition, 10);
             fillrect(i + 4, linesize, 4, pianorollposition, 11);
         }
         
-        if (control.mx < 20 && control.my > linesize && control.my < linesize + pianorollposition && control.arrange.viewstart > 0)
+        if (Control.mx < 20 && Control.my > linesize && Control.my < linesize + pianorollposition && Control.arrange.viewstart > 0)
         {
             if (arrangementscrollleft < 20)
             {
@@ -707,7 +707,7 @@ class Gfx extends Sprite
             fillrect(-20 + 2 + arrangementscrollleft, linesize + 2, 16, pianorollposition - 4, 5);
             drawicon(-20 + 4 + arrangementscrollleft, linesize + (pianorollposition / 2) - 12, 12);
         }
-        else if (control.mx > patternmanagerx - 20 && control.mx < patternmanagerx && control.my > linesize && control.my < linesize + pianorollposition)
+        else if (Control.mx > patternmanagerx - 20 && Control.mx < patternmanagerx && Control.my > linesize && Control.my < linesize + pianorollposition)
         {
             if (arrangementscrollright < 20)
             {
@@ -726,15 +726,15 @@ class Gfx extends Sprite
         else
         {
             
-            if (control.arrangecurx > -1 && control.arrangecury > -1)
+            if (Control.arrangecurx > -1 && Control.arrangecury > -1)
             {
-                if (control.arrangecurx == 0 && control.arrange.viewstart == -1)
+                if (Control.arrangecurx == 0 && Control.arrange.viewstart == -1)
                 {
                     drawbox(0, linesize, patternwidth, pianorollposition - 12, 0);
                 }
                 else
                 {
-                    drawbox(control.arrangecurx * patternwidth, linesize + (control.arrangecury * patternheight), patternwidth, patternheight, 0);
+                    drawbox(Control.arrangecurx * patternwidth, linesize + (Control.arrangecury * patternheight), patternwidth, patternheight, 0);
                 }
             }
             
@@ -778,11 +778,11 @@ class Gfx extends Sprite
             fillrect(i * patternwidth, pianorollposition + 8, 2, 12, 14);
         }
         
-        if (control.dragaction == 3)
+        if (Control.dragaction == 3)
         {
             for (i in 0...temp)
             {
-                if (i + control.arrange.viewstart == control.dragx || (i + control.arrange.viewstart >= control.dragx && i + control.arrange.viewstart < control.timelinecurx + control.arrange.viewstart + 1) || (i + control.arrange.viewstart < control.dragx && i + control.arrange.viewstart >= control.timelinecurx + control.arrange.viewstart + 1))
+                if (i + Control.arrange.viewstart == Control.dragx || (i + Control.arrange.viewstart >= Control.dragx && i + Control.arrange.viewstart < Control.timelinecurx + Control.arrange.viewstart + 1) || (i + Control.arrange.viewstart < Control.dragx && i + Control.arrange.viewstart >= Control.timelinecurx + Control.arrange.viewstart + 1))
                 {
                     fillrect(i * patternwidth, pianorollposition + 8, patternwidth, 12, 0);
                 }
@@ -791,13 +791,13 @@ class Gfx extends Sprite
         
         for (i in 0...temp)
         {
-            if (i + control.arrange.viewstart >= control.arrange.loopstart && i + control.arrange.viewstart < control.arrange.loopend)
+            if (i + Control.arrange.viewstart >= Control.arrange.loopstart && i + Control.arrange.viewstart < Control.arrange.loopend)
             {
-                if (i + control.arrange.viewstart == control.arrange.loopstart)
+                if (i + Control.arrange.viewstart == Control.arrange.loopstart)
                 {
                     fillrect(i * patternwidth, pianorollposition + 10, 4, 8, 2);
                 }
-                if (i + control.arrange.viewstart == control.arrange.loopend - 1)
+                if (i + Control.arrange.viewstart == Control.arrange.loopend - 1)
                 {
                     fillrect(((i + 1) * patternwidth) - 4, pianorollposition + 10, 4, 8, 2);
                 }
@@ -805,7 +805,7 @@ class Gfx extends Sprite
             }
         }
         
-        if (control.arrange.viewstart == -1)
+        if (Control.arrange.viewstart == -1)
         {
             fillrect(0, pianorollposition + 8, patternwidth, 12, 16);
         }
@@ -815,16 +815,16 @@ class Gfx extends Sprite
     //Draw the cursor
     {
         
-        if (control.timelinecurx > -1)
+        if (Control.timelinecurx > -1)
         {
-            if (control.arrange.viewstart == -1 && control.timelinecurx == 0)
+            if (Control.arrange.viewstart == -1 && Control.timelinecurx == 0)
             {
                 drawbox(0, linesize, patternwidth, pianorollposition - 12, 0);
             }
             else
             {
-                drawbox(control.timelinecurx * patternwidth, pianorollposition + 8, patternwidth, 12, 0);
-                print(control.timelinecurx * patternwidth, pianorollposition + 8 - linesize, Std.string(control.arrange.viewstart + control.timelinecurx + 1), 0, false, true);
+                drawbox(Control.timelinecurx * patternwidth, pianorollposition + 8, patternwidth, 12, 0);
+                print(Control.timelinecurx * patternwidth, pianorollposition + 8 - linesize, Std.string(Control.arrange.viewstart + Control.timelinecurx + 1), 0, false, true);
             }
         }
     }
@@ -838,12 +838,12 @@ class Gfx extends Sprite
         //List
         for (k in 0...7)
         {
-            if (k == 0 && control.patternmanagerview > 0 && control.numboxes > 0)
+            if (k == 0 && Control.patternmanagerview > 0 && Control.numboxes > 0)
             {
                 //Draw scrollup
                 drawicon(patternmanagerx + 50, linesize + 4 + (k * patternheight), 1);
             }
-            else if (k == 6 && k + control.patternmanagerview < control.numboxes)
+            else if (k == 6 && k + Control.patternmanagerview < Control.numboxes)
             {
                 //Draw scrolldown
                 drawicon(patternmanagerx + 50, linesize + 2 + (k * patternheight), 0);
@@ -852,9 +852,9 @@ class Gfx extends Sprite
             else
             {
                 
-                if (control.patternmanagerview + k < control.numboxes)
+                if (Control.patternmanagerview + k < Control.numboxes)
                 {
-                    drawmusicbox(patternmanagerx + 3, linesize + 2 + (k * patternheight), control.patternmanagerview + k, true, 4);
+                    drawmusicbox(patternmanagerx + 3, linesize + 2 + (k * patternheight), Control.patternmanagerview + k, true, 4);
                 }
             }
         }
@@ -864,9 +864,9 @@ class Gfx extends Sprite
     //Draw the cursor
     {
         
-        if (control.patterncury > -1)
+        if (Control.patterncury > -1)
         {
-            drawbox(patternmanagerx + 3, linesize + 2 + (control.patterncury * patternheight), 108, patternheight, 0);
+            drawbox(patternmanagerx + 3, linesize + 2 + (Control.patterncury * patternheight), 108, patternheight, 0);
         }
     }
     
@@ -877,12 +877,12 @@ class Gfx extends Sprite
         //List
         for (k in 0...7)
         {
-            if (k == 0 && control.instrumentmanagerview > 0 && control.numinstrument > 0)
+            if (k == 0 && Control.instrumentmanagerview > 0 && Control.numinstrument > 0)
             {
                 //Draw scrollup
                 drawicon(132, linesize + 8 + (k * patternheight), 1);
             }
-            else if (k == 6 && k + control.instrumentmanagerview < control.numinstrument)
+            else if (k == 6 && k + Control.instrumentmanagerview < Control.numinstrument)
             {
                 //Draw scrolldown
                 drawicon(132, linesize + 4 + (k * patternheight), 0);
@@ -891,42 +891,42 @@ class Gfx extends Sprite
             else
             {
                 
-                if (control.instrumentmanagerview + k < control.numinstrument)
+                if (Control.instrumentmanagerview + k < Control.numinstrument)
                 {
-                    fillrect(4, linesize + 4 + (k * patternheight), 272, 24, 100 + (control.instrument[control.instrumentmanagerview + k].palette * 10));
-                    fillrect(4 + 50, linesize + 4 + (k * patternheight), 272 - 50, 24, 101 + (control.instrument[control.instrumentmanagerview + k].palette * 10));
-                    print(12, linesize + 6 + (k * patternheight), Std.string(control.instrumentmanagerview + k + 1), 0, false, true);
-                    print(56, linesize + 6 + (k * patternheight), control.instrument[control.instrumentmanagerview + k].name, 0, false, true);
+                    fillrect(4, linesize + 4 + (k * patternheight), 272, 24, 100 + (Control.instrument[Control.instrumentmanagerview + k].palette * 10));
+                    fillrect(4 + 50, linesize + 4 + (k * patternheight), 272 - 50, 24, 101 + (Control.instrument[Control.instrumentmanagerview + k].palette * 10));
+                    print(12, linesize + 6 + (k * patternheight), Std.string(Control.instrumentmanagerview + k + 1), 0, false, true);
+                    print(56, linesize + 6 + (k * patternheight), Control.instrument[Control.instrumentmanagerview + k].name, 0, false, true);
                 }
             }
         }
         //Draw the cursor
-        if (control.instrumentcury > -1)
+        if (Control.instrumentcury > -1)
         {
-            drawbox(4, linesize + 4 + (control.instrumentcury * patternheight), 272, patternheight, 0);
+            drawbox(4, linesize + 4 + (Control.instrumentcury * patternheight), 272, patternheight, 0);
         }
     }
     
     public static function drawinstrument() : Void
     {
-        fillrect(280, linesize, screenwidth - 280, pianorollposition, 101 + (control.instrument[control.currentinstrument].palette * 10));
-        print(290, linesize + 6, "INSTRUMENT " + Std.string(control.currentinstrument + 1), 0, false, true);
+        fillrect(280, linesize, screenwidth - 280, pianorollposition, 101 + (Control.instrument[Control.currentinstrument].palette * 10));
+        print(290, linesize + 6, "INSTRUMENT " + Std.string(Control.currentinstrument + 1), 0, false, true);
         
-        fillrect(286, (linesize * 2) + 6, 160, linesize, 100 + (control.instrument[control.currentinstrument].palette * 10));
+        fillrect(286, (linesize * 2) + 6, 160, linesize, 100 + (Control.instrument[Control.currentinstrument].palette * 10));
         drawicon(290, (linesize * 2) + 4, 0);
-        print(320, (linesize * 2) + 6, control.instrument[control.currentinstrument].category, 0, false, true);
+        print(320, (linesize * 2) + 6, Control.instrument[Control.currentinstrument].category, 0, false, true);
         
-        fillrect(286 + 180, (linesize * 2) + 6, 280, linesize, 100 + (control.instrument[control.currentinstrument].palette * 10));
+        fillrect(286 + 180, (linesize * 2) + 6, 280, linesize, 100 + (Control.instrument[Control.currentinstrument].palette * 10));
         drawicon(290 + 180, (linesize * 2) + 4, 0);
-        print(320 + 180, (linesize * 2) + 6, control.instrument[control.currentinstrument].name, 0, false, true);
+        print(320 + 180, (linesize * 2) + 6, Control.instrument[Control.currentinstrument].name, 0, false, true);
         
         //Filter pad and volume bar
         i = 0;
-        if (control.currentbox > -1)
+        if (Control.currentbox > -1)
         {
-            if (control.musicbox[control.currentbox].recordfilter == 1)
+            if (Control.musicbox[Control.currentbox].recordfilter == 1)
             {
-                if (control.musicbox[control.currentbox].instr == control.currentinstrument)
+                if (Control.musicbox[Control.currentbox].instr == Control.currentinstrument)
                 {
                     i = 1;
                 }
@@ -946,34 +946,34 @@ class Gfx extends Sprite
                 }
             }
             
-            print(286 + ((screenwidth - 348) / 2) - (len("! RECORDING FOR PATTERN " + Std.string(control.currentbox + 1) + "!") / 2), (linesize * 4) + 114, "! RECORDING FOR PATTERN " + Std.string(control.currentbox + 1) + "!", 15, false, true);
+            print(286 + ((screenwidth - 348) / 2) - (len("! RECORDING FOR PATTERN " + Std.string(Control.currentbox + 1) + "!") / 2), (linesize * 4) + 114, "! RECORDING FOR PATTERN " + Std.string(Control.currentbox + 1) + "!", 15, false, true);
             
             //Move over recording
-            j = as3hx.Compat.parseInt(((256 - control.musicbox[control.currentbox].volumegraph[control.looptime % control.boxcount]) * 90) / 256);
-            fillrect(screenwidth - 42, (linesize * 4) + j, 20, 20, 101 + (control.instrument[control.currentinstrument].palette * 10));
-            fillrect(screenwidth - 42 + 2, (linesize * 4) + j + 2, 16, 16, 100 + (control.instrument[control.currentinstrument].palette * 10));
+            j = as3hx.Compat.parseInt(((256 - Control.musicbox[Control.currentbox].volumegraph[Control.looptime % Control.boxcount]) * 90) / 256);
+            fillrect(screenwidth - 42, (linesize * 4) + j, 20, 20, 101 + (Control.instrument[Control.currentinstrument].palette * 10));
+            fillrect(screenwidth - 42 + 2, (linesize * 4) + j + 2, 16, 16, 100 + (Control.instrument[Control.currentinstrument].palette * 10));
             
-            i = as3hx.Compat.parseInt((control.musicbox[control.currentbox].cutoffgraph[control.looptime % control.boxcount] * (screenwidth - 368)) / 128);
-            j = as3hx.Compat.parseInt((control.musicbox[control.currentbox].resonancegraph[control.looptime % control.boxcount] * 90) / 9);
-            fillrect(286 + i, (linesize * 4) + j, 20, 20, 101 + (control.instrument[control.currentinstrument].palette * 10));
-            fillrect(286 + i + 2, (linesize * 4) + j + 2, 16, 16, 100 + (control.instrument[control.currentinstrument].palette * 10));
+            i = as3hx.Compat.parseInt((Control.musicbox[Control.currentbox].cutoffgraph[Control.looptime % Control.boxcount] * (screenwidth - 368)) / 128);
+            j = as3hx.Compat.parseInt((Control.musicbox[Control.currentbox].resonancegraph[Control.looptime % Control.boxcount] * 90) / 9);
+            fillrect(286 + i, (linesize * 4) + j, 20, 20, 101 + (Control.instrument[Control.currentinstrument].palette * 10));
+            fillrect(286 + i + 2, (linesize * 4) + j + 2, 16, 16, 100 + (Control.instrument[Control.currentinstrument].palette * 10));
         }
         else
         {
-            fillrect(286, linesize * 4, screenwidth - 348, 110, 102 + (control.instrument[control.currentinstrument].palette * 10));
-            fillrect(screenwidth - 42, linesize * 4, 20, 110, 102 + (control.instrument[control.currentinstrument].palette * 10));
+            fillrect(286, linesize * 4, screenwidth - 348, 110, 102 + (Control.instrument[Control.currentinstrument].palette * 10));
+            fillrect(screenwidth - 42, linesize * 4, 20, 110, 102 + (Control.instrument[Control.currentinstrument].palette * 10));
             
             for (i in 0...110)
             {
                 if (i % 4 == 0)
                 {
-                    fillrect(286, (linesize * 4) + i, screenwidth - 348, 2, 103 + (control.instrument[control.currentinstrument].palette * 10));
-                    fillrect(screenwidth - 42, (linesize * 4) + i, 20, 2, 103 + (control.instrument[control.currentinstrument].palette * 10));
+                    fillrect(286, (linesize * 4) + i, screenwidth - 348, 2, 103 + (Control.instrument[Control.currentinstrument].palette * 10));
+                    fillrect(screenwidth - 42, (linesize * 4) + i, 20, 2, 103 + (Control.instrument[Control.currentinstrument].palette * 10));
                 }
             }
             
-            print(286 + ((screenwidth - 348) / 2) - (len("LOW PASS FILTER PAD") / 2), (linesize * 4) + 114, "LOW PASS FILTER PAD", 103 + (control.instrument[control.currentinstrument].palette * 10));
-            print(screenwidth - 52, (linesize * 4) + 114, "VOL", 103 + (control.instrument[control.currentinstrument].palette * 10));
+            print(286 + ((screenwidth - 348) / 2) - (len("LOW PASS FILTER PAD") / 2), (linesize * 4) + 114, "LOW PASS FILTER PAD", 103 + (Control.instrument[Control.currentinstrument].palette * 10));
+            print(screenwidth - 52, (linesize * 4) + 114, "VOL", 103 + (Control.instrument[Control.currentinstrument].palette * 10));
             
             //Default values
             j = 0;
@@ -985,14 +985,14 @@ class Gfx extends Sprite
             fillrect(286 + i + 2, (linesize * 4) + j + 2, 16, 16, 5);
             
             //Switches for volume/filter
-            j = as3hx.Compat.parseInt((256 - control.instrument[control.currentinstrument].volume) * 90 / 256);
-            fillrect(screenwidth - 42, (linesize * 4) + j, 20, 20, 101 + (control.instrument[control.currentinstrument].palette * 10));
-            fillrect(screenwidth - 42 + 2, (linesize * 4) + j + 2, 16, 16, 100 + (control.instrument[control.currentinstrument].palette * 10));
+            j = as3hx.Compat.parseInt((256 - Control.instrument[Control.currentinstrument].volume) * 90 / 256);
+            fillrect(screenwidth - 42, (linesize * 4) + j, 20, 20, 101 + (Control.instrument[Control.currentinstrument].palette * 10));
+            fillrect(screenwidth - 42 + 2, (linesize * 4) + j + 2, 16, 16, 100 + (Control.instrument[Control.currentinstrument].palette * 10));
             
-            i = as3hx.Compat.parseInt(control.instrument[control.currentinstrument].cutoff * (screenwidth - 368) / 128);
-            j = as3hx.Compat.parseInt(control.instrument[control.currentinstrument].resonance * 90 / 9);
-            fillrect(286 + i, (linesize * 4) + j, 20, 20, 101 + (control.instrument[control.currentinstrument].palette * 10));
-            fillrect(286 + i + 2, (linesize * 4) + j + 2, 16, 16, 100 + (control.instrument[control.currentinstrument].palette * 10));
+            i = as3hx.Compat.parseInt(Control.instrument[Control.currentinstrument].cutoff * (screenwidth - 368) / 128);
+            j = as3hx.Compat.parseInt(Control.instrument[Control.currentinstrument].resonance * 90 / 9);
+            fillrect(286 + i, (linesize * 4) + j, 20, 20, 101 + (Control.instrument[Control.currentinstrument].palette * 10));
+            fillrect(286 + i + 2, (linesize * 4) + j + 2, 16, 16, 100 + (Control.instrument[Control.currentinstrument].palette * 10));
         }
     }
     
@@ -1053,7 +1053,7 @@ class Gfx extends Sprite
         windowboundsy = stage.nativeWindow.bounds.height - stage.stageHeight;
         windowwidth = w;
         windowheight = h;
-        if (control.fullscreen)
+        if (Control.fullscreen)
         {
         }
         else if (stage && stage.nativeWindow)
@@ -1062,7 +1062,7 @@ class Gfx extends Sprite
             stage.nativeWindow.height = h + windowboundsy;
         }
         
-        if (gfx.scalemode == 1)
+        if (Gfx.scalemode == 1)
         {
             screenwidth = w / 1.5;screenheight = h / 1.5;
         }
@@ -1081,7 +1081,7 @@ class Gfx extends Sprite
         windowwidth = w;
         windowheight = h;
 
-        if (gfx.scalemode == 1) {
+        if (Gfx.scalemode == 1) {
             screenwidth = w/1.5; screenheight = h/1.5;
         }else {
             screenwidth = w; screenheight = h;
@@ -1503,11 +1503,11 @@ class Gfx extends Sprite
     
     public static function render() : Void
     {
-        if (control.test)
+        if (Control.test)
         {
             settrect(0, 0, screenwidth, 10);
             backbuffer.fillRect(trect, 0x000000);
-            print(5, 0, control.teststring, 2, false);
+            print(5, 0, Control.teststring, 2, false);
         }
         
         normalrender();

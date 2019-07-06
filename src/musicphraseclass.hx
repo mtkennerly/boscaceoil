@@ -77,9 +77,9 @@ class Musicphraseclass
         {
             if (notes[i].x != -1)
             {
-                if (control.invertpianoroll[notes[i].x] + amount != -1)
+                if (Control.invertpianoroll[notes[i].x] + amount != -1)
                 {
-                    notes[i].x = control.pianoroll[control.invertpianoroll[notes[i].x] + amount];
+                    notes[i].x = Control.pianoroll[Control.invertpianoroll[notes[i].x] + amount];
                 }
             }
             if (notes[i].x < 0)

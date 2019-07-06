@@ -405,7 +405,7 @@ class Voicelistclass
         
         for (i in 0...listsize)
         {
-            while (gfx.len(name[i]) > 190)
+            while (Gfx.len(name[i]) > 190)
             {
                 name[i] = help.Left(name[i], name[i].length - 1);
             }

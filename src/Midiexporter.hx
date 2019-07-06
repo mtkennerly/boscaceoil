@@ -7,7 +7,7 @@ import ocean.midi.*;
 import ocean.midi.event.*;
 import ocean.midi.model.*;
 
-//Taking Midias library calls away from midicontrol
+//Taking Midias library calls away from Midicontrol
 class Midiexporter
 {
     //MidiFile

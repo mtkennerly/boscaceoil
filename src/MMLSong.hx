@@ -16,21 +16,21 @@ class MMLSong
     
     public function loadFromLiveBoscaCeoilModel() : Void
     {
-        noteDivisions = control.barcount;
-        bpm = control.bpm;
-        lengthOfPattern = control.boxcount;
+        noteDivisions = Control.barcount;
+        bpm = Control.bpm;
+        lengthOfPattern = Control.boxcount;
         
         var emptyBarMML : String = "\n// empty bar\n" + StringUtil.repeat("  r   ", lengthOfPattern) + "\n";
         var bar : Int;
         var patternNum : Int;
-        var numberOfPatterns : Int = control.numboxes;
+        var numberOfPatterns : Int = Control.numboxes;
         
         instrumentDefinitions = new Array<String>();
         mmlToUseInstrument = new Array<String>();
         var i : Int = 0;
-        while (i < control.numinstrument)
+        while (i < Control.numinstrument)
         {
-            var boscaInstrument : Instrumentclass = control.instrument[i];
+            var boscaInstrument : Instrumentclass = Control.instrument[i];
             if (boscaInstrument.type == 0)
             {
                 //regular instrument, not a drumkit
@@ -56,9 +56,9 @@ class MMLSong
         {
             var maxMonoTracksForBoscaTrack : Int = 0;
             bar = 0;
-            while (bar < control.arrange.lastbar)
+            while (bar < Control.arrange.lastbar)
             {
-                patternNum = control.arrange.bar[bar].channel[track];
+                patternNum = Control.arrange.bar[bar].channel[track];
                 
                 if (patternNum < 0)
                 {
@@ -66,7 +66,7 @@ class MMLSong
                         continue;
                     }
                 }
-                var monoTracksForBar : Array<String> = _mmlTracksForBoscaPattern(patternNum, control.musicbox);
+                var monoTracksForBar : Array<String> = _mmlTracksForBoscaPattern(patternNum, Control.musicbox);
                 maxMonoTracksForBoscaTrack = Math.max(maxMonoTracksForBoscaTrack, monoTracksForBar.length);
                 
                 monophonicTracksForBoscaPattern[patternNum] = monoTracksForBar;
@@ -78,9 +78,9 @@ class MMLSong
             {
                 var outTrack : String = "\n";
                 bar = 0;
-                while (bar < control.arrange.lastbar)
+                while (bar < Control.arrange.lastbar)
                 {
-                    patternNum = control.arrange.bar[bar].channel[track];
+                    patternNum = Control.arrange.bar[bar].channel[track];
                     if (patternNum < 0)
                     {
                         outTrack += emptyBarMML;

@@ -451,12 +451,12 @@ class Control extends Sprite
         
         if (programsettings.data.firstrun == null)
         {
-            guiclass.firstrun = true;
+            Guiclass.firstrun = true;
             programsettings.data.firstrun = 1;
         }
         else
         {
-            guiclass.firstrun = false;
+            Guiclass.firstrun = false;
         }
         
         if (programsettings.data.fullscreen == 0)
@@ -470,25 +470,25 @@ class Control extends Sprite
         
         if (programsettings.data.scalemode == null)
         {
-            gfx.changescalemode(0);
+            Gfx.changescalemode(0);
         }
         else
         {
-            gfx.changescalemode(programsettings.data.scalemode);
+            Gfx.changescalemode(programsettings.data.scalemode);
         }
         
         if (programsettings.data.windowwidth == null)
         {
-            gfx.windowwidth = 768;
-            gfx.windowheight = 560;
+            Gfx.windowwidth = 768;
+            Gfx.windowheight = 560;
         }
         else
         {
-            gfx.windowwidth = programsettings.data.windowwidth;
-            gfx.windowheight = programsettings.data.windowheight;
+            Gfx.windowwidth = programsettings.data.windowwidth;
+            Gfx.windowheight = programsettings.data.windowheight;
         }
         
-        gfx.changewindowsize(gfx.windowwidth, gfx.windowheight);
+        Gfx.changewindowsize(Gfx.windowwidth, Gfx.windowheight);
         
         programsettings.flush();
         programsettings.close();
@@ -527,9 +527,9 @@ class Control extends Sprite
             programsettings.data.fullscreen = 1;
         }
         
-        programsettings.data.scalemode = gfx.scalemode;
-        programsettings.data.windowwidth = gfx.windowwidth;
-        programsettings.data.windowheight = gfx.windowheight;
+        programsettings.data.scalemode = Gfx.scalemode;
+        programsettings.data.windowwidth = Gfx.windowwidth;
+        programsettings.data.windowheight = Gfx.windowheight;
         
         programsettings.flush();
         programsettings.close();
@@ -802,7 +802,7 @@ class Control extends Sprite
             musicbox[t].start = 0;
         }
         
-        guiclass.changetab(currenttab);
+        Guiclass.changetab(currenttab);
     }
     
     public static function _setscale(t1 : Int = -1, t2 : Int = -1, t3 : Int = -1, t4 : Int = -1, t5 : Int = -1, t6 : Int = -1, t7 : Int = -1, t8 : Int = -1, t9 : Int = -1, t10 : Int = -1, t11 : Int = -1, t12 : Int = -1) : Void
@@ -2008,7 +2008,7 @@ class Control extends Sprite
     public static function changetab(newtab : Int) : Void
     {
         currenttab = newtab;
-        guiclass.changetab(newtab);
+        Guiclass.changetab(newtab);
     }
     
     public static function changetab_ifdifferent(newtab : Int) : Void
@@ -2016,7 +2016,7 @@ class Control extends Sprite
         if (currenttab != newtab)
         {
             currenttab = newtab;
-            guiclass.changetab(newtab);
+            Guiclass.changetab(newtab);
         }
     }
     

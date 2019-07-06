@@ -26,7 +26,7 @@ class Listclass
     {
         x = xp;y = yp;active = true;
         getwidth();
-        h = as3hx.Compat.parseInt(numitems * gfx.linesize);
+        h = as3hx.Compat.parseInt(numitems * Gfx.linesize);
     }
     
     public function close() : Void
@@ -40,7 +40,7 @@ class Listclass
         var temp : Int;
         for (i in 0...numitems)
         {
-            temp = gfx.len(item[i]);
+            temp = Gfx.len(item[i]);
             if (w < temp)
             {
                 w = temp;

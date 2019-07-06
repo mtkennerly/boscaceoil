@@ -26,19 +26,19 @@ class TrackerModuleXM
         xm = new XMSong();
         
         xm.songname = desiredSongName;
-        xm.defaultBPM = control.bpm;
-        xm.defaultTempo = as3hx.Compat.parseInt(control.bpm / 20);
+        xm.defaultBPM = Control.bpm;
+        xm.defaultTempo = as3hx.Compat.parseInt(Control.bpm / 20);
         xm.numChannels = 8;  // bosca has a hard-coded limit  
-        xm.numInstruments = control.numinstrument;
+        xm.numInstruments = Control.numinstrument;
         
         var notesByEachInstrumentNumber : Array<Array<Int>> = _notesUsedByEachInstrumentAcrossEntireSong();
         
         // map notes to other notes (mostly for drums)
         var perInstrumentBoscaNoteToXMNoteMap : Array<Array<Int>> = new Array<Array<Int>>();
         i = 0;
-        while (i < control.numinstrument)
+        while (i < Control.numinstrument)
         {
-            boscaInstrument = control.instrument[i];
+            boscaInstrument = Control.instrument[i];
             var boscaNoteToXMNoteMapForThisInstrument : Array<Int> = _boscaNoteToXMNoteMapForInstrument(boscaInstrument, notesByEachInstrumentNumber[i]);
             perInstrumentBoscaNoteToXMNoteMap[i] = boscaNoteToXMNoteMapForThisInstrument;
             i++;
@@ -46,7 +46,7 @@ class TrackerModuleXM
         
         // pattern arrangement
         var i : Int = 0;
-        while (i < control.arrange.lastbar)
+        while (i < Control.arrange.lastbar)
         {
             var xmpat : XMPattern = xmPatternFromBoscaBar(i, perInstrumentBoscaNoteToXMNoteMap);
             xm.patterns.push(xmpat);
@@ -57,9 +57,9 @@ class TrackerModuleXM
         }
         
         i = 0;
-        while (i < control.numinstrument)
+        while (i < Control.numinstrument)
         {
-            boscaInstrument = control.instrument[i];
+            boscaInstrument = Control.instrument[i];
             var xmInstrument : XMInstrument = new XMInstrument();
             var notesUsed : Array<Int> = notesByEachInstrumentNumber[i];
             xmInstrument.name = boscaInstrument.name;
@@ -69,12 +69,12 @@ class TrackerModuleXM
             switch (_sw3_)
             {
                 case 0:
-                    xmInstrument.addSample(_boscaInstrumentToXMSample(boscaInstrument, control._driver));
+                    xmInstrument.addSample(_boscaInstrumentToXMSample(boscaInstrument, Control._driver));
                 default:
                     // XXX: bosca ceoil drumkits are converted lossily to a single XM
                     // instrument, but they could be converted to several instruments.
                     var drumkitNumber : Int = as3hx.Compat.parseInt(boscaInstrument.type - 1);
-                    xmInstrument.addSamples(_boscaDrumkitToXMSamples(control.drumkit[drumkitNumber], notesUsed, perInstrumentBoscaNoteToXMNoteMap[i], control._driver));
+                    xmInstrument.addSamples(_boscaDrumkitToXMSamples(Control.drumkit[drumkitNumber], notesUsed, perInstrumentBoscaNoteToXMNoteMap[i], Control._driver));
                     var s : Int = 0;
                     while (s < notesUsed.length)
                     {
@@ -108,7 +108,7 @@ class TrackerModuleXM
         
         // start with a clear 2d array
         i = 0;
-        while (i < control.numinstrument)
+        while (i < Control.numinstrument)
         {
             seenNotePerInstrument[i] = [];
             i++;
@@ -116,9 +116,9 @@ class TrackerModuleXM
         
         // build a 2d sparse boolean array of notes used
         i = 0;
-        while (i < control.numboxes)
+        while (i < Control.numboxes)
         {
-            var box : Musicphraseclass = control.musicbox[i];
+            var box : Musicphraseclass = Control.musicbox[i];
             var instrumentNum : Int = box.instr;
             
             n = 0;
@@ -156,7 +156,7 @@ class TrackerModuleXM
     private function xmPatternFromBoscaBar(barNum : Int, instrumentNoteMap : Array<Array<Int>>) : XMPattern
     {
         var numtracks : Int = 8;
-        var numrows : Int = control.boxcount;
+        var numrows : Int = Control.boxcount;
         var pattern : XMPattern = new XMPattern(numrows);
         var rows : Array<XMPatternLine> = pattern.rows;
         // 	var lineAllNotesOff = [];
@@ -177,12 +177,12 @@ class TrackerModuleXM
         // ----------
         for (i in 0...numtracks)
         {
-            var whichbox : Int = control.arrange.bar[barNum].channel[i];
+            var whichbox : Int = Control.arrange.bar[barNum].channel[i];
             if (whichbox < 0)
             {
                 continue;
             }
-            var box : Musicphraseclass = control.musicbox[whichbox];
+            var box : Musicphraseclass = Control.musicbox[whichbox];
             
             var notes : Array<Rectangle> = box.notes;
             var j : Int = 0;

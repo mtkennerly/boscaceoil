@@ -11,16 +11,16 @@
 
 Arrangementclass.hx
 Barclass.hx
-control.hx
+Control.hx
 Drumkitclass.hx
-gfx.hx
+Gfx.hx
 Guibutton.hx
-guiclass.hx
+Guiclass.hx
 Help.hx
 Instrumentclass.hx
 Listclass.hx
 Main.hx
-midicontroller.hx
+Midicontrol.hx
 Midiexporter.hx
 MMLSong.hx
 Musicphraseclass.hx
