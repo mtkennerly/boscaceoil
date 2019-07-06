@@ -4,10 +4,10 @@ import flash.events.*;
 import flash.net.*;
 import flash.text.*;
 import flash.utils.Dictionary;
+#if targetDesktop
 import flash.display.NativeWindow;
+#end
 
-// CONFIG::desktop {
-// }
 class Gfx extends Sprite
 {
     public static function init(_stage : Stage) : Void
@@ -41,15 +41,17 @@ class Gfx extends Sprite
         {
             min_windowwidth = 768;
             min_windowheight = 540;
-            // CONFIG::desktop {
+            #if targetDesktop
             stage.nativeWindow.minSize = new Point(768 + windowboundsx, 540 + windowboundsy);
+            #end
         }
         else
         {
             min_windowwidth = 1152;
             min_windowheight = 690;
-            // CONFIG::desktop {
+            #if targetDesktop
             stage.nativeWindow.minSize = new Point(1152 + windowboundsx, 690 + windowboundsy);
+            #end
         }
         
         scalemode = t;
@@ -1051,7 +1053,7 @@ class Gfx extends Sprite
         patternwidth = 44 + (zoom * 16);
     }
     
-    // CONFIG::desktop {
+    #if targetDesktop
     public static function changewindowsize(w : Int, h : Int) : Void
     //if (w < 768) w = 768;
     {
@@ -1082,23 +1084,23 @@ class Gfx extends Sprite
         screenwidthmid = screenwidth / 2;screenheightmid = screenheight / 2;
         screenviewwidth = screenwidth;screenviewheight = screenheight;
     }
-    // }
+    #end
     
-    // CONFIG::web {
-    // 	public static function changewindowsize(w:int, h:int):void {
-    // 		windowwidth = w;
-    // 		windowheight = h;
-    
-    // 		if (gfx.scalemode == 1) {
-    // 			screenwidth = w/1.5; screenheight = h/1.5;
-    // 		}else {
-    // 			screenwidth = w; screenheight = h;
-    // 		}
-    
-    // 		screenwidthmid = screenwidth / 2; screenheightmid = screenheight / 2;
-    // 		screenviewwidth = screenwidth; screenviewheight = screenheight;
-    // 	}
-    // }
+    #if targetWeb
+    public static function changewindowsize(w : Int, h : Int) : Void {
+        windowwidth = w;
+        windowheight = h;
+
+        if (gfx.scalemode == 1) {
+            screenwidth = w/1.5; screenheight = h/1.5;
+        }else {
+            screenwidth = w; screenheight = h;
+        }
+
+        screenwidthmid = screenwidth / 2; screenheightmid = screenheight / 2;
+        screenviewwidth = screenwidth; screenviewheight = screenheight;
+    }
+    #end
     
     public static function settrect(x : Int, y : Int, w : Int, h : Int) : Void
     {

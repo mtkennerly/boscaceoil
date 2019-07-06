@@ -44,15 +44,14 @@ import bigroom.input.KeyPoll;
 import flash.ui.Mouse;
 import flash.utils.Timer;
 import flash.events.InvokeEvent;
-import flash.desktop.NativeApplication;
 
-// CONFIG::desktop
-// {
-// }
-// CONFIG::web
-// {
-// 	import flash.external.ExternalInterface;
-// }
+#if targetDesktop
+import flash.desktop.NativeApplication;
+#end
+#if targetWeb
+import flash.external.ExternalInterface;
+#end
+
 class Main extends Sprite
 {
     public function generickeypoll() : Void
@@ -409,14 +408,17 @@ class Main extends Sprite
                         }if (control.list.type == control.LIST_MOREEXPORTS)
                         {
                             if (control.list.selection == 0)
-                            
-                            // CONFIG::desktop {{
+                            {
+                                #if targetDesktop
                                 control.exportxm();
+                                #end
                             }
                             else if (control.list.selection == 1)
-                            
-                            // TODO: enable for web usage too (it's just text!){
-                                // CONFIG::desktop {control.exportmml();
+                            {
+                                // TODO: enable for web usage too (it's just text!)
+                                #if targetDesktop
+                                control.exportmml();
+                                #end
                             }control.list.close();
                         }if (control.list.type == control.LIST_EXPORTS)
                         {
@@ -425,9 +427,10 @@ class Main extends Sprite
                                 control.exportwav();
                             }
                             else if (control.list.selection == 1)
-                            
-                            // CONFIG::desktop {{
+                            {
+                                #if targetDesktop
                                 midicontrol.savemidi();
+                                #end
                             }
                             else if (control.list.selection == 2)
                             {
@@ -532,11 +535,16 @@ class Main extends Sprite
                                     //Clicked the control panel
                                     else if (control.arrange.viewstart == -1 && control.arrangecurx == 0)
                                     
-                                    /* Not doing this stuff anymore
-										if (control.mx < gfx.patternwidth / 2) {
-											control.arrange.channelon[control.arrangecury] = true;
-										}else {
-											control.arrange.channelon[control.arrangecury] = false;
+                                    /* Not doing this stuff anymore
+
+										if (control.mx < gfx.patternwidth / 2) {
+
+											control.arrange.channelon[control.arrangecury] = true;
+
+										}else {
+
+											control.arrange.channelon[control.arrangecury] = false;
+
 										}*/{
                                         //Set loop to entire song!control.arrange.loopstart = 0;control.arrange.loopend = control.arrange.lastbar;
                                     }
@@ -946,10 +954,14 @@ class Main extends Sprite
                     guiclass.changewindow("help14");control.changetab(control.currenttab);control.clicklist = true;
                 }
             }guiclass.helpcondition_set = "nothing";
-        }  // CONFIG::desktop {  if (key.isDown(Keyboard.ESCAPE))
+        }
+
+        #if targetDesktop
+        if (key.isDown(Keyboard.ESCAPE))
         {
             NativeApplication.nativeApplication.exit(0);
         }
+        #end
     }
     public function render(key : KeyPoll) : Void
     {
@@ -957,7 +969,18 @@ class Main extends Sprite
         var j : Int;
         var k : Int;if (gfx.updatebackground > 0)
         {
-            gfx.changeframerate(30);  //Background  gfx.fillrect(0, 0, gfx.screenwidth, gfx.screenheight, 1);  //Tabs    // CONFIG::desktop {  j = as3hx.Compat.parseInt((gfx.screenwidth - 40) / 4);  // }    // CONFIG::web {    // 	j = (gfx.screenwidth) / 4;    // }  if (control.currenttab == control.MENUTAB_HELP)
+            gfx.changeframerate(30);
+            //Background
+            gfx.fillrect(0, 0, gfx.screenwidth, gfx.screenheight, 1);
+            
+            //Tabs
+            #if targetDesktop
+            j = as3hx.Compat.parseInt((gfx.screenwidth - 40) / 4);
+            #end
+            #if targetWeb
+            j = (gfx.screenwidth) / 4;
+            #end
+            if (control.currenttab == control.MENUTAB_HELP)
             {
                 gfx.fillrect(0, 0, j, gfx.linesize, 5);gfx.print(14, 0, "HELP", (control.currenttab == control.MENUTAB_HELP) ? 0 : 2, false, true);
             }
@@ -968,7 +991,16 @@ class Main extends Sprite
             else
             {
                 gfx.fillrect(control.currenttab * j, 0, j, gfx.linesize, 5);gfx.print(14, 0, "FILE", (control.currenttab == control.MENUTAB_FILE) ? 0 : 2, false, true);
-            }gfx.print(j + 14, 0, "ARRANGEMENT", (control.currenttab == control.MENUTAB_ARRANGEMENTS) ? 0 : 2, false, true);gfx.print((j * 2) + 14, 0, "INSTRUMENT", (control.currenttab == control.MENUTAB_INSTRUMENTS) ? 0 : 2, false, true);gfx.print((j * 3) + 14, 0, "ADVANCED", (control.currenttab == control.MENUTAB_ADVANCED) ? 0 : 2, false, true);  // CONFIG::desktop {  gfx.fillrect(j * 4, 0, 42, 20, 3);gfx.drawicon((j * 4) + 12, 1, (control.fullscreen) ? 5 : 4);  // }  if (control.nowexporting)
+            }
+            gfx.print(j + 14, 0, "ARRANGEMENT", (control.currenttab == control.MENUTAB_ARRANGEMENTS) ? 0 : 2, false, true);
+            gfx.print((j * 2) + 14, 0, "INSTRUMENT", (control.currenttab == control.MENUTAB_INSTRUMENTS) ? 0 : 2, false, true);
+            gfx.print((j * 3) + 14, 0, "ADVANCED", (control.currenttab == control.MENUTAB_ADVANCED) ? 0 : 2, false, true);
+            #if targetDesktop
+                gfx.fillrect(j * 4, 0, 42, 20, 3);
+                gfx.drawicon((j * 4) + 12, 1, (control.fullscreen) ? 5 : 4);
+            #end
+
+            if (control.nowexporting)
             {
                 gfx.updatebackground = 5;gfx.fillrect(0, gfx.pianorollposition + gfx.linesize, gfx.screenwidth, gfx.screenheight - (gfx.pianorollposition + gfx.linesize), 14);if (control.arrange.currentbar % 2 == 0)
                 {
@@ -1056,11 +1088,10 @@ class Main extends Sprite
         control.version = 3;  // Version number used by file  
         control.ctrl = "Ctrl";  //Set this to Cmd on Mac so that the tutorial is correct  
         
-        // CONFIG::desktop
-        // {
+        #if targetDesktop
         NativeApplication.nativeApplication.setAsDefaultApplication("ceol");
         NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE, onInvokeEvent);
-        // }
+        #end
         
         key = new KeyPoll(stage);
         control.init();
@@ -1068,10 +1099,9 @@ class Main extends Sprite
         //Working towards resolution independence!
         gfx.init(stage);
         
-        // CONFIG::desktop
-        // {
+        #if targetDesktop
         stage.addEventListener(Event.RESIZE, handleResize);
-        // }
+        #end
         
         var tempbmp : Bitmap;
         tempbmp = new ImIcons();
@@ -1189,18 +1219,15 @@ class Main extends Sprite
     }
     
     private function _startMainLoop() : Void
-    // CONFIG::desktop
     {
-        
-        // {
+        #if targetDesktop
         NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE, __activate__);
         NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE, __deactivate__);
-        // }
-        // CONFIG::web
-        // {
-        // 	addEventListener(Event.DEACTIVATE, __activate__);
-        // 	addEventListener(Event.ACTIVATE, __deactivate__);
-        // }
+        #end
+        #if targetWeb
+        addEventListener(Event.DEACTIVATE, __activate__);
+        addEventListener(Event.ACTIVATE, __deactivate__);
+        #end
         
         _timer.addEventListener(TimerEvent.TIMER, mainloop);
         _timer.start();
@@ -1216,21 +1243,20 @@ class Main extends Sprite
         gfx.changeframerate(1);
     }
     
-    // CONFIG::web
-    // {
-    // 	private function _startMainLoopWeb():void
-    // 	{
-    // 		// Expose some functions to external JS
-    // 		ExternalInterface.addCallback("getCeolString", control.getCeolString);
-    // 		ExternalInterface.addCallback("invokeCeolWeb", control.invokeCeolWeb);
-    // 		ExternalInterface.addCallback("newSong", control.newsong);
-    // 		ExternalInterface.addCallback("exportWav", control.exportwav);
-    
-    // 		control.invokeCeolWeb(ExternalInterface.call("Bosca._getStartupCeol"));
-    
-    // 		_startMainLoop();
-    // 	}
-    // }
+    #if targetWeb
+    private function _startMainLoopWeb() : Void
+    {
+        // Expose some functions to external JS
+        ExternalInterface.addCallback("getCeolString", control.getCeolString);
+        ExternalInterface.addCallback("invokeCeolWeb", control.invokeCeolWeb);
+        ExternalInterface.addCallback("newSong", control.newsong);
+        ExternalInterface.addCallback("exportWav", control.exportwav);
+
+        control.invokeCeolWeb(ExternalInterface.call("Bosca._getStartupCeol"));
+
+        _startMainLoop();
+    }
+    #end
     
     public function _input() : Void
     {
@@ -1318,8 +1344,7 @@ class Main extends Sprite
         control.savescreensettings();
     }
     
-    // CONFIG::desktop
-    // {
+    #if targetDesktop
     public function onInvokeEvent(event : InvokeEvent) : Void
     {
         if (event.arguments.length > 0)
@@ -1344,7 +1369,7 @@ class Main extends Sprite
             }
         }
     }
-    // }
+    #end
     
     public var key : KeyPoll;
     

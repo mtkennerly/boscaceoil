@@ -1636,12 +1636,12 @@ class Guiclass
                 addbutton(20 + tx, (gfx.linespacing * 9) - 6, 120, "CREDITS", "creditstab");
                 addbutton(154 + tx, (gfx.linespacing * 9) - 6, 120, "HELP", "helptab");
                 
-                // CONFIG::desktop {
+                #if targetDesktop
                 addbutton(gfx.screenwidth - 340 - tx, gfx.linespacing * 2, 150, "NEW SONG", "newsong");
                 addbutton(gfx.screenwidth - 170 - tx, gfx.linespacing * 2, 150, "EXPORT...", "exportlist");
                 addbutton(gfx.screenwidth - 340 - tx, (gfx.linespacing * 4) + 10, 150, "LOAD .ceol", "loadceol");
                 addbutton(gfx.screenwidth - 170 - tx, (gfx.linespacing * 4) + 10, 150, "SAVE .ceol", "saveceol");
-                // }
+                #end
                 
                 addcontrol(gfx.screenwidth - 340 - tx, (gfx.linespacing * 7) - 2, "changepatternlength");
                 addcontrol(gfx.screenwidth - 340 - tx, (gfx.linespacing * 9) - 2, "changebpm");
@@ -1702,7 +1702,7 @@ class Guiclass
                 addcontrol(40 + tx, (gfx.linespacing * 7) + 4, "swingcontrol");
                 addcontrol(gfx.screenwidth - 210 - tx, (gfx.linespacing * 3) + 4, "globaleffects");
                 
-                // CONFIG::desktop {
+                #if targetDesktop
                 if (gfx.scalemode == 0)
                 {
                     addbutton(gfx.screenwidth - 340 - tx, gfx.linespacing * 7, 150, "SCALE UP", "changescale");
@@ -1712,7 +1712,7 @@ class Guiclass
                     addbutton(gfx.screenwidth - 340 - tx, gfx.linespacing * 7, 150, "SCALE DOWN", "changescale");
                 }
                 addbutton(gfx.screenwidth - 170 - tx, gfx.linespacing * 7, 150, "IMPORT .mid", "loadmidi");
-                // }
+                #end
                 break;
         }
         
@@ -1849,24 +1849,24 @@ class Guiclass
             }
         }
         else if (currentbutton == "exportlist")
-        
-        // CONFIG::desktop {{
-            
+        {
+            #if targetDesktop
             tx = (gfx.screenwidth - 768) / 4;
             control.filllist(control.LIST_EXPORTS);
             control.list.init(gfx.screenwidth - 170 - tx, (gfx.linespacing * 4) - 14);
+            #end
         }
         else if (currentbutton == "loadceol")
-        
-        // CONFIG::desktop {{
-            
+        {
+            #if targetDesktop
             control.loadceol();
+            #end
         }
         else if (currentbutton == "saveceol")
-        
-        // CONFIG::desktop {{
-            
+        {
+            #if targetDesktop
             control.saveceol();
+            #end
         }
         else if (currentbutton == "filetab")
         {
@@ -2042,8 +2042,9 @@ class Guiclass
         else if (currentbutton == "loadmidi")
         {
             button[i].press();
-            // CONFIG::desktop {
+            #if targetDesktop
             midicontrol.openfile();
+            #end
         }
         else if (currentbutton == "changescale")
         {

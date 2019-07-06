@@ -1,0 +1,11 @@
+-cp ./src
+-swf ./bin/BoscaCeoil.swf
+# -js ./bin/out.js
+
+-lib sion
+-lib openfl
+
+-D targetDesktop
+# -D targetWeb
+
+Main.hx

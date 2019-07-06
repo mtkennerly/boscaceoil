@@ -15,11 +15,10 @@ import flash.filesystem.*;
 import flash.net.FileFilter;
 import flash.system.Capabilities;
 
-// CONFIG::web
-// {
-// 	import flash.external.ExternalInterface;
-// 	import mx.utils.Base64Encoder;
-// }
+#if targetWeb
+import flash.external.ExternalInterface;
+import mx.utils.Base64Encoder;
+#end
 class Control extends Sprite
 {
     public static var SCALE_NORMAL : Int = 0;
@@ -258,13 +257,13 @@ class Control extends Sprite
         _driver.play(null, false);
         
         startup = 1;
-        // CONFIG::desktop
-        // {
+        #if targetDesktop
         if (invokefile != "null")
         {
             invokeceol(invokefile);
             invokefile = "null";
         }
+        #end
     }
     
     public static function notecut() : Void
@@ -1658,8 +1657,7 @@ class Control extends Sprite
     
     // File stuff
     
-    // CONFIG::desktop
-    // {
+    #if targetDesktop
     
     public static function fileHasExtension(file : File, extension : String) : Bool
     {
@@ -1849,34 +1847,33 @@ class Control extends Sprite
         showmessage("SONG EXPORTED AS WAV");
         savefilesettings();
     }
+
+    #end
     
-    // }
-    
-    // CONFIG::web
-    // {
-    // 	public static function invokeCeolWeb(ceolStr:String):void
-    // 	{
-    // 		changetab(MENUTAB_FILE);
-    // 		if (ceolStr != "")
-    // 		{
-    // 			filestring = ceolStr;
-    // 			loadfilestring(filestring);
-    // 			showmessage("SONG LOADED");
-    // 		}
-    // 		else
-    // 		{
-    // 			newsong();
-    // 		}
-    
-    // 		_driver.play(null, false);
-    // 	}
-    
-    // 	public static function getCeolString():String
-    // 	{
-    // 		makefilestring();
-    // 		return filestring;
-    // 	}
-    // }
+    #if targetWeb
+    public static function invokeCeolWeb(ceolStr : String) : Void
+    {
+        changetab(MENUTAB_FILE);
+        if (ceolStr != "")
+        {
+            filestring = ceolStr;
+            loadfilestring(filestring);
+            showmessage("SONG LOADED");
+        }
+        else
+        {
+            newsong();
+        }
+
+        _driver.play(null, false);
+    }
+
+    public static function getCeolString():String
+    {
+        makefilestring();
+        return filestring;
+    }
+    #end
     
     private static function loadfilestring(s : String) : Void
     {
@@ -1991,8 +1988,7 @@ class Control extends Sprite
         _data.position = 0;
         _wav.writeBytes(_data);
         
-        // CONFIG::desktop
-        // {
+        #if targetDesktop
         if (!filepath)
         {
             filepath = defaultDirectory;
@@ -2000,15 +1996,14 @@ class Control extends Sprite
         file = filepath.resolvePath("*.wav");
         file.addEventListener(Event.SELECT, onsavewav);
         file.browseForSave("Export .wav File");
-        // }
+        #end
         
-        // CONFIG::web
-        // {
-        // 	var b64:Base64Encoder = new Base64Encoder();
-        // 	_wav.position = 0;
-        // 	b64.encodeBytes(_wav);
-        // 	ExternalInterface.call('Bosca._wavRecorded', b64.toString());
-        // }
+        #if targetWeb
+        var b64:Base64Encoder = new Base64Encoder();
+        _wav.position = 0;
+        b64.encodeBytes(_wav);
+        ExternalInterface.call('Bosca._wavRecorded', b64.toString());
+        #end
         
         fixmouseclicks = true;
     }
@@ -2028,10 +2023,9 @@ class Control extends Sprite
         }
     }
     
-    // CONFIG::desktop
-    // {
+    #if targetDesktop
     public static var file : File;public static var stream : FileStream;
-    // }
+    #end
     public static var filestring : String;public static var fi : Int;
     public static var filestream : Array<Dynamic>;
     public static var ceolFilter : FileFilter = new FileFilter("Ceol", "*.ceol");

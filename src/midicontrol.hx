@@ -1,5 +1,5 @@
 // temporary: ignore the entire contents of this file when building for web
-// CONFIG::desktop {
+#if targetDesktop
 import flash.display.*;
 import flash.geom.*;
 import flash.events.*;
@@ -1041,9 +1041,9 @@ class Midicontrol
         return control.voicelist.midimap[t];
     }
     
-    // CONFIG::desktop {
+    #if targetDesktop
     public static var file : File;public static var stream : FileStream;
-    // }
+    #end
     
     public static var mididata : ByteArray;
     public static var resolution : Float;
@@ -1068,4 +1068,4 @@ class Midicontrol
     }
 }
 
-// }
+#end
