@@ -109,7 +109,7 @@ class XMSong
         return unpadded;
     }
     
-    public function writeToStream(stream : IDataOutput) : Void
+    public function writeToStream(stream : sys.io.FileOutput) : Void
     {
         var xm : XMSong = this;
         var headbuf : ByteArray = new ByteArray();

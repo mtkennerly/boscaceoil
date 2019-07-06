@@ -1,6 +1,7 @@
 -cp ./src
--swf ./bin/BoscaCeoil.swf
+# -swf ./bin/BoscaCeoil.swf
 # -js ./bin/out.js
+-neko ./bin/BoscaCeoil.n
 
 -lib sion
 -lib openfl

@@ -1656,7 +1656,7 @@ class Control extends Sprite
     
     #if targetDesktop
     
-    public static function fileHasExtension(file : File, extension : String) : Bool
+    public static function fileHasExtension(file : sys.io.File, extension : String) : Bool
     {
         if (!file.extension || file.extension.toLowerCase() != extension)
         {
@@ -1665,7 +1665,7 @@ class Control extends Sprite
         return true;
     }
     
-    public static function addExtensionToFile(file : File, extension : String) : Void
+    public static function addExtensionToFile(file : sys.io.File, extension : String) : Void
     {
         file.url += "." + extension;
     }
@@ -1694,10 +1694,7 @@ class Control extends Sprite
         
         makefilestring();
         
-        stream = new FileStream();
-        stream.open(file, FileMode.WRITE);
-        stream.writeUTFBytes(filestring);
-        stream.close();
+        sys.io.File.saveContent(file, filestring);
         
         fixmouseclicks = true;
         showmessage("SONG SAVED");
@@ -1722,10 +1719,7 @@ class Control extends Sprite
         file = new File();
         file.nativePath = t;
         
-        stream = new FileStream();
-        stream.open(file, FileMode.READ);
-        filestring = stream.readUTFBytes(stream.bytesAvailable);
-        stream.close();
+        filestring = sys.io.File.getContent(file);
         
         loadfilestring(filestring);
         _driver.play(null, false);
@@ -1739,10 +1733,7 @@ class Control extends Sprite
         file = try cast(e.currentTarget, File) catch(e:Dynamic) null;
         filepath = file.resolvePath("");
         
-        stream = new FileStream();
-        stream.open(file, FileMode.READ);
-        filestring = stream.readUTFBytes(stream.bytesAvailable);
-        stream.close();
+        filestring = sys.io.File.getContent(file);
         
         loadfilestring(filestring);
         _driver.play(null, false);
@@ -1779,11 +1770,10 @@ class Control extends Sprite
         var xm : TrackerModuleXM = new TrackerModuleXM();
         xm.loadFromLiveBoscaCeoilModel(file.name);
         
-        stream = new FileStream();
-        stream.open(file, FileMode.WRITE);
+        var stream = sys.io.File.write(file, true);
         xm.writeToStream(stream);
         stream.close();
-        
+
         fixmouseclicks = true;
         showmessage("SONG EXPORTED AS XM");
         savefilesettings();
@@ -1816,8 +1806,7 @@ class Control extends Sprite
         var song : MMLSong = new MMLSong();
         song.loadFromLiveBoscaCeoilModel();
         
-        stream = new FileStream();
-        stream.open(file, FileMode.WRITE);
+        var stream = sys.io.File.write(file, false);
         song.writeToStream(stream);
         stream.close();
         
@@ -1835,10 +1824,7 @@ class Control extends Sprite
             addExtensionToFile(file, "wav");
         }
         
-        stream = new FileStream();
-        stream.open(file, FileMode.WRITE);
-        stream.writeBytes(_wav, 0, _wav.length);
-        stream.close();
+        sys.io.File.saveBytes(file, _wav);
         
         fixmouseclicks = true;
         showmessage("SONG EXPORTED AS WAV");
@@ -2021,7 +2007,7 @@ class Control extends Sprite
     }
     
     #if targetDesktop
-    public static var file : File;public static var stream : FileStream;
+    public static var file : sys.io.File;
     #end
     public static var filestring : String;public static var fi : Int;
     public static var filestream : Array<Dynamic>;
@@ -2123,8 +2109,8 @@ class Control extends Sprite
     public static var ctrl : String;
     
     // Add filepath memory
-    public static var filepath : File = null;
-    public static var defaultDirectory : File = null;
+    public static var filepath : sys.io.File = null;
+    public static var defaultDirectory : sys.io.File = null;
     
     //Global effects
     public static var effecttype : Int;

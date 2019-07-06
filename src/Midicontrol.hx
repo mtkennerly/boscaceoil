@@ -103,10 +103,7 @@ class Midicontrol
         tempbytes = new ByteArray();
         tempbytes = clone(midiexporter.midifile.output());
         
-        stream = new FileStream();
-        stream.open(file, FileMode.WRITE);
-        stream.writeBytes(tempbytes, 0, tempbytes.length);
-        stream.close();
+        sys.io.File.saveBytes(file, tempbytes);
         
         Control.fixmouseclicks = true;
         Control.showmessage("SONG EXPORTED AS MIDI");
@@ -118,10 +115,7 @@ class Midicontrol
         mididata = new ByteArray();
         file = try cast(e.currentTarget, File) catch(e:Dynamic) null;
         
-        stream = new FileStream();
-        stream.open(file, FileMode.READ);
-        stream.readBytes(mididata);
-        stream.close();
+        sys.io.File.saveBytes(file, mididata);
         
         tempbytes = new ByteArray();
         tempbytes = clone(mididata);
@@ -1033,7 +1027,7 @@ class Midicontrol
     }
     
     #if targetDesktop
-    public static var file : File;public static var stream : FileStream;
+    public static var file : sys.io.File;
     #end
     
     public static var mididata : ByteArray;

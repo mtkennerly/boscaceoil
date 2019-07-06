@@ -1,4 +1,3 @@
-import openfl.desktop.InteractiveIcon;
 import openfl.display.*;
 import openfl.geom.*;
 import openfl.events.*;
@@ -1733,7 +1732,8 @@ class Guiclass
             if (Control.mx >= button[i].position.x && Control.mx < button[i].position.x + button[i].position.width && Control.my >= button[i].position.y && Control.my <= button[i].position.y + 22 && Control.dragaction == 0)
             
             {
-                //if we're currently dragging, move the windowif (windowdrag)
+                //if we're currently dragging, move the window
+                if (windowdrag)
                 {
                 }
                 //otherwise start dragging from here

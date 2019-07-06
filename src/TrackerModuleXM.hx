@@ -95,7 +95,7 @@ class TrackerModuleXM
         }
     }
     
-    public function writeToStream(stream : IDataOutput) : Void
+    public function writeToStream(stream : sys.io.FileOutput) : Void
     {
         xm.writeToStream(stream);
     }

@@ -107,7 +107,7 @@ class MMLSong
         }
     }
     
-    public function writeToStream(stream : IDataOutput) : Void
+    public function writeToStream(stream : sys.io.FileOutput) : Void
     {
         var out : String = "";
         out += "/** Music Macro Language (MML) exported from Bosca Ceoil */\n";
@@ -137,7 +137,7 @@ class MMLSong
                 out += ";\n";
             }
         }
-        stream.writeMultiByte(out, "utf-8");
+        stream.writeString(out);
     }
     
     private function _mmlTracksForBoscaPattern(patternNum : Int, patternDefinitions : Array<Musicphraseclass>) : Array<String>

@@ -5,7 +5,7 @@ import openfl.net.*;
 import openfl.text.*;
 import openfl.utils.Dictionary;
 #if targetDesktop
-import openfl.display.NativeWindow;
+//? import openfl.display.NativeWindow;
 #end
 
 class Gfx extends Sprite
@@ -42,7 +42,7 @@ class Gfx extends Sprite
             min_windowwidth = 768;
             min_windowheight = 540;
             #if targetDesktop
-            stage.nativeWindow.minSize = new Point(768 + windowboundsx, 540 + windowboundsy);
+            //? stage.nativeWindow.minSize = new Point(768 + windowboundsx, 540 + windowboundsy);
             #end
         }
         else
@@ -50,7 +50,7 @@ class Gfx extends Sprite
             min_windowwidth = 1152;
             min_windowheight = 690;
             #if targetDesktop
-            stage.nativeWindow.minSize = new Point(1152 + windowboundsx, 690 + windowboundsy);
+            //? stage.nativeWindow.minSize = new Point(1152 + windowboundsx, 690 + windowboundsy);
             #end
         }
         
@@ -1045,22 +1045,21 @@ class Gfx extends Sprite
     
     #if targetDesktop
     public static function changewindowsize(w : Int, h : Int) : Void
-    //if (w < 768) w = 768;
     {
-        
+        //if (w < 768) w = 768;
         //if (h < 480) h = 480;
-        windowboundsx = stage.nativeWindow.bounds.width - stage.stageWidth;
-        windowboundsy = stage.nativeWindow.bounds.height - stage.stageHeight;
+        //? windowboundsx = stage.nativeWindow.bounds.width - stage.stageWidth;
+        //? windowboundsy = stage.nativeWindow.bounds.height - stage.stageHeight;
         windowwidth = w;
         windowheight = h;
         if (Control.fullscreen)
         {
         }
-        else if (stage && stage.nativeWindow)
-        {
-            stage.nativeWindow.width = w + windowboundsx;
-            stage.nativeWindow.height = h + windowboundsy;
-        }
+        //? else if (stage && stage.nativeWindow)
+        //? {
+        //?     stage.nativeWindow.width = w + windowboundsx;
+        //?     stage.nativeWindow.height = h + windowboundsy;
+        //? }
         
         if (Gfx.scalemode == 1)
         {
@@ -1248,7 +1247,7 @@ class Gfx extends Sprite
         print(x, y, t, col, false, shadow);
     }
     
-    public static var cachedtextindex : Dictionary = new Dictionary();
+    public static var cachedtextindex : Dictionary<String, Int> = new Dictionary();
     public static var cachedtext : Array<BitmapData> = new Array<BitmapData>();
     public static var cachedrect : Array<Rectangle> = new Array<Rectangle>();
     public static var cacheindex : Int;
