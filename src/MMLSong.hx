@@ -32,9 +32,8 @@ class MMLSong
         {
             var boscaInstrument : Instrumentclass = control.instrument[i];
             if (boscaInstrument.type == 0)
-            
-            //regular instrument, not a drumkit{
-                
+            {
+                //regular instrument, not a drumkit
                 instrumentDefinitions[i] = _boscaInstrumentToMML(boscaInstrument, i);
                 mmlToUseInstrument[i] = _boscaInstrumentToMMLUse(boscaInstrument, i);
             }
@@ -129,10 +128,9 @@ class MMLSong
             
             for (monoTrack in monoTracks)
             {
-                out +="\n// ---- track\n"  // XXX: I thought note length would be something like (lengthOfPattern / noteDivisions) but I clearly misunderstand  ;
+                out +="\n// ---- track\n";
                 
-                
-                
+                // XXX: I thought note length would be something like (lengthOfPattern / noteDivisions) but I clearly misunderstand
                 out += StringUtil.substitute("\nt{0} l{1} // timing (tempo and note length)\n", bpm, 16);
                 
                 out += monoTrack;

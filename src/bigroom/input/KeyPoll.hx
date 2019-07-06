@@ -156,9 +156,8 @@ class KeyPoll
         hasreleased = true;
         
         if (shiftheld || middlepress)
-        
-        //Middle click{
-            
+        {
+            //Middle click
             middlepress = false;
             
             middleclick = false;
@@ -167,9 +166,8 @@ class KeyPoll
         }
         
         if (ctrlheld || rightpress)
-        
-        //Right click{
-            
+        {
+            //Right click
             rightpress = false;
             
             rightclick = false;
@@ -186,9 +184,8 @@ class KeyPoll
         hasreleased = false;
         
         if (shiftheld)
-        
-        //Middle click{
-            
+        {
+            //Middle click
             middlepress = true;
             
             middleclick = true;
@@ -197,9 +194,8 @@ class KeyPoll
         }
         
         if (ctrlheld)
-        
-        //Right click{
-            
+        {
+            //Right click
             rightpress = true;
             
             rightclick = true;

@@ -180,9 +180,8 @@ class MidiFile
         
         //puts every track into track array
         for (i in 0..._tracks)
-        
-        //unserialize a track data{
-            
+        {
+            //unserialize a track data
             track = new MidiTrack(fileStream);
             _trackArray[i] = track;
         }
@@ -321,9 +320,8 @@ class MidiFile
     public function deleteTrack(t : Int) : MidiTrack
     {
         if (t <= 0)
-        
-        //track[0] refers to the main track{
-            
+        {
+            //track[0] refers to the main track
             throw new InvalidMidiError("Invalid track number. Can't delete main track.");
         }
         else if (t >= _tracks)
@@ -376,9 +374,8 @@ class MidiFile
     public function swapTrack(t1 : Int, t2 : Int) : Void
     {
         if (t1 <= 0 || t2 <= 0)
-        
-        //track[0] refers to the main track{
-            
+        {
+            //track[0] refers to the main track
             throw new InvalidMidiError("Invalid track number. Can't swap main track.");
         }
         else if (t1 >= _tracks || t2 >= _tracks)

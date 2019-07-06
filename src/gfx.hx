@@ -266,9 +266,8 @@ class Gfx extends Sprite
         //Print note names
         j = control.instrument[control.musicbox[control.currentbox].instr].type;
         if (j >= 1)
-        
-        //Drumkit!{
-            
+        {
+            //Drumkit!
             j--;
             for (i in 0...notesonscreen)
             {
@@ -407,9 +406,8 @@ class Gfx extends Sprite
         
         control.seekposition(control.boxsize * control.looptime);
         if (control.musicbox[control.currentbox].isplayed)
-        
-        //Only draw if this musicbox is actually being played{
-            
+        {
+            //Only draw if this musicbox is actually being played
             fillrect(40 + control.barposition, pianorollposition + linesize, 4, linesize * patterneditorheight, 10);
             fillrect(40 + control.barposition + 4, pianorollposition + linesize, 4, linesize * patterneditorheight, 11);
         }
@@ -429,9 +427,8 @@ class Gfx extends Sprite
                 }
             }
             else if (control.cursory == notesonscreen - 1)
-            
-            //draw partial cursor{
-                
+            {
+                //draw partial cursor
                 drawpartialbox(40 + (control.cursorx * control.boxsize), gfx.screenheight - linesize - (control.cursory * linesize), control.boxsize * control.notelength, linesize, 0, pianorollposition + linesize);
             }
             else
@@ -449,9 +446,8 @@ class Gfx extends Sprite
     public static function drawlist() : Void
     {
         if (control.list.active)
-        
-        //Draw list{
-            
+        {
+            //Draw list
             fillrect(control.list.x - 2, control.list.y - 2, control.list.w + 4, control.list.h + 4, 12);
             fillrect(control.list.x, control.list.y, control.list.w, control.list.h, 11);
             if (control.list.type == control.LIST_SELECTINSTRUMENT)
@@ -509,9 +505,8 @@ class Gfx extends Sprite
         }
         
         if (control.secondlist.active)
-        
-        //Draw list{
-            
+        {
+            //Draw list
             fillrect(control.secondlist.x - 2, control.secondlist.y - 2, control.secondlist.w + 4, control.secondlist.h + 4, 12);
             fillrect(control.secondlist.x, control.secondlist.y, control.secondlist.w, control.secondlist.h, 11);
             i = 0;
@@ -589,9 +584,8 @@ class Gfx extends Sprite
                 control.drawnoteposition = control.musicbox[t].notes[mbj].x;
                 control.drawnotelength = Math.ceil(control.musicbox[t].notes[mbj].y * zoomoffset);
                 if (mbi + control.musicbox[t].notes[mbj].y > control.boxcount)
-                
-                //temppatternwidth for each bar{
-                    
+                {
+                    //temppatternwidth for each bar
                     control.drawnotelength = (temppatternwidth / 2) - (21 + mbi * zoomoffset);
                     control.drawnotelength += ((temppatternwidth / 2) * (control.musicbox[t].notes[mbj].y - (control.boxcount - mbi)) / control.boxcount);
                 }
@@ -845,15 +839,13 @@ class Gfx extends Sprite
         for (k in 0...7)
         {
             if (k == 0 && control.patternmanagerview > 0 && control.numboxes > 0)
-            
-            //Draw scrollup{
-                
+            {
+                //Draw scrollup
                 drawicon(patternmanagerx + 50, linesize + 4 + (k * patternheight), 1);
             }
             else if (k == 6 && k + control.patternmanagerview < control.numboxes)
-            
-            //Draw scrolldown{
-                
+            {
+                //Draw scrolldown
                 drawicon(patternmanagerx + 50, linesize + 2 + (k * patternheight), 0);
             }
             //Normal
@@ -886,15 +878,13 @@ class Gfx extends Sprite
         for (k in 0...7)
         {
             if (k == 0 && control.instrumentmanagerview > 0 && control.numinstrument > 0)
-            
-            //Draw scrollup{
-                
+            {
+                //Draw scrollup
                 drawicon(132, linesize + 8 + (k * patternheight), 1);
             }
             else if (k == 6 && k + control.instrumentmanagerview < control.numinstrument)
-            
-            //Draw scrolldown{
-                
+            {
+                //Draw scrolldown
                 drawicon(132, linesize + 4 + (k * patternheight), 0);
             }
             //Normal
@@ -1275,9 +1265,8 @@ class Gfx extends Sprite
             cachelabel = t + "_" + Std.string(col) + "_noshadow";
         }
         if (Reflect.field(cachedtextindex, cachelabel) == null)
-        
-        //Cache the text{
-            
+        {
+            //Cache the text
             cacheindex = cachedtext.length;
             Reflect.setField(cachedtextindex, cachelabel, cacheindex);
             cachedtext.push(new BitmapData(len(t), 22, true, 0));
@@ -1419,20 +1408,24 @@ class Gfx extends Sprite
         if (r < 0)
         {
             r = 0;
-        }if (g < 0)
+        }
+        if (g < 0)
         {
             g = 0;
-        }if (b < 0)
+        }
+        if (b < 0)
         {
             b = 0;
         }
         if (r > 255)
         {
             r = 255;
-        }if (g > 255)
+        }
+        if (g > 255)
         {
             g = 255;
-        }if (b > 255)
+        }
+        if (b > 255)
         {
             b = 255;
         }

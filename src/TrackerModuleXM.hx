@@ -196,14 +196,12 @@ class TrackerModuleXM
                 // find a clear place to write
                 var targetTrack : Int = i;
                 while (rows[timerelativetostartofbar].cellOnTrack[targetTrack].note > 0)
-                
-                // track is busy (eg drum hits at once, chords){
-                    
+                {
+                    // track is busy (eg drum hits at once, chords)
                     targetTrack++;
                     if (!(targetTrack < numtracks))
-                    
-                    // too much going on, just ignore this note{
-                        
+                    {
+                        // too much going on, just ignore this note
                         {j++;
                             continue;
                         }
@@ -269,16 +267,14 @@ class TrackerModuleXM
             var maybeXMNote : Int = as3hx.Compat.parseInt(scionNote + 13);
             var xmNote : Int;
             if (maybeXMNote < 1)
-            
-            // too low for XM{
-                
+            {
+                // too low for XM
                 map[scionNote] = 0;
                 continue;
             }
             if (maybeXMNote > 96)
-            
-            // too high for XM{
-                
+            {
+                // too high for XM
                 map[scionNote] = 0;
                 continue;
             }
@@ -349,7 +345,7 @@ class TrackerModuleXM
     {
         var voice : SiONVoice = instrument.voice;
         var xmsample : XMSample = new XMSample();
-        xmsample.relativeNoteNumber = +3;
+        xmsample.relativeNoteNumber = 3;
         xmsample.name = voice.name;
         xmsample.volume = 0x40;
         xmsample.bitsPerSample = 16;

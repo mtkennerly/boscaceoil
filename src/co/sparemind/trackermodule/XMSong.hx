@@ -205,18 +205,16 @@ class XMSong
                 kma++;
             }
             for (p in 0...12)
-            
-            // var point:XMEnvelopePoint = inst.volumeEnvelope.points[p];{
-                
+            {
+                // var point:XMEnvelopePoint = inst.volumeEnvelope.points[p];
                 // instrheadbuf.writeShort(point.x);
                 // instrheadbuf.writeShort(point.y);
                 instrheadbuf.writeShort(0x1111);
                 instrheadbuf.writeShort(0x2222);
             }
             for (p in 0...12)
-            
-            // var point:XMEnvelopePoint = inst.panningEnvelope.points[p];{
-                
+            {
+                // var point:XMEnvelopePoint = inst.panningEnvelope.points[p];
                 // instrheadbuf.writeShort(point.x);
                 // instrheadbuf.writeShort(point.y);
                 instrheadbuf.writeShort(0x0000);

@@ -62,9 +62,8 @@ class GreedyUINT
             e = 0;
 t = n >> as3hx.Compat.parseInt(7 * e);
             while (t >= 1 && e < 5)
-            
-            //变长整数最后一个字节高bit位为0。其他字节高bit位为1，低七位是余数对128求模{
-                
+            {
+                //变长整数最后一个字节高bit位为0。其他字节高bit位为1，低七位是余数对128求模
                 // tips:If the divisor is a power of 2, the modulo (%) operation can be done with:
                 //	modulus = numerator & (divisor - 1);
                 temp[e] = (e != 0) ? (t & as3hx.Compat.parseInt(128 - 1) | 0x80) : n & as3hx.Compat.parseInt(128 - 1);  //temp[e] = e?( t%128 | 0x80 ): n%128;  
@@ -195,9 +194,8 @@ t = n >> as3hx.Compat.parseInt(7 * e);
         var temp : Int;
         
         do
-        
-        //从流中读出一字节{
-            
+        {
+            //从流中读出一字节
             try
             {
                 temp = raw.readByte();

@@ -8,4 +8,21 @@
 -D targetDesktop
 # -D targetWeb
 
+Arrangementclass.hx
+Barclass.hx
+control.hx
+Drumkitclass.hx
+gfx.hx
+Guibutton.hx
+guiclass.hx
+Help.hx
+Instrumentclass.hx
+Listclass.hx
 Main.hx
+midicontroller.hx
+Midiexporter.hx
+MMLSong.hx
+Musicphraseclass.hx
+Paletteclass.hx
+TrackerModuleXM.hx
+Voicelistclass.hx

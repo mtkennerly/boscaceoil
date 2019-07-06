@@ -28,9 +28,21 @@ import ocean.midi.MidiTrack;
 
 /**
 	 */
-class MessageList extends Array<Dynamic>
+class MessageList
 {
-    
+    private var items : Array<Dynamic> = new Array<Dynamic>();
+
+    @:arrayAccess
+    public inline function arrayGet(key : Int) {
+        return this.items[key];
+    }
+
+    @:arrayAccess
+    public inline function arraySet(key : Int, value : Dynamic) : Dynamic {
+        this.items[key] = value;
+        return value;
+    }
+
     public function new()
     {
         super();
@@ -54,7 +66,7 @@ class MessageList extends Array<Dynamic>
 		*/
     public function input(mt : MidiTrack) : Void
     {
-        for (item/* AS3HX WARNING could not determine type for var: item exp: EField(EIdent(mt),msgList) type: null */ in mt.msgList)
+        for (item in mt.msgList)
         {
             this.push(item.clone());
         }
@@ -67,7 +79,7 @@ class MessageList extends Array<Dynamic>
     public function clone() : MessageList
     {
         var msgList : MessageList = new MessageList();
-        for (item/* AS3HX WARNING could not determine type for var: item exp: EIdent(this) type: null */ in this)
+        for (item in this.items)
         {
             msgList.push(item.clone());
         }

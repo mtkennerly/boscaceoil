@@ -380,9 +380,8 @@ class Control extends Sprite
                                     if (musicbox[i].notes[j].x > -1)
                                     {
                                         if (musicbox[i].notes[j].x < drumkit[instrument[musicbox[i].instr].type - 1].size)
-                                        
-                                        //Change filter on first note{
-                                            
+                                        {
+                                            //Change filter on first note
                                             if (looptime == 0)
                                             {
                                                 drumkit[instrument[musicbox[i].instr].type - 1].updatefilter(instrument[musicbox[i].instr].cutoff, instrument[musicbox[i].instr].resonance);
@@ -581,9 +580,8 @@ class Control extends Sprite
         drumkit[t].voicename.push(name);
         drumkit[t].voicenote.push(note);
         if (t == 2)
-        
-        //Midi drumkit{
-            
+        {
+            //Midi drumkit
             var voicenum : String = "";
             var afterdot : Bool = false;
             var i : Int = 0;
@@ -1148,9 +1146,8 @@ class Control extends Sprite
                 list.numitems = 13;
             case LIST_INSTRUMENT:
                 if (voicelist.sublistsize > 15)
-                
-                //Need to split into several pages{
-                    
+                {
+                    //Need to split into several pages
                     //Fix pagenum if it got broken somewhere
                     if ((voicelist.pagenum * 15) > voicelist.sublistsize)
                     {

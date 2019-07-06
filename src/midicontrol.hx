@@ -140,22 +140,19 @@ class Midicontrol
         
         var trackn : Int = 0;
         while (trackn < smfData.numTracks)
-        
-        //trace("Reading track " + String(trackn) + ": " + String(smfData.tracks[trackn].sequence.length));{
-            
+        {
+            //trace("Reading track " + String(trackn) + ": " + String(smfData.tracks[trackn].sequence.length));
             for (event/* AS3HX WARNING could not determine type for var: event exp: EField(EArray(EField(EIdent(smfData),tracks),EIdent(trackn)),sequence) type: null */ in smfData.tracks[trackn].sequence)
-            
-            //trace("msg: " + String(event.time) + ": " + event.toString());{
-                
+            {
+                //trace("msg: " + String(event.time) + ": " + event.toString());
                 var _sw1_ = (event.type & 0xf0);                
 
                 switch (_sw1_)
                 {
                     case SMFEvent.NOTE_ON:
                         if (event.velocity == 0)
-                        
-                        //This is *actually* a note off event in disguise{
-                            
+                        {
+                            //This is *actually* a note off event in disguise
                             changenotelength(event.time, event.note, event.channel);
                         }
                         else
@@ -327,9 +324,8 @@ class Midicontrol
     {
         
         if (chan == 9)
-        
-        //Drums, put it on the last row{
-            
+        {
+            //Drums, put it on the last row
             if (control.arrange.bar[currentpattern].channel[7] == -1)
             {
                 return 7;
@@ -449,9 +445,8 @@ class Midicontrol
         }
         control._driver.bpm = control.bpm;
         control._driver.play(null, false);
-        
         //for (var tst:int = 0; tst < 16; tst++) {
-        //	trace("channel " + String(tst) + " uses instrument " + String(channelinstrument[tst]) + " at volume " + String(channelvolume[tst]));
+        //     trace("channel " + String(tst) + " uses instrument " + String(channelinstrument[tst]) + " at volume " + String(channelvolume[tst]));
         //}
         
         resolution = smfData.resolution;
@@ -500,13 +495,11 @@ class Midicontrol
         
         i = 0;
         while (i < midinotes.length)
-        
-        //Drums{
-            
+        {
+            //Drums
             if (as3hx.Compat.parseInt(midinotes[i].height) == 9)
-            
-            //x = time{
-                
+            {
+                //x = time
                 //y = note
                 //w = length
                 //h = instrument
@@ -606,9 +599,8 @@ class Midicontrol
                 while (j < control.numboxes)
                 {
                     if (control.musicbox[j].hash == currenthash)
-                    
-                    //Probably a match! Let's compare and remove if so{
-                        
+                    {
+                        //Probably a match! Let's compare and remove if so
                         if (musicboxmatch(i, j))
                         {
                             replaceontimeline(j, i);
@@ -961,9 +953,8 @@ class Midicontrol
             }
         }
         else if (control.voicelist.name[drumkit] == "Midi Drumkit")
-        
-        //This one's easy: we already have the mapping saved.{
-            
+        {
+            //This one's easy: we already have the mapping saved.
             trace(note, control.drumkit[2].midivoice[note]);
             if (control.drumkit[2].midivoice[note] >= 35 && control.drumkit[2].midivoice[note] <= 81)
             {

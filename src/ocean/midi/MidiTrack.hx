@@ -160,9 +160,8 @@ class MidiTrack
         
         //through the message list
         for (item/* AS3HX WARNING could not determine type for var: item exp: EIdent(_msgList) type: MessageList */ in _msgList)
-        
-        //reads active item{
-            
+        {
+            //reads active item
             if (!item.mark)
             {
                 continue;
@@ -189,9 +188,8 @@ class MidiTrack
                 rawArray.push(rawItem);
             }
             else if (item.kind == MidiEnum.NOTE)
-            
-            //create note on{
-                
+            {
+                //create note on
                 rawItem = new RawItem();
                 rawItem.timeline = item.timeline;
                 rawItem.noteOn = (item.channel | MidiEnum.NOTE_ON);  //noteOn is utilized when divide note-on and note-off  
@@ -340,9 +338,8 @@ class MidiTrack
         var command : Int;
         //loop reading
         while (stream.position < end)
-        
-        //get delta time{
-            
+        {
+            //get delta time
             guint.stream(stream);
             
             //increasing timeline
@@ -406,16 +403,14 @@ class MidiTrack
                 noteItem.pitch = stream.readByte() & 0xff;
                 noteItem.velocity = stream.readByte() & 0xff;
                 if (noteItem.velocity == 0)
-                
-                //meets a note-off, should pick a conrespond note-on in queue{
-                    
+                {
+                    //meets a note-off, should pick a conrespond note-on in queue
                     var i : Int = 0;
                     while (i < queue.length)
                     {
                         if (queue[i].pitch == noteItem.pitch && queue[i].channel == noteItem.channel)
-                        
-                        //get duration value{
-                            
+                        {
+                            //get duration value
                             queue[i].duration = noteItem.timeline - queue[i].timeline;
                             queue.splice(i, 1);
                             break;
@@ -516,9 +511,8 @@ class MidiTrack
             }
             //sys_ex message
             else if (byte == MidiEnum.END_OF_SYS_EX || byte == MidiEnum.SYSTEM_EXCLUSIVE)
-            
-            //the byte following the 1st 0xF0 is the size of sys_ex.{
-                
+            {
+                //the byte following the 1st 0xF0 is the size of sys_ex.
                 //and the sys_ex can end with 0xF7 as well as a certain size.
                 // i don't know why this is not specificated in books. Damn it!
                 var sysExSize : Int = stream.readByte() & 0xff;

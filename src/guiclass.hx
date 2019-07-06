@@ -974,9 +974,8 @@ class Guiclass
         var i : Int;
         var z : Int;
         if (numbuttons == 0)
-        
-        //If there are no active buttons, Z=0;{
-            
+        {
+            //If there are no active buttons, Z=0;
             z = 0;
         }
         else
@@ -1606,9 +1605,8 @@ class Guiclass
             }
             
             if (control.doublesize)
-            
-            //addrect(42 + (32 * control.boxsize), gfx.pianorollposition + gfx.linesize, gfx.screenwidth - (42 + (32 * control.boxsize)), gfx.screenheight - gfx.linesize - 20 - gfx.pianorollposition - gfx.linesize, 12);{
-                
+            {
+                //addrect(42 + (32 * control.boxsize), gfx.pianorollposition + gfx.linesize, gfx.screenwidth - (42 + (32 * control.boxsize)), gfx.screenheight - gfx.linesize - 20 - gfx.pianorollposition - gfx.linesize, 12);
                 //addrect(42 + (32 * control.boxsize)+ 2, gfx.pianorollposition + gfx.linesize, gfx.screenwidth - (42 + (32 * control.boxsize))- 4, gfx.screenheight - gfx.linesize - 20 - gfx.pianorollposition - gfx.linesize, 4);
                 addscrollupbutton(42 + (32 * control.boxsize), gfx.pianorollposition + gfx.linesize, gfx.screenwidth - (42 + (32 * control.boxsize)), "notescrollup");
                 addscrolldownbutton(42 + (32 * control.boxsize), gfx.screenheight - gfx.linesize - 20, gfx.screenwidth - (42 + (32 * control.boxsize)), "notescrolldown");
@@ -1734,9 +1732,8 @@ class Guiclass
         {
             if (control.mx >= button[i].position.x && control.mx < button[i].position.x + button[i].position.width && control.my >= button[i].position.y && control.my <= button[i].position.y + 22 && control.dragaction == 0)
             
-            //if we're currently dragging, move the window{
-                
-                if (windowdrag)
+            {
+                //if we're currently dragging, move the windowif (windowdrag)
                 {
                 }
                 //otherwise start dragging from here
@@ -1744,9 +1741,8 @@ class Guiclass
                 {
                     
                     if (control.mx >= button[i].position.x + button[i].position.width - 20)
-                    
-                    //close the window{
-                        
+                    {
+                        //close the window
                         changewindow("nothing");
                         changetab(control.currenttab);
                         control.clicklist = true;

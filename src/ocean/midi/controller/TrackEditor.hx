@@ -234,9 +234,8 @@ class TrackEditor extends EventDispatcher
                     item.timeline += args[1];
                 }
                 if (Std.is(item, NoteItem))
-                
-                //max key is G#10{
-                    
+                {
+                    //max key is G#10
                     if (((try cast(item, NoteItem) catch(e:Dynamic) null).pitch + args[0]) > 0x7F)
                     {
                         (try cast(item, NoteItem) catch(e:Dynamic) null).pitch = 0x7F;
@@ -285,19 +284,16 @@ class TrackEditor extends EventDispatcher
         ////_end.timeline += slide;
         
         if (Std.is(temp, NoteItem))
-        
-        //slide old, and form a abandoned array{
-            
+        {
+            //slide old, and form a abandoned array
             for (it/* AS3HX WARNING could not determine type for var: it exp: EIdent(_activeMsgList) type: MessageList */ in _activeMsgList)
-            
-            // _end is always not in undo-redo stack{
-                
+            {
+                // _end is always not in undo-redo stack
                 if (it.mark)
                 {
                     if (it.timeline >= atTime)
-                    
-                    // slide cloned item{
-                        
+                    {
+                        // slide cloned item
                         temp = it.clone();
                         temp.timeline += slide;
                         
@@ -404,18 +400,16 @@ class TrackEditor extends EventDispatcher
         for (item/* AS3HX WARNING could not determine type for var: item exp: EIdent(list) type: MessageList */ in list)
         {
             if (item.mark)
-            
-            // clone an item{
-                
+            {
+                // clone an item
                 temp = item.clone();
                 
                 // fix timeline of lst
                 temp.timeline += atTime;
                 
                 if (Std.is(item, NoteItem))
-                
-                // max timeline in list{
-                    
+                {
+                    // max timeline in list
                     slide = ((slide > (temp.timeline + (try cast(temp, NoteItem) catch(e:Dynamic) null).duration))) ? slide : (temp.timeline + (try cast(temp, NoteItem) catch(e:Dynamic) null).duration);
                 }
                 
@@ -439,9 +433,8 @@ class TrackEditor extends EventDispatcher
             if (item.mark)
             {
                 if (item.timeline >= atTime)
-                
-                // slide cloned item{
-                    
+                {
+                    // slide cloned item
                     temp = item.clone();
                     temp.timeline += slide;
                     
@@ -487,18 +480,16 @@ class TrackEditor extends EventDispatcher
         for (item/* AS3HX WARNING could not determine type for var: item exp: EIdent(list) type: MessageList */ in list)
         {
             if (item.mark)
-            
-            // clone an item{
-                
+            {
+                // clone an item
                 temp = item.clone();
                 
                 // fix timeline
                 temp.timeline += atTime;
                 
                 if (item.kind == MidiEnum.NOTE)
-                
-                // max timeline in list{
-                    
+                {
+                    // max timeline in list
                     max = ((max > (temp.timeline + (try cast(temp, NoteItem) catch(e:Dynamic) null).duration))) ? max : (temp.timeline + (try cast(temp, NoteItem) catch(e:Dynamic) null).duration);
                 }
                 else
@@ -523,9 +514,8 @@ class TrackEditor extends EventDispatcher
             if (item.mark)
             {
                 if (item.kind == MidiEnum.NOTE && item.timeline >= atTime && item.timeline < max)
-                
-                //old item{
-                    
+                {
+                    //old item
                     item.mark = false;
                     
                     // record action
@@ -556,18 +546,16 @@ class TrackEditor extends EventDispatcher
         for (item/* AS3HX WARNING could not determine type for var: item exp: EIdent(list) type: MessageList */ in list)
         {
             if (item.mark)
-            
-            // clone an item{
-                
+            {
+                // clone an item
                 temp = item.clone();
                 
                 //fix timeline
                 temp.timeline += atTime;
                 
                 if (item.kind == MidiEnum.NOTE)
-                
-                // max timeline in list{
-                    
+                {
+                    // max timeline in list
                     max = ((max > (temp.timeline + (try cast(temp, NoteItem) catch(e:Dynamic) null).duration))) ? max : (temp.timeline + (try cast(temp, NoteItem) catch(e:Dynamic) null).duration);
                 }
                 else
@@ -601,9 +589,8 @@ class TrackEditor extends EventDispatcher
         for (item/* AS3HX WARNING could not determine type for var: item exp: EIdent(list) type: MessageList */ in list)
         {
             if (item.mark)
-            
-            //new item{
-                
+            {
+                //new item
                 item.mark = false;
                 after.push(item);
             }
@@ -649,9 +636,8 @@ class TrackEditor extends EventDispatcher
     public function undo() : Void
     {
         if (_itr.node != _stack.head)
-        
-        //switch state of cached session **{
-            
+        {
+            //switch state of cached session **
             for (item/* AS3HX WARNING could not determine type for var: item exp: EField(EIdent(_itr),data) type: null */ in _itr.data)
             {
                 item.mark = !item.mark;
@@ -670,9 +656,8 @@ class TrackEditor extends EventDispatcher
     public function redo() : Void
     {
         if (_itr.node != _stack.tail)
-        
-        //move iterator forth{
-            
+        {
+            //move iterator forth
             _itr.forth();
             //switch state of cached session **
             for (item/* AS3HX WARNING could not determine type for var: item exp: EField(EIdent(_itr),data) type: null */ in _itr.data)

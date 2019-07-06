@@ -59,19 +59,24 @@ class Main extends Sprite
         control.press_up = false;control.press_down = false;control.press_left = false;control.press_right = false;control.press_space = false;control.press_enter = false;if (key.isDown(Keyboard.LEFT) || key.isDown(Keyboard.A))
         {
             control.press_left = true;
-        }if (key.isDown(Keyboard.RIGHT) || key.isDown(Keyboard.D))
+        }
+        if (key.isDown(Keyboard.RIGHT) || key.isDown(Keyboard.D))
         {
             control.press_right = true;
-        }if (key.isDown(Keyboard.UP) || key.isDown(Keyboard.W))
+        }
+        if (key.isDown(Keyboard.UP) || key.isDown(Keyboard.W))
         {
             control.press_up = true;
-        }if (key.isDown(Keyboard.DOWN) || key.isDown(Keyboard.S))
+        }
+        if (key.isDown(Keyboard.DOWN) || key.isDown(Keyboard.S))
         {
             control.press_down = true;
-        }if (key.isDown(Keyboard.SPACE))
+        }
+        if (key.isDown(Keyboard.SPACE))
         {
             control.press_space = true;
-        }if (key.isDown(Keyboard.ENTER))
+        }
+        if (key.isDown(Keyboard.ENTER))
         {
             control.press_enter = true;
         }control.keypriority = 0;if (control.keypriority == 3)
@@ -81,9 +86,10 @@ class Main extends Sprite
         else if (control.keypriority == 4)
         {
             control.press_left = false;control.press_right = false;
-        }if ((key.isDown(15) || key.isDown(17)) && key.isDown(70) && !control.fullscreentoggleheld)
-        
-        //Toggle fullscreen{
+        }
+        if ((key.isDown(15) || key.isDown(17)) && key.isDown(70) && !control.fullscreentoggleheld)
+        {
+            //Toggle fullscreen
             control.fullscreentoggleheld = true;if (control.fullscreen)
             {
                 control.fullscreen = false;
@@ -92,13 +98,15 @@ class Main extends Sprite
             {
                 control.fullscreen = true;
             }updategraphicsmode();
-        }if (control.fullscreentoggleheld)
+        }
+        if (control.fullscreentoggleheld)
         {
             if (!key.isDown(15) && !key.isDown(17) && !key.isDown(70))
             {
                 control.fullscreentoggleheld = false;
             }
-        }if (control.keyheld)
+        }
+        if (control.keyheld)
         {
             if (control.press_space || control.press_right || control.press_left || control.press_enter || control.press_down || control.press_up)
             {
@@ -108,9 +116,10 @@ class Main extends Sprite
             {
                 control.keyheld = false;
             }
-        }if (control.press_space || control.press_right || control.press_left || control.press_enter || control.press_down || control.press_up)
-        
-        //Update screen when there is input.{
+        }
+        if (control.press_space || control.press_right || control.press_left || control.press_enter || control.press_down || control.press_up)
+        {
+            //Update screen when there is input.
             gfx.updatebackground = 5;
         }
     }
@@ -121,37 +130,43 @@ class Main extends Sprite
         var k : Int;if (control.arrangescrolldelay > 0)
         {
             control.arrangescrolldelay--;
-        }if (control.messagedelay > 0)
+        }
+        if (control.messagedelay > 0)
         {
             control.messagedelay -= 2;if (control.messagedelay < 0)
             {
                 control.messagedelay = 0;
             }
-        }if (control.doubleclickcheck > 0)
+        }
+        if (control.doubleclickcheck > 0)
         {
             control.doubleclickcheck -= 2;if (control.doubleclickcheck < 0)
             {
                 control.doubleclickcheck = 0;
             }
-        }if (gfx.buttonpress > 0)
+        }
+        if (gfx.buttonpress > 0)
         {
             gfx.buttonpress -= 2;if (gfx.buttonpress < 0)
             {
                 gfx.buttonpress = 0;
             }
-        }if (control.minresizecountdown > 0)
+        }
+        if (control.minresizecountdown > 0)
         {
             control.minresizecountdown -= 2;if (control.minresizecountdown <= 0)
             {
                 control.minresizecountdown = 0;gfx.forceminimumsize();
             }
-        }if (control.savescreencountdown > 0)
+        }
+        if (control.savescreencountdown > 0)
         {
             control.savescreencountdown -= 2;if (control.savescreencountdown <= 0)
             {
                 control.savescreencountdown = 0;control.savescreensettings();
             }
-        }if (control.dragaction == 2)
+        }
+        if (control.dragaction == 2)
         {
             control.trashbutton += 2;if (control.trashbutton > 10)
             {
@@ -161,12 +176,14 @@ class Main extends Sprite
         else if (control.trashbutton > 0)
         {
             control.trashbutton--;
-        }if (control.followmode)
+        }
+        if (control.followmode)
         {
             if (control.arrange.currentbar < control.arrange.viewstart)
             {
                 control.arrange.viewstart = control.arrange.currentbar;
-            }if (control.arrange.currentbar > control.arrange.viewstart + 5)
+            }
+            if (control.arrange.currentbar > control.arrange.viewstart + 5)
             {
                 control.arrange.viewstart = control.arrange.currentbar;
             }
@@ -176,11 +193,13 @@ class Main extends Sprite
     {
         var i : Int;
         var j : Int;
-        var k : Int;generickeypoll();if (key.click || key.press || key.rightpress || key.rightclick || key.middlepress || key.middleclick || key.mousewheel != 0)
-        
-        //Update screen when you click the mouse{
+        var k : Int;generickeypoll();
+        if (key.click || key.press || key.rightpress || key.rightclick || key.middlepress || key.middleclick || key.mousewheel != 0)
+        {
+            //Update screen when you click the mouse
             gfx.updatebackground = 5;
-        }if (control.fixmouseclicks)
+        }
+        if (control.fixmouseclicks)
         {
             control.fixmouseclicks = false;key.releaseall();
         }control.cursorx = -1;control.cursory = -1;control.notey = -1;control.instrumentcury = -1;control.arrangecurx = -1;control.arrangecury = -1;control.patterncury = -1;control.timelinecurx = -1;control.list.selection = -1;control.secondlist.selection = -1;if (control.clicklist)
@@ -189,16 +208,20 @@ class Main extends Sprite
             {
                 control.clicklist = false;
             }
-        }if (control.clicksecondlist)
+        }
+        if (control.clicksecondlist)
         {
             if (!key.press)
             {
                 control.clicksecondlist = false;
             }
-        }guiclass.checkinput(key);if (guiclass.windowdrag)
+        }
+        guiclass.checkinput(key);
+        if (guiclass.windowdrag)
         {
             key.click = false;key.press = false;
-        }if (control.list.active || control.secondlist.active)
+        }
+        if (control.list.active || control.secondlist.active)
         {
             if (control.secondlist.active)
             {
@@ -206,7 +229,8 @@ class Main extends Sprite
                 {
                     control.secondlist.selection = control.my - control.secondlist.y;control.secondlist.selection = (control.secondlist.selection - (control.secondlist.selection % gfx.linesize)) / gfx.linesize;
                 }
-            }if (control.list.active)
+            }
+            if (control.list.active)
             {
                 if (control.mx > control.list.x && control.mx < control.list.x + control.list.w && control.my > control.list.y && control.my < control.list.y + control.list.h)
                 {
@@ -223,7 +247,8 @@ class Main extends Sprite
                     control.cursorx = (control.mx - 40);control.cursorx = (control.cursorx - (control.cursorx % control.boxsize)) / control.boxsize;control.cursory = (gfx.screenheight - gfx.linesize) - control.my;control.cursory = 1 + ((control.cursory - (control.cursory % gfx.linesize)) / gfx.linesize);if (control.cursorx >= control.boxcount)
                     {
                         control.cursorx = control.boxcount - 1;
-                    }if (control.my >= gfx.screenheight - (gfx.linesize))
+                    }
+                    if (control.my >= gfx.screenheight - (gfx.linesize))
                     {
                         control.cursory = -1;
                     }
@@ -238,22 +263,23 @@ class Main extends Sprite
                         control.notey = -1;
                     }
                 }
-            }if (control.my > gfx.linesize && control.my < gfx.pianorollposition + 20)
+            }
+            if (control.my > gfx.linesize && control.my < gfx.pianorollposition + 20)
             {
                 if (control.currenttab == control.MENUTAB_ARRANGEMENTS)
-                
-                //Priority: Timeline, Pattern manager, arrangements{
+                {
+                    //Priority: Timeline, Pattern manager, arrangements
                     if (control.mx > gfx.patternmanagerx)
-                    
-                    //Pattern Manager{
+                    {
+                        //Pattern Manager
                         control.patterncury = control.my - gfx.linesize - 4;control.patterncury = (control.patterncury - (control.patterncury % gfx.patternheight)) / gfx.patternheight;if (control.patterncury > 6)
                         {
                             control.patterncury = -1;
                         }
                     }
                     else if (control.my >= gfx.pianorollposition + 8 || control.dragaction == 3)
-                    
-                    //Timeline{
+                    {
+                        //Timeline
                         control.timelinecurx = control.mx;control.timelinecurx = (control.timelinecurx - (control.timelinecurx % gfx.patternwidth)) / gfx.patternwidth;
                     }
                     //Arrangements
@@ -276,13 +302,15 @@ class Main extends Sprite
                     }
                 }
             }
-        }if (control.copykeyheld)
+        }
+        if (control.copykeyheld)
         {
             if (!key.isDown(Keyboard.C) && !key.isDown(Keyboard.V))
             {
                 control.copykeyheld = false;
             }
-        }if (control.timelinecurx > -1)
+        }
+        if (control.timelinecurx > -1)
         {
             if (key.ctrlheld && !control.copykeyheld)
             {
@@ -291,22 +319,24 @@ class Main extends Sprite
                     gfx.updatebackground = 5;control.copykeyheld = true;control.arrange.paste(control.arrange.viewstart + control.timelinecurx);
                 }
             }
-        }if (key.ctrlheld && !control.copykeyheld)
+        }
+        if (key.ctrlheld && !control.copykeyheld)
         {
             if (key.isDown(Keyboard.C))
             {
                 control.copykeyheld = true;control.arrange.copy();control.showmessage("PATTERNS COPIED");
             }
-        }if (control.cursorx > -1 && control.cursory > -1 && control.currentbox > -1 && !control.clicklist)
+        }
+        if (control.cursorx > -1 && control.cursory > -1 && control.currentbox > -1 && !control.clicklist)
         {
             if (key.press && control.dragaction == 0)
-            
-            //Add note{
+            {
+                //Add note
                 if (control.musicbox[control.currentbox].start + control.cursory - 1 == -1)
                 {
                     if (key.click)
-                    
-                    //Enable/Disable recording filter for this musicbox{
+                    {
+                        //Enable/Disable recording filter for this musicbox
                         control.musicbox[control.currentbox].recordfilter = 1 - control.musicbox[control.currentbox].recordfilter;
                     }
                 }
@@ -321,16 +351,18 @@ class Main extends Sprite
                         control.musicbox[control.currentbox].addnote(control.cursorx, control.currentnote, control.notelength);
                     }
                 }
-            }if (key.rightpress)
-            
-            //Remove any note in this position{
+            }
+            if (key.rightpress)
+            {
+                //Remove any note in this position
                 if (control.musicbox[control.currentbox].start + ((gfx.patterneditorheight - 1) - control.cursory) > -1)
-                
-                //OLD{
+                {
+                    //OLD
                     //control.currentnote = control.pianoroll[control.musicbox[control.currentbox].start + ((gfx.patterneditorheight - 1) - control.cursory)];if (control.musicbox[control.currentbox].start + control.cursory - 1 > -1)
                     {
                         control.currentnote = control.pianoroll[control.musicbox[control.currentbox].start + control.cursory - 1];
-                    }control.musicbox[control.currentbox].removenote(control.cursorx, control.currentnote);
+                    }
+                    control.musicbox[control.currentbox].removenote(control.cursorx, control.currentnote);
                 }
             }
         }
@@ -341,8 +373,8 @@ class Main extends Sprite
                 if (control.secondlist.active)
                 {
                     if (control.secondlist.selection > -1)
-                    
-                    //List selection stuff here{
+                    {
+                        //List selection stuff here
                         if (control.secondlist.type >= control.LIST_MIDI_0_PIANO && control.secondlist.type <= control.LIST_MIDI_15_SOUNDEFFECTS)
                         {
                             control.changeinstrumentvoice(control.secondlist.item[control.secondlist.selection]);control.secondlist.close();control.list.close();
@@ -354,16 +386,19 @@ class Main extends Sprite
                         {
                             control.list.close();
                         }
-                    }control.clicksecondlist = true;
-                }if (control.list.active)
+                    }
+                    control.clicksecondlist = true;
+                }
+                if (control.list.active)
                 {
                     if (control.list.selection > -1)
-                    
-                    //List selection stuff here{
+                    {
+                        //List selection stuff here
                         if (control.list.type == control.LIST_CATEGORY)
                         {
                             control.list.close();control.instrument[control.currentinstrument].category = control.list.item[control.list.selection];control.voicelist.index = control.voicelist.getfirst(control.instrument[control.currentinstrument].category);control.changeinstrumentvoice(control.voicelist.name[control.voicelist.index]);
-                        }if (control.list.type == control.LIST_MIDIINSTRUMENT)
+                        }
+                        if (control.list.type == control.LIST_MIDIINSTRUMENT)
                         {
                             control.list.close();control.filllist(control.LIST_MIDIINSTRUMENT);control.list.init(470, (gfx.linesize * 3) + 6);control.midilistselection = control.list.selection;control.secondlist.close();control.filllist(control.LIST_MIDI_0_PIANO + control.list.selection);if (gfx.screenwidth < 800)
                             {
@@ -373,7 +408,8 @@ class Main extends Sprite
                             {
                                 control.secondlist.init(595, (gfx.linesize * 3) + 6 + (control.list.selection * gfx.linesize));
                             }
-                        }if (control.list.type == control.LIST_INSTRUMENT)
+                        }
+                        if (control.list.type == control.LIST_INSTRUMENT)
                         {
                             if (help.Left(control.list.item[control.list.selection], 2) == "<<")
                             {
@@ -390,22 +426,28 @@ class Main extends Sprite
                             {
                                 control.changeinstrumentvoice(control.list.item[control.list.selection]);control.list.close();
                             }
-                        }if (control.list.type == control.LIST_SELECTINSTRUMENT)
+                        }
+                        if (control.list.type == control.LIST_SELECTINSTRUMENT)
                         {
                             control.musicbox[control.currentbox].instr = control.list.selection;control.musicbox[control.currentbox].palette = control.instrument[control.musicbox[control.currentbox].instr].palette;control.list.close();guiclass.changetab(control.currenttab);
-                        }if (control.list.type == control.LIST_KEY)
+                        }
+                        if (control.list.type == control.LIST_KEY)
                         {
                             control.changekey(control.list.selection);control.list.close();
-                        }if (control.list.type == control.LIST_SCALE)
+                        }
+                        if (control.list.type == control.LIST_SCALE)
                         {
                             control.changescale(control.list.selection);control.list.close();
-                        }if (control.list.type == control.LIST_BUFFERSIZE)
+                        }
+                        if (control.list.type == control.LIST_BUFFERSIZE)
                         {
                             control.setbuffersize(control.list.selection);control.list.close();
-                        }if (control.list.type == control.LIST_EFFECTS)
+                        }
+                        if (control.list.type == control.LIST_EFFECTS)
                         {
                             control.effecttype = control.list.selection;control.updateeffects();control.list.close();
-                        }if (control.list.type == control.LIST_MOREEXPORTS)
+                        }
+                        if (control.list.type == control.LIST_MOREEXPORTS)
                         {
                             if (control.list.selection == 0)
                             {
@@ -420,7 +462,8 @@ class Main extends Sprite
                                 control.exportmml();
                                 #end
                             }control.list.close();
-                        }if (control.list.type == control.LIST_EXPORTS)
+                        }
+                        if (control.list.type == control.LIST_EXPORTS)
                         {
                             control.list.close();if (control.list.selection == 0)
                             {
@@ -444,57 +487,70 @@ class Main extends Sprite
                     }control.clicklist = true;
                 }
                 else if (control.clicksecondlist)
-                
-                //Clumsy workaround :3{
+                {
+                    //Clumsy workaround :3
                     control.clicklist = true;
                 }
                 else if (control.my <= gfx.linesize)
-                
-                //Change tabs{
-                    //   CONFIG::desktop {if (control.mx < (gfx.screenwidth - 40) / 4)
+                {
+                    //Change tabs
+                    #if targetDesktop
+                    if (control.mx < (gfx.screenwidth - 40) / 4)
                     {
                         control.changetab(control.MENUTAB_FILE);
                     }
                     else if (control.mx < (2 * (gfx.screenwidth - 40)) / 4)
                     {
-                        control.changetab(control.MENUTAB_ARRANGEMENTS);guiclass.helpcondition_set = "changetab_arrangement";
+                        control.changetab(control.MENUTAB_ARRANGEMENTS);
+                        guiclass.helpcondition_set = "changetab_arrangement";
+                         //For interactive tutorial
                     }
                     else if (control.mx < (3 * (gfx.screenwidth - 40)) / 4)
                     {
-                        control.changetab(control.MENUTAB_INSTRUMENTS);guiclass.helpcondition_set = "changetab_instrument";
-                    }
-                    else if (control.mx >= gfx.screenwidth - 40)
-                    {
-                        if (control.fullscreen)
-                        {
-                            control.fullscreen = false;
-                        }
-                        else
-                        {
-                            control.fullscreen = true;
-                        }updategraphicsmode();
+                        control.changetab(control.MENUTAB_INSTRUMENTS);
+                        guiclass.helpcondition_set = "changetab_instrument";
+                         //For interactive tutorial
                     }
                     else
                     {
                         control.changetab(control.MENUTAB_ADVANCED);
                     }
+                    #end
+
+                    #if targetWeb
+					if (control.mx < (gfx.screenwidth) / 4) {
+						control.changetab(control.MENUTAB_FILE);
+					}
+                    else if (control.mx < (2 * (gfx.screenwidth)) / 4) {
+						control.changetab(control.MENUTAB_ARRANGEMENTS);
+					}
+                    else if (control.mx < (3 * (gfx.screenwidth)) / 4) {
+						control.changetab(control.MENUTAB_INSTRUMENTS);
+					}
+                    else{
+						control.changetab(control.MENUTAB_ADVANCED);
+					}
+                    #end
                 }
                 else if (control.my > gfx.linesize && control.my < gfx.pianorollposition + 20)
                 {
                     if (control.currenttab == control.MENUTAB_ARRANGEMENTS)
-                    
-                    //Arrangements{
+                    {
+                        //Arrangements
                         //Timelineif (control.timelinecurx > -1)
                         {
-                            j = as3hx.Compat.parseInt(control.arrange.viewstart + control.timelinecurx);if (j > -1)
+                            j = as3hx.Compat.parseInt(control.arrange.viewstart + control.timelinecurx);
+                            if (j > -1)
                             {
                                 if (control.doubleclickcheck > 0)
-                                
-                                //Set loop song from this bar{
-                                    control.arrange.loopstart = j;control.arrange.loopend = control.arrange.lastbar;if (control.arrange.loopend <= control.arrange.loopstart)
+                                {
+                                    //Set loop song from this bar
+                                    control.arrange.loopstart = j;control.arrange.loopend = control.arrange.lastbar;
+                                    if (control.arrange.loopend <= control.arrange.loopstart)
                                     {
                                         control.arrange.loopend = control.arrange.loopstart + 1;
-                                    }control.doubleclickcheck = 0;
+                                    }
+                                    control.doubleclickcheck = 0;
                                 }
                                 else
                                 {
@@ -521,8 +577,8 @@ class Main extends Sprite
                         }  //Arrangements  if (control.arrangecurx > -1 && control.arrangecury > -1)
                         {
                             if (gfx.arrangementscrollleft == 0 && gfx.arrangementscrollright == 0)
-                            
-                            //Change, start drag{
+                            {
+                                //Change, start drag
                                 if (control.dragaction == 0)
                                 {
                                     if (control.arrangecurx + control.arrange.viewstart > -1)
@@ -553,8 +609,8 @@ class Main extends Sprite
                         }
                     }
                     else if (control.currenttab == control.MENUTAB_INSTRUMENTS)
-                    
-                    //Instrument Manager{
+                    {
+                        //Instrument Manager
                         if (control.instrumentcury > -1)
                         {
                             if (control.instrumentcury == 0 && control.instrumentmanagerview > 0 && control.numinstrument > 0)
@@ -566,9 +622,8 @@ class Main extends Sprite
                                 control.instrumentmanagerview++;
                             }
                             else if (control.instrumentcury == 7)
-                            
-                            //Add a new one!{
-                                
+                            {
+                                //Add a new one!
                             }
                             else
                             {
@@ -599,13 +654,13 @@ class Main extends Sprite
                     }
                 }
                 else if (control.notey > -1)
-                
-                //Play a single note{
+                {
+                    //Play a single note
                     if (control.currentbox > -1)
                     {
                         if (control.instrument[control.musicbox[control.currentbox].instr].type == 0)
-                        
-                        //Normal instrument{
+                        {
+                            //Normal instrument
                             j = as3hx.Compat.parseInt(control.musicbox[control.currentbox].start + control.notey - 1);if (j >= 0 && j < 128)
                             {
                                 control._driver.noteOn(control.pianoroll[j], control.instrument[control.musicbox[control.currentbox].instr].voice, control.notelength);
@@ -621,7 +676,8 @@ class Main extends Sprite
                         }
                     }
                 }
-            }if (key.press && (!control.clicklist && !control.clicksecondlist))
+            }
+            if (key.press && (!control.clicklist && !control.clicksecondlist))
             {
                 if (control.currenttab == control.MENUTAB_ARRANGEMENTS)
                 {
@@ -655,13 +711,16 @@ class Main extends Sprite
                             i = as3hx.Compat.parseInt(control.mx - 280);j = as3hx.Compat.parseInt(control.my - 80);if (i < 0)
                             {
                                 i = 0;
-                            }if (i > gfx.screenwidth - 368)
+                            }
+                            if (i > gfx.screenwidth - 368)
                             {
                                 i = as3hx.Compat.parseInt(gfx.screenwidth - 368);
-                            }if (j < 0)
+                            }
+                            if (j < 0)
                             {
                                 j = 0;
-                            }if (j > 90)
+                            }
+                            if (j > 90)
                             {
                                 j = 90;
                             }k = 0;if (control.currentbox > -1)
@@ -670,7 +729,8 @@ class Main extends Sprite
                                 {
                                     k = 1;
                                 }
-                            }if (k == 1)
+                            }
+                            if (k == 1)
                             {
                                 control.musicbox[control.currentbox].cutoffgraph[control.looptime % control.boxcount] = (i * 128) / (gfx.screenwidth - 368);control.musicbox[control.currentbox].resonancegraph[control.looptime % control.boxcount] = (j * 9) / 90;control.instrument[control.currentinstrument].changefilterto(control.musicbox[control.currentbox].cutoffgraph[control.looptime % control.boxcount], control.musicbox[control.currentbox].resonancegraph[control.looptime % control.boxcount], control.musicbox[control.currentbox].volumegraph[control.looptime % control.boxcount]);if (control.instrument[control.currentinstrument].type > 0)
                                 {
@@ -690,7 +750,8 @@ class Main extends Sprite
                             j = as3hx.Compat.parseInt(control.my - 90);if (j < 0)
                             {
                                 j = 0;
-                            }if (j > 90)
+                            }
+                            if (j > 90)
                             {
                                 j = 90;
                             }j = as3hx.Compat.parseInt(90 - j);k = 0;if (control.currentbox > -1)
@@ -702,7 +763,8 @@ class Main extends Sprite
                                         k = 1;
                                     }
                                 }
-                            }if (k == 1)
+                            }
+                            if (k == 1)
                             {
                                 control.musicbox[control.currentbox].volumegraph[control.looptime % control.boxcount] = (j * 256) / 90;control.instrument[control.currentinstrument].changevolumeto((j * 256) / 90);if (control.instrument[control.currentinstrument].type > 0)
                                 {
@@ -719,65 +781,73 @@ class Main extends Sprite
                         }
                     }
                 }
-            }if (key.rightpress)
+            }
+            if (key.rightpress)
             {
                 if (control.my > gfx.linesize && control.my < gfx.pianorollposition + gfx.linesize)
                 {
                     if (control.currenttab == control.MENUTAB_FILE)
-                    
-                    //Files{
-                        
+                    {
+                        //Files
                     }
                     else if (control.currenttab == control.MENUTAB_ARRANGEMENTS)
-                    
-                    //Arrangements{
-                        //Timelineif (key.rightclick)
+                    {
+                        //Arrangements
+                        //Timeline
+                        if (key.rightclick)
                         {
                             if (control.timelinecurx > -1)
                             {
                                 j = as3hx.Compat.parseInt(control.arrange.viewstart + control.timelinecurx);if (j > -1)
-                                
-                                //Insert blank pattern{
+                                {
+                                    //Insert blank pattern
                                     control.arrange.deletebar(j);
                                 }
                             }
-                        }  //Pattern Manager    //Arrangements  if (control.arrangecurx > -1 && control.arrangecury > -1)
-                        
-                        //Delete pattern from position{
-                            control.dragaction = 0;if (control.arrange.bar[control.arrangecurx + control.arrange.viewstart].channel[control.arrangecury] > -1)
+                        }
+                        //Pattern Manager
+                        //Arrangements
+                        if (control.arrangecurx > -1 && control.arrangecury > -1)
+                        {
+                            //Delete pattern from position
+                            control.dragaction = 0;
+                            if (control.arrange.bar[control.arrangecurx + control.arrange.viewstart].channel[control.arrangecury] > -1)
                             {
                                 control.arrange.removepattern(control.arrangecurx + control.arrange.viewstart, control.arrangecury);
                             }
                         }
                     }
                     else if (control.currenttab == control.MENUTAB_INSTRUMENTS)
-                    
-                    //Instruments{
-                        
+                    {
+                        //Instruments
                     }
                 }
-            }if (key.middleclick)
+            }
+            if (key.middleclick)
             {
                 if (control.my > gfx.linesize && control.my < gfx.pianorollposition + gfx.linesize)
                 {
                     if (control.currenttab == control.MENUTAB_FILE)
-                    
-                    //Files{
-                        
+                    {
+                        //Files
                     }
                     else if (control.currenttab == control.MENUTAB_ARRANGEMENTS)
-                    
-                    //Arrangements{
-                        //Timelineif (control.timelinecurx > -1)
+                    {
+                        //Arrangements
+                        //Timeline
+                        if (control.timelinecurx > -1)
                         {
                             j = as3hx.Compat.parseInt(control.arrange.viewstart + control.timelinecurx);if (j > -1)
-                            
-                            //Insert blank pattern{
+                            {
+                                //Insert blank pattern
                                 control.arrange.insertbar(j);
                             }
-                        }  //Pattern Manager    //Arrangements  if (control.arrangecurx > -1 && control.arrangecury > -1)
-                        
-                        //Make variation pattern!{
+                        }
+                        //Pattern Manager
+                        //Arrangements
+                        if (control.arrangecurx > -1 && control.arrangecury > -1)
+                        {
+                            //Make variation pattern!
                             j = control.arrange.bar[control.arrangecurx + control.arrange.viewstart].channel[control.arrangecury];if (j > -1)
                             {
                                 control.addmusicbox();control.copymusicbox(control.numboxes - 1, j);control.musicbox[control.numboxes - 1].setnotespan();control.patternmanagerview = control.numboxes - 6;control.changemusicbox(control.numboxes - 1);if (control.patternmanagerview < 0)
@@ -788,16 +858,19 @@ class Main extends Sprite
                         }
                     }
                     else if (control.currenttab == control.MENUTAB_INSTRUMENTS)
-                    
-                    //Instruments{
-                        
+                    {
+                        //Instruments
                     }
                 }
             }
-        }if (key.hasreleased || key.hasmiddlereleased)
-        
-        //Check for click releases: deal with immediately{
-            key.hasreleased = false;key.hasmiddlereleased = false;gfx.updatebackground = 5;  //Update the background on input  if (control.dragaction == 1 || control.dragaction == 2)
+        }
+        if (key.hasreleased || key.hasmiddlereleased)
+        {
+            //Check for click releases: deal with immediately
+            key.hasreleased = false;
+            key.hasmiddlereleased = false;gfx.updatebackground = 5;  //Update the background on input
+            
+            if (control.dragaction == 1 || control.dragaction == 2)
             {
                 control.dragaction = 0;if (control.arrangecurx > -1 && control.arrangecury > -1)
                 {
@@ -813,18 +886,22 @@ class Main extends Sprite
                 control.dragaction = 0;control.arrange.loopstart = control.dragx;control.arrange.loopend = control.arrange.viewstart + control.timelinecurx + 1;if (control.arrange.loopend <= control.arrange.loopstart)
                 {
                     i = control.arrange.loopend;control.arrange.loopend = control.arrange.loopstart + 1;control.arrange.loopstart = i - 1;
-                }if (control.arrange.currentbar < control.arrange.loopstart)
+                }
+                if (control.arrange.currentbar < control.arrange.loopstart)
                 {
                     control.arrange.currentbar = control.arrange.loopstart;
-                }if (control.arrange.currentbar >= control.arrange.loopend)
+                }
+                if (control.arrange.currentbar >= control.arrange.loopend)
                 {
                     control.arrange.currentbar = control.arrange.loopend - 1;
-                }if (control.arrange.loopstart < 0)
+                }
+                if (control.arrange.loopstart < 0)
                 {
                     control.arrange.loopstart = 0;
                 }
             }
-        }if (control.my > gfx.pianorollposition)
+        }
+        if (control.my > gfx.pianorollposition)
         {
             if (key.mousewheel < 0)
             {
@@ -851,7 +928,8 @@ class Main extends Sprite
             {
                 gfx.zoom = 4;
             }gfx.setzoomlevel(gfx.zoom);key.mousewheel = 0;
-        }if (control.keydelay <= 0)
+        }
+        if (control.keydelay <= 0)
         {
             if (control.currentbox > -1)
             {
@@ -869,13 +947,15 @@ class Main extends Sprite
                         control.musicbox[control.currentbox].start++;if (control.musicbox[control.currentbox].start > control.pianorollsize - gfx.notesonscreen)
                         {
                             control.musicbox[control.currentbox].start = control.pianorollsize - gfx.notesonscreen;
-                        }if (control.instrument[control.musicbox[control.currentbox].instr].type > 0)
-                        
-                        //Also check for drumkit ranges{
+                        }
+                        if (control.instrument[control.musicbox[control.currentbox].instr].type > 0)
+                        {
+                            //Also check for drumkit ranges
                             if (control.musicbox[control.currentbox].start > control.drumkit[control.instrument[control.musicbox[control.currentbox].instr].type - 1].size - 12)
                             {
                                 control.musicbox[control.currentbox].start = control.drumkit[control.instrument[control.musicbox[control.currentbox].instr].type - 1].size - 12;
-                            }if (control.musicbox[control.currentbox].start < 0)
+                            }
+                            if (control.musicbox[control.currentbox].start < 0)
                             {
                                 control.musicbox[control.currentbox].start = 0;
                             }
@@ -893,7 +973,8 @@ class Main extends Sprite
                 {
                     control.notelength++;control.keydelay = 2;
                 }
-            }if (!key.shiftheld)
+            }
+            if (!key.shiftheld)
             {
                 if (control.press_left)
                 {
@@ -914,13 +995,15 @@ class Main extends Sprite
         else
         {
             control.keydelay--;
-        }if (control.currentbox > -1)
+        }
+        if (control.currentbox > -1)
         {
             if (!control.press_down && control.musicbox[control.currentbox].start == -1)
             {
                 control.musicbox[control.currentbox].start = 0;
             }
-        }if (!control.keyheld)
+        }
+        if (!control.keyheld)
         {
             if (control.press_space || control.press_enter)
             {
@@ -1018,11 +1101,13 @@ class Main extends Sprite
                     {
                         gfx.fillrect(0, gfx.pianorollposition + gfx.linesize + (i * 64) + help.slowsine, gfx.screenwidth, 32, 1);
                         i++;
-                    }if (help.slowsine >= 32)
+                    }
+                    if (help.slowsine >= 32)
                     {
                         gfx.fillrect(0, gfx.pianorollposition + gfx.linesize, gfx.screenwidth, help.slowsine - 32, 1);
                     }
-                }if (help.slowsine < 32)
+                }
+                if (help.slowsine < 32)
                 {
                     gfx.print(gfx.screenwidthmid - (gfx.len("NOW EXPORTING AS WAV, PLEASE WAIT") / 2), (gfx.pianorollposition + gfx.linesize) + (gfx.screenheight - gfx.hig("WAV") - (gfx.pianorollposition + gfx.linesize)) / 2, "NOW EXPORTING AS WAV, PLEASE WAIT", 0, false, true);
                 }
@@ -1057,13 +1142,15 @@ class Main extends Sprite
             {
                 gfx.changeframerate(15);
             }  //If there's no music playing, drop the framerate!    //Draw from cache  gfx.settrect(gfx.backbuffercache.rect.x, gfx.backbuffercache.rect.y, gfx.backbuffercache.rect.width, gfx.backbuffercache.rect.height);gfx.backbuffer.copyPixels(gfx.backbuffercache, gfx.trect, gfx.tl);
-        }if (control.currenttab == control.MENUTAB_ARRANGEMENTS)
+        }
+        if (control.currenttab == control.MENUTAB_ARRANGEMENTS)
         {
             gfx.drawarrangementcursor();if (control.mx > gfx.patternmanagerx - 108)
             {
                 gfx.drawpatternmanager();
             }gfx.drawtimeline_cursor();gfx.drawpatternmanager_cursor();
-        }if (!control.nowexporting)
+        }
+        if (!control.nowexporting)
         {
             if (control.currentbox > -1)
             {
@@ -1350,14 +1437,14 @@ class Main extends Sprite
         if (event.arguments.length > 0)
         {
             if (event.currentDirectory != null)
-            
-            // set file directory to current directory{
+            {
+                // set file directory to current directory
                 
                 control.filepath = event.currentDirectory;
             }
             if (control.startup == 0)
-            
-            //Loading a song at startup, wait until the sound is initilised{
+            {
+                //Loading a song at startup, wait until the sound is initilised
                 
                 control.invokefile = event.arguments[0];
             }
